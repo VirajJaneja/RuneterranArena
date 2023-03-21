@@ -26,4 +26,10 @@ public class Character {
     public Ability getAbility(int i){
         return abilitySet.get(i);
     }
+    public double getHealth(){
+        return health;
+    }
+    public void setHealth(double b){
+        this.health = b;
+    }
 }
