@@ -12,8 +12,9 @@ public class Ability {
         this.missChance = d;
         this.type = type;
         this.name = name;
+        this.effect = effect;
         if(effect){
-          //idk bs for later
+            //bs for later
         }
    }
 
@@ -43,6 +44,9 @@ public class Ability {
 
    public boolean getEffect(){
      return effect;
+   }
+   public String toString(){
+      return ("Name: "+ name + "\nType: "+type + "maxDmg"+ maxDmg + "\nminDmg: "+ minDmg + "\ncritRate"+ critChance + "\nmissChance: "+ missChance);  
    }
 }
 
