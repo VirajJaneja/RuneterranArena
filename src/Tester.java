@@ -1,8 +1,8 @@
 public class Tester{
     public static void main(String[] args){
-        Sylas sylas = new Sylas("easy");
-        System.out.println(sylas.getHealth());
-        System.out.println(sylas.getAbility(0).getCritChance());
-        System.out.println(sylas.getAbility(0).getEffect());
+        RunRuneterranArena game = new RunRuneterranArena();
+        System.out.println(game.CharReg.CHARACTERS.get(0).getHealth());
+        System.out.println(game.CharReg.CHARACTERS.get(0).getAbility(0).getCritChance());
+        System.out.println(game.CharReg.CHARACTERS.get(0).getAbility(0).getEffect());
     }
 }

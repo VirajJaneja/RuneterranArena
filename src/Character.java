@@ -4,36 +4,36 @@ import java.awt.Image;
 
 public class Character {
     private ArrayList<Ability> abilitySet;
-    private String region, diff;
+    private String type, region, level;
     private Ability a,b,c,d;
     private double health;
-    private final double easy = 0.5;
-    private final double medium = 1;
-    private final double hard = 2.5;
+    private final double Bronze = 0.5;
+    private final double Silver = 1;
+    private final double Gold = 2.5;
     private Image sprite;
 
-    public Character(String region, String diff, Image image, double health){
+    public Character(String type, String region, Image image, double health){
         this.region = region;
         abilitySet = new ArrayList<Ability>(4);  
         this.sprite = image;
-        setHealth(diff, health);
+        setHealth(level, health);
     }
 
-    public Character(String region, String diff, double health){
+    public Character(String type, String region, double health){
         this.region = region;
         this.abilitySet = new ArrayList<Ability>(4);  
-        setHealth(diff, health);
+        setHealth(level, health);
     }
 
-    public void setHealth(String diff, double health){
-        if(diff.equals("easy")){
-            this.health = health * easy;
+    public void setHealth(String level, double health){
+        if(level.equals("Bronze")){
+            this.health = health * Bronze;
         }
-        else if(diff.equals("medium")){
-            this.health = health * medium;
+        else if(level.equals("Silver")){
+            this.health = health * Silver;
         }
-        else if(diff.equals("hard")){
-            this.health = health * hard;
+        else if(level.equals("Gold")){
+            this.health = health * Gold;
         }
     }
 
@@ -60,5 +60,8 @@ public class Character {
     }
     public double getHealth(){
         return health;
+    }
+    public void setLevel(String lvl){
+        level = lvl;
     }
 }
