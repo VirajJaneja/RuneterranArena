@@ -1,20 +1,43 @@
-package backend;
-
-import java.lang.reflect.Array;
+import java.awt.Point;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 public class Player {
-    ArrayList<String[]> charLevels = new ArrayList<>();
 
+    private ArrayList<Character> playerRoster;
+    private int currentCharacter;
+    private Point point;
 
+    public Player(String diff, boolean placement){
 
-
-    public void setCharLevel(String charac, String lvl){
-        String[] newSet = {charac, lvl};
-        for(int i = 0; i<charLevels.size();i++){
-            if(charLevels.get(i)[0].equals(charac))
-                charLevels.set(i, newSet);
+        if(placement){
+            this.point = new Point(20,20);
         }
+        else{
+            this.point = new Point(80, 80);
+        }
+        currentCharacter = 0;
+        playerRoster = new ArrayList<Character>();
     }
-    
+
+    public int getChoice(){
+        Scanner obj = new Scanner(System.in);
+        return Integer.parseInt(obj.nextLine());
+    } 
+
+    public void swapCharacter(int i){
+        currentCharacter = i;
+    }
+
+    public Point getPoint(){
+        return point;
+    }
+    public Character getCharacter(int i){
+        return playerRoster.get(i);
+    }
+    public Character getCurrentCharacter(){
+        return playerRoster.get(currentCharacter);
+    }
+    public void addCharacter(Character chara){
+        playerRoster.add(chara);
+    }
 }
