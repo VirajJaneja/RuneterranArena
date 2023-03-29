@@ -1,6 +1,9 @@
-import java.awt.Image;
+package backend;
 
-public class Sylas extends Character{
+import backend.Ability;
+import backend.Character;
+
+public class Sylas extends Character {
     private static String type = "Mage";
     private static String region = "Demacian";
     private Ability a = new Ability(region, "q", 2, 3, 0.2, 0.1, false);

@@ -1,3 +1,4 @@
+package backend;
 
 public class Ability {
     int maxDmg, minDmg;

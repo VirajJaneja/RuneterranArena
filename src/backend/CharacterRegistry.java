@@ -1,3 +1,7 @@
+package backend;
+
+import backend.Character;
+
 import java.util.ArrayList;
 
 public class CharacterRegistry {
