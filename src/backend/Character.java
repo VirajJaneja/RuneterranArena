@@ -3,47 +3,46 @@ package backend;
 import backend.Ability;
 
 import java.util.ArrayList;
-
-import java.awt.Point;
-
 import java.awt.Image;
+
 public class Character {
     private ArrayList<Ability> abilitySet;
     private String type, region, level;
     private Ability a,b,c,d;
-    private double health;
+    private int health;
     private final double Bronze = 0.5;
     private final double Silver = 1;
     private final double Gold = 2.5;
     private Image sprite;
-    private Point position;
 
-    public Character(String type, String region, Image image, double health){
+    public Character(String Inputtype, String region, Image image, double health){
+        type = Inputtype;
         this.region = region;
-        abilitySet = new ArrayList<Ability>(4);  
+        abilitySet = new ArrayList<Ability>(4);
         this.sprite = image;
         setHealth(level, health);
     }
 
-    public Character(String type, String region, double health){
+    public Character(String Inputtype, String region, int hp){
+        type = Inputtype;
         this.region = region;
-        this.abilitySet = new ArrayList<Ability>(4);  
-        setHealth(level, health);
+        this.abilitySet = new ArrayList<Ability>(4);
+        setHealth(level, hp);
     }
 
-    public void setHealth(String level, double health){
+    public void setHealth(String level, double baseHp){
         if(level.equals("Bronze")){
-            this.health = health * Bronze;
+            this.health = (int)(baseHp * Bronze);
         }
         else if(level.equals("Silver")){
-            this.health = health * Silver;
+            this.health = (int)(baseHp * Silver);
         }
         else if(level.equals("Gold")){
-            this.health = health * Gold;
+            this.health = (int)(baseHp * Gold);
         }
     }
 
-    public void updateHealth(double b){
+    public void updateHealth(int b){
         this.health = b;
     }
 
@@ -64,7 +63,9 @@ public class Character {
     public Ability getAbility(int i){
         return abilitySet.get(i);
     }
-    public double getHealth(){
+    public String getType(){return type;}
+
+    public int getHealth(){
         return health;
     }
     public void setLevel(String lvl){

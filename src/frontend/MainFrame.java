@@ -1,5 +1,7 @@
 package frontend;
 
+import backend.Turnstile;
+
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
@@ -9,6 +11,10 @@ public class MainFrame extends JFrame {
 
     MainFrame(){
         screen = new JFrame();
+        screen.setSize(500, 600);
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        screen.setResizable(false);
+        CurrentPanel = new GamePanel(500, 500, new Turnstile());
+
     }
 }
