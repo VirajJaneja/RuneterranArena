@@ -1,3 +1,6 @@
+package backend;
+
+import backend.Ability;
 
 import java.util.ArrayList;
 import java.awt.Image;
