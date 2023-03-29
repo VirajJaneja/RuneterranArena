@@ -15,4 +15,5 @@ Ranger counters Mage
 1 = ability 1 
 2 = ability 2
 3 = ult
+4 = swap charac
 
