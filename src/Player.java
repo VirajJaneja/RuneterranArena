@@ -19,6 +19,7 @@ public class Player {
         playerRoster = new ArrayList<Character>();
     }
 
+    
     public int getChoice(){
         Scanner obj = new Scanner(System.in);
         return Integer.parseInt(obj.nextLine());

@@ -12,39 +12,17 @@ public class Board {
     public Board(Player playerUno, Player playerDos){
         playerOne = playerUno;
         playerTwo = playerDos;
-
     }
 
-    public void dealDamage(Character target, int damage){
-
-        deployedCharacOne.updateHealth(deployedCharacOne.getHealth()-damage);
+    public void dealDamage(Character target, double damage){
+        deployedCharacOne.updateHealth(deployedCharacOne.getHealth());
     }
 
-    public void swapCharacter(int playerNum, Character charac){
-        if(playerNum==1){
-            deployedCharacOne = charac;
-        }
-        if(playerNum==2){
-            deployedCharacTwo = charac;
-        }
-    }
-
-//    public void updateCharacter(playerNum){
-//
-//    }
+    public void
 
 
-    private boolean doesCounter(Character aggressor, Character target){
-        String type1 = aggressor.getType();
-        String type2 = aggressor.getType();
 
-        if(type1.equals("Mage") && type2.equals("Fighter"))
-            return true;
-        if(type1.equals("Fighter") && type2.equals("Ranger"))
-            return true;
-        if(type1.equals("Ranger") && type2.equals("Mage"))
-            return true;
-        return false;
-    }
+
+
 }
 

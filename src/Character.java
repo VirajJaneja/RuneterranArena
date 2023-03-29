@@ -1,45 +1,46 @@
 
 import java.util.ArrayList;
-import java.awt.Image;
 
+import java.awt.Point;
+
+import java.awt.Image;
 public class Character {
     private ArrayList<Ability> abilitySet;
     private String type, region, level;
     private Ability a,b,c,d;
-    private int health;
+    private double health;
     private final double Bronze = 0.5;
     private final double Silver = 1;
     private final double Gold = 2.5;
     private Image sprite;
+    private Point position;
 
-    public Character(String Inputtype, String region, Image image, double health){
-        type = Inputtype;
+    public Character(String type, String region, Image image, double health){
         this.region = region;
         abilitySet = new ArrayList<Ability>(4);  
         this.sprite = image;
         setHealth(level, health);
     }
 
-    public Character(String Inputtype, String region, int hp){
-        type = Inputtype;
+    public Character(String type, String region, double health){
         this.region = region;
         this.abilitySet = new ArrayList<Ability>(4);  
-        setHealth(level, hp);
+        setHealth(level, health);
     }
 
-    public void setHealth(String level, double baseHp){
+    public void setHealth(String level, double health){
         if(level.equals("Bronze")){
-            this.health = (int)(baseHp * Bronze);
+            this.health = health * Bronze;
         }
         else if(level.equals("Silver")){
-            this.health = (int)(baseHp * Silver);
+            this.health = health * Silver;
         }
         else if(level.equals("Gold")){
-            this.health = (int)(baseHp * Gold);
+            this.health = health * Gold;
         }
     }
 
-    public void updateHealth(int b){
+    public void updateHealth(double b){
         this.health = b;
     }
 
@@ -60,9 +61,7 @@ public class Character {
     public Ability getAbility(int i){
         return abilitySet.get(i);
     }
-    public String getType(){return type;}
-
-    public int getHealth(){
+    public double getHealth(){
         return health;
     }
     public void setLevel(String lvl){
