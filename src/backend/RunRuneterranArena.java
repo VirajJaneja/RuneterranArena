@@ -1,11 +1,11 @@
 package backend;
 
 import backend.CharacterRegistry;
+import frontend.MainFrame;
 
 public class RunRuneterranArena {
 
     public static void main(String[] args) {
-        MainScreen game = new MainScreen();
-        
+        MainFrame mf = new MainFrame();
     }
 }
