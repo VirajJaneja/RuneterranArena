@@ -13,4 +13,8 @@ public class GamePanel extends JPanel {
         height = h;
         width = w;
     }
+    public GamePanel(int h, int w){
+        height = h;
+        width = w;
+    }
 }
