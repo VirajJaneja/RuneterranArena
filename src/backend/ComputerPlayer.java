@@ -1,3 +1,4 @@
+package backend;
 public class ComputerPlayer extends Player{
     public ComputerPlayer(String diff, boolean placement){
         super(diff, placement);

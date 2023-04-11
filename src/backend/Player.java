@@ -43,4 +43,7 @@ public class Player {
     public void addCharacter(Character chara){
         playerRoster.add(chara);
     }
+    public int getSize(){
+        return playerRoster.size();
+    }
 }

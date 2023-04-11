@@ -1,4 +1,5 @@
 package frontend;
+import frontend.Player;
 
 import backend.Turnstile;
 

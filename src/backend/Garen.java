@@ -1,3 +1,4 @@
+package backend;
 import java.awt.Point;
 
 public class Garen extends Character{
