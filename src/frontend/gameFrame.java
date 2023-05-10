@@ -84,7 +84,7 @@ public class gameFrame implements ActionListener {
     class Settings extends JFrame implements ActionListener {
         private JPanel settingsPanel;
         private JFrame settingsFrame;
-        private final Point res1 = new Point(1280-200, 720-200);
+        private final Point res1 = new Point(1280-200, 720-100);
         private final Point res2 = new Point(1980-200, 1080-200);
         private final Point res3 = new Point(2560-200, 1440-200);
 

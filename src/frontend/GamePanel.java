@@ -37,9 +37,9 @@ public class GamePanel extends JPanel {
         width = p.x;
         System.out.println(width);
 
-        cPane = new choicePanel();
-        tPane = new teamPanel();
-        fPane = new fightPanel();
+        cPane = initCP();
+        tPane = initTP();
+        fPane = initFP();
         JButton settingsButton = new JButton("Settings");
         settingsButton.setActionCommand("Settings");
     }
@@ -48,40 +48,25 @@ public class GamePanel extends JPanel {
         int width = gp.width;
         int height = gp.height;
 
+
         int cpX = (int)(.30 * width);
-        int cpY = (int)(.80 * height);
+        int cpY = (int)(.85 * height);
         int tpX = (int)(1 * width);
-        int tpY = (int)(.05 * height);
+        int tpY = (int)(.15 * height);
         int fpX = (int)(.70 * width);
-        int fpY = (int)(.80 * height);
-
-
-
-        switch(height){
-            case 520:
-                int[] hwVals = {0, 0, 0, 0, 0, 0};
-                break;
-            case 880:
-                int[] hwVals = {0, 0, 0, 0, 0, 0};
-                break;
-            case 1240:
-                int[] hwVals = {0, 0, 0, 0, 0, 0};
-                break;
-            default:
-                int[] hwVals = {0, 0, 0, 0, 0, 0};
-                break;
-        }
-        // cpX, cpY, tpX, tpY, fpX, fpY
-
+        int fpY = (int)(.85 * height);
 
 
         System.out.println(height + " ooga booga");
 
 
-        cPane.setPreferredSize(new Dimension(hwVals[0], hwVals[1]));
-        tPane.setPreferredSize(new Dimension(hwVals[2], hwVals[3]));
-        fPane.setPreferredSize(new Dimension(hwVals[4], hwVals[5]));
+        cPane.setPreferredSize(new Dimension(cpX, cpY));
+        tPane.setPreferredSize(new Dimension(tpX, tpY));
+        fPane.setPreferredSize(new Dimension(fpX, fpY));
 
+        cPane.setBackground(new Color(221, 232, 96));
+        tPane.setBackground(new Color(00, 00, 200));
+        fPane.setBackground(new Color(200, 0, 0));
 
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -107,6 +92,12 @@ public class GamePanel extends JPanel {
 
     private choicePanel initCP(){
         choicePanel cPane = new choicePanel();
+        cPane.add(cPane.basicATK);
+        cPane.add(cPane.basicATK);
+        cPane.add(cPane.abilityOne);
+        cPane.add(cPane.ult);
+        cPane.add(cPane.swapCharac);
+        
         return cPane;
     }
 
