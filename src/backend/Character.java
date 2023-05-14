@@ -23,13 +23,22 @@ public class Character {
         setHealth(level, health);
     }
 
-    public Character(String Inputtype, String region, int hp){
+    public Character(String Inputtype, String region, int hp, int diff){
         type = Inputtype;
         this.region = region;
         this.abilitySet = new ArrayList<Ability>(4);
+        difficultyManagement(diff);
         setHealth(level, hp);
     }
-
+    
+    public void difficultyManagement(int diff){
+        switch(diff){
+            case 0: level = "Bronze";
+            case 1: level = "Silver";
+            case 2: level = "Gold";
+            default: level = "Silver";
+        }
+    }
     public void setHealth(String level, double baseHp){
         if(level.equals("Bronze")){
             this.health = (int)(baseHp * Bronze);
