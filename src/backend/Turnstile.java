@@ -17,4 +17,13 @@ public class Turnstile {
         }
         return battlefield.gameOver();
     }
+
+    public String playPVEGame(){
+        while(battlefield.gameOver().equals("Ongoing")) {
+            battlefield.makeMove(battlefield.playerOne.getChoice(), playerOne, playerTwo);
+            
+            battlefield.makeMove(battlefield.playerTwo.getChoice(), playerTwo, playerOne);
+        }
+        return battlefield.gameOver();
+    }
 }

@@ -8,9 +8,9 @@ public class Player {
     private ArrayList<Character> playerRoster;
     private int currentCharacter;
     private Point point;
+    
 
     public Player(String diff, boolean placement){
-
         if(placement){
             this.point = new Point(20,20);
         }
@@ -23,8 +23,7 @@ public class Player {
 
     
     public int getChoice(){
-        Scanner obj = new Scanner(System.in);
-        return Integer.parseInt(obj.nextLine());
+        
     } 
 
     public void swapCharacter(int i){

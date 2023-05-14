@@ -2,11 +2,14 @@ package frontend;
 
 import backend.Turnstile;
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Point;
 
 import javax.swing.*;
@@ -42,6 +45,9 @@ public class GamePanel extends JPanel {
         fPane = initFP();
         JButton settingsButton = new JButton("Settings");
         settingsButton.setActionCommand("Settings");
+        System.out.println(cPane.getWidth() + " here");
+        if(height == 1080)
+            System.out.println(cPane.getResponse());;
     }
 
     public static GamePanel initGP(GamePanel gp){
@@ -57,7 +63,6 @@ public class GamePanel extends JPanel {
         int fpY = (int)(.85 * height);
 
 
-        System.out.println(height + " ooga booga");
 
 
         cPane.setPreferredSize(new Dimension(cpX, cpY));
@@ -92,7 +97,7 @@ public class GamePanel extends JPanel {
 
     private choicePanel initCP(){
         choicePanel cPane = new choicePanel();
-        cPane.add(cPane.basicATK);
+        cPane.setLayout(new BoxLayout(cPane, BoxLayout.PAGE_AXIS));
         cPane.add(cPane.basicATK);
         cPane.add(cPane.abilityOne);
         cPane.add(cPane.ult);
@@ -110,6 +115,5 @@ public class GamePanel extends JPanel {
         fightPanel fPane = new fightPanel();
         return fPane;
     }
-
-
+    
 }
