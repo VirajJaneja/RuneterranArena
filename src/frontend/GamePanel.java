@@ -46,8 +46,8 @@ public class GamePanel extends JPanel {
         JButton settingsButton = new JButton("Settings");
         settingsButton.setActionCommand("Settings");
         System.out.println(cPane.getWidth() + " here");
-        if(height == 1080)
-            System.out.println(cPane.getResponse());;
+        // if(height == 1080)
+        //     System.out.println(cPane.getResponse());;
     }
 
     public static GamePanel initGP(GamePanel gp){

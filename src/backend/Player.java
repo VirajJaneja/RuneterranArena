@@ -10,28 +10,13 @@ public class Player {
     private Point point;
     
 
-    public Player(String diff, boolean placement){
-        if(placement){
-            this.point = new Point(20,20);
-        }
-        else{
-            this.point = new Point(80, 80);
-        }
+    public Player(int teamSize, ArrayList<Character> characs){
         currentCharacter = 0;
-        playerRoster = new ArrayList<Character>();
+        playerRoster = characs;
     }
-
-    
-    public int getChoice(){
-        
-    } 
 
     public void swapCharacter(int i){
         currentCharacter = i;
-    }
-
-    public Point getPoint(){
-        return point;
     }
     public Character getCharacter(int i){
         return playerRoster.get(i);
