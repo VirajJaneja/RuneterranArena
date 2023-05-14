@@ -10,17 +10,16 @@ import frontend.*;
 public class RunRuneterranArena {
 
     public static void main(String[] args) {
-        Ability ab1 = ;
-        Ability ab2 = ;
-        Ability ab3 = ; 
-        Ability[] abilities = {};
+        ArrayList<Character> testCharacter = new ArrayList<Character>();
         ArrayList<Character> characs = new ArrayList<>();
-        Player player1 = new Player("Bronze", characs);
-        Player player2 = new Player("Bronze", characs);
-        Board board = new Board(player1, player2);
-        Turnstile turnstile = new Turnstile(board);
+        characs.add(new Garen(0));
+        Player player1 = new Player(characs.size(), characs);
+        Player player2 = new Player(characs.size(), characs);
+        Turnstile turnstile = new Turnstile(player1, player2);
 
-        gameFrame mf = new gameFrame(new Point(1980, 1080));
+        
+
+        // gameFrame mf = new gameFrame(new Point(1980, 1080));
         // mf.mainFrame.getContentPane().removeAll();
         // mf.mainFrame.getContentPane().add(gm);
     }

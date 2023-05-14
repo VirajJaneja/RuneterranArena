@@ -8,11 +8,13 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 import backend.Player;
+import backend.Turnstile;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,14 +34,16 @@ public class gameFrame implements ActionListener {
     JPanel contentPane;
     GamePanel gp;
     JMenuBar menuBar;
+    Turnstile turnstile;
 
 
-    public gameFrame(Point p) {
+    public gameFrame(Point p, Turnstile turnstile2) {
+        turnstile = turnstile2;
         contentPane = new JPanel();
         resolution = p;
         menuBar = new JMenuBar();
         mainFrame = new JFrame("Runeterran Arena");
-        gp = new GamePanel(p);
+        gp = new GamePanel(p, turnstile);
         gp.setBounds(0, 0, (int) resolution.getX(), (int) resolution.getY());
         // mainPanel.setLayout(null);
         int xMax = gp.getWidth();
@@ -64,7 +68,7 @@ public class gameFrame implements ActionListener {
         mainFrame.setResizable(false);
     }
     public void alterRes(Point p) {
-        new gameFrame(p);
+        new gameFrame(p, turnstile);
     }
 
 
@@ -80,6 +84,11 @@ public class gameFrame implements ActionListener {
         contentPane.removeAll();
         contentPane.add(pane);
     }
+
+    // public void disposeGF(){
+    //     dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+
+    // }
 
     class Settings extends JFrame implements ActionListener {
         private JPanel settingsPanel;

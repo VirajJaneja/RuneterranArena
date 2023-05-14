@@ -7,7 +7,8 @@ public class Player {
 
     private ArrayList<Character> playerRoster;
     private int currentCharacter;
-    private Point point;
+    public static int nextTurn;
+    public static int pointsCounter;
     
 
     public Player(int teamSize, ArrayList<Character> characs){
@@ -29,5 +30,11 @@ public class Player {
     }
     public int getSize(){
         return playerRoster.size();
+    }
+    public void setNextTurn(int i){
+        nextTurn = i;
+    }
+    public Integer getNextTurn(){
+        return nextTurn;
     }
 }

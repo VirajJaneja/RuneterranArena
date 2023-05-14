@@ -1,6 +1,7 @@
 package frontend;
 
 import backend.Turnstile;
+import backend.Turnstile.Turn;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
@@ -35,6 +36,21 @@ public class GamePanel extends JPanel {
         JButton settingsButton = new JButton("Settings");
         settingsButton.setActionCommand("Settings");
     }
+    public GamePanel(Point p, Turnstile turnstile){
+        height = p.y;
+        width = p.x;
+        System.out.println(width);
+        TurnStile = turnstile;
+        cPane = initCP();
+        tPane = initTP();
+        fPane = initFP();
+        JButton settingsButton = new JButton("Settings");
+        settingsButton.setActionCommand("Settings");
+        System.out.println(cPane.getWidth() + " here");
+        // if(height == 1080)
+        //     System.out.println(cPane.getResponse());;
+    }
+
     public GamePanel(Point p){
         height = p.y;
         width = p.x;
@@ -96,7 +112,7 @@ public class GamePanel extends JPanel {
     }
 
     private choicePanel initCP(){
-        choicePanel cPane = new choicePanel();
+        choicePanel cPane = new choicePanel(TurnStile, TurnStile.playerOne);
         cPane.setLayout(new BoxLayout(cPane, BoxLayout.PAGE_AXIS));
         cPane.add(cPane.basicATK);
         cPane.add(cPane.abilityOne);

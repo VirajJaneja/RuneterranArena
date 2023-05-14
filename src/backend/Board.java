@@ -11,7 +11,7 @@ public class Board {
     }
 
 
-    public boolean makeMove(int i, Player aggressor, Player idlePlayer){
+    public static boolean makeMove(int i, Player aggressor, Player idlePlayer){
 
         switch(i){
             case 0:

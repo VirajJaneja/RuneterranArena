@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
+import backend.Player;
 import backend.Turnstile;
 
 public class choicePanel extends JPanel implements ActionListener{
@@ -24,14 +25,17 @@ public class choicePanel extends JPanel implements ActionListener{
     static JButton ult;
     static JButton swapCharac;
     static JButton confirm;
+    Player player;
     Icon icons[] = new Icon[4];
-    public static Boolean turn;
-    private static String nextTurnValue;
+    // public static Boolean turn;
+    // private static String nextTurnValue;
 
 
-    choicePanel() {
-        turn = false;
-        nextTurnValue = "";
+    choicePanel(Turnstile turnstile2, Player Givenplayer) {
+        TurnStile = turnstile2;
+        player = Givenplayer;
+        // turn = false;
+        // nextTurnValue = "";
         icons[0] = new ImageIcon("E:/lib/Demacian_Justice.png");
         icons[1] = new ImageIcon("lib/Demacian_Justice.png");
         icons[2] = new ImageIcon("lib/Demacian_Justice.png");
@@ -79,8 +83,25 @@ public class choicePanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String eventName = e.getActionCommand();
-        System.out.println(turn);
-        nextTurnValue = eventName;
+        // System.out.println(eventName);
+        // nextTurnValue = eventName;
+        switch(eventName){
+            case "Basic Attack":
+                player.setNextTurn(0);
+                break;
+            case "Ability 1":
+                player.setNextTurn(1);
+                break;
+            case "Ultimate":
+                player.setNextTurn(2);
+                break;
+            case "Swap":
+                player.setNextTurn(3);
+                break;
+            case "Confirm":
+                break;
+        }
+        System.out.println(TurnStile.playerOne.nextTurn);
     }
 
     
