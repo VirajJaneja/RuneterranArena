@@ -4,12 +4,12 @@ package backend;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Malzahar extends Character{
-    private static String region = "Demacian";
-    private static String type = "Marksman";
-    private Ability a = new Ability("Frost Arrow", 30, 0.4, 0.25, false, false, false);
-    private Ability b = new Ability("Ice Volley", 45, 0.2, 0.1, false, false, false);
-    private Ability c = new Ability("Piercing Cold", 45, 0.2, 0.1, false, false, true);
+public class Malzahar extends CharacterWrapperSq{
+    private static String region = "Void";
+    private static String type = "Mage";
+    private Ability a = new Ability("Nether Grasp", 30, 0.4, 0.25, false, false, false);
+    private Ability b = new Ability("Call of the Void", 45, 0.2, 0.1, false, false, true);
+    private Ability c = new Ability("Null Zone", 45, 0.2, 0.1, false, true, true);
     private Ability d = new Ability("Auto Attack", 40, 0.2, 0.1, false, false, false);
     
     public Malzahar(int diff){

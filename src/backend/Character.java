@@ -15,6 +15,9 @@ public class Character {
     private final double Gold = 2.5;
     private Image sprite;
 
+    public Character(){
+        this.region = "placeholder";
+    }
     public Character(String Inputtype, String region, Image image, double health){
         type = Inputtype;
         this.region = region;

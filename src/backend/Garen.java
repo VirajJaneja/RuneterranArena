@@ -2,7 +2,7 @@ package backend;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Garen extends Character{
+public class Garen extends CharacterWrapperSq{
     private static String region = "Demacian";
     private static String type = "Fighter";
     private Ability a = new Ability("Decisive Strike", 40, 0.15, 0.2, false, false, false);

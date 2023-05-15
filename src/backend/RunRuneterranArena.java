@@ -10,9 +10,11 @@ import frontend.*;
 public class RunRuneterranArena {
 
     public static void main(String[] args) {
-        ArrayList<Character> testCharacter = new ArrayList<Character>();
-        ArrayList<Character> characs = new ArrayList<>();
+        ArrayList<CharacterWrapperSq> testCharacter = new ArrayList<CharacterWrapperSq>();
+
+        ArrayList<CharacterWrapperSq> characs = new ArrayList<CharacterWrapperSq>();
         characs.add(new Garen(0));
+        
         Player player1 = new Player(characs.size(), characs);
         Player player2 = new Player(characs.size(), characs);
         Turnstile turnstile = new Turnstile(player1, player2);

@@ -3,7 +3,7 @@ package backend;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Ahri extends Character{
+public class Ahri extends CharacterWrapperSq{
     private static String region = "Ionian";
     private static String type = "Mage";
     private Ability a = new Ability("Spirit Orb", 40, 0.2, 0.2, false, false, false);

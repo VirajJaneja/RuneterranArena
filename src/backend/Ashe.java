@@ -2,7 +2,7 @@ package backend;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Ashe extends Character{
+public class Ashe extends CharacterWrapperSq{
     private static String region = "Demacian";
     private static String type = "Marksman";
     private Ability a = new Ability("Frost Arrow", 30, 0.4, 0.25, false, false, false);
