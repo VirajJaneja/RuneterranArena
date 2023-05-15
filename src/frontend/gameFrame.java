@@ -32,7 +32,7 @@ public class gameFrame implements ActionListener {
     private JPanel backupPane;
     private Point resolution;
     JPanel contentPane;
-    GamePanel gp;
+    public static GamePanel gp;
     JMenuBar menuBar;
     Turnstile turnstile;
 

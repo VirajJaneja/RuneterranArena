@@ -48,18 +48,25 @@ public class choicePanel extends JPanel implements ActionListener{
         initButtons();
     }
 
+    private void resetButtons(){
+        basicATK.setBackground(new Color(255, 255, 255));
+	    abilityOne.setBackground(new Color(255, 255, 255));
+	    ult.setBackground(new Color(255, 255, 255));
+	    swapCharac.setBackground(new Color(255, 255, 255));
+    }
 
     private void initButtons(){
         setupButton(basicATK, "Basic Attack");
         setupButton(abilityOne, "Ability 1");
         setupButton(ult, "Ultimate");
         setupButton(swapCharac, "Swap");
-        // confirmButtonSetup();
+        setupButton(confirm, "None");
+        setConfirmButtonPresence(1);
     }
 
     private void setupButton(JButton b, String s){
         b.setFont(new Font("Serif", Font.BOLD, 30));
-	    b.setBackground(new Color(29, 38, 44));
+	    b.setBackground(new Color(255, 255, 255));
         b.setForeground(new Color(138, 158, 160));
         b.setBorder(BorderFactory.createTitledBorder(s));
 	    b.setOpaque(true);
@@ -68,16 +75,19 @@ public class choicePanel extends JPanel implements ActionListener{
         // b.setAlignmentX(CENTER_ALIGNMENT);
     }
 
-    private void confirmButtonSetup(boolean turn){
+    public void setConfirmButtonPresence(Integer i) {
         confirm.setFont(new Font("Serif", Font.BOLD, 30));
-	    confirm.setBackground(new Color(79, 88, 94));
-        confirm.setForeground(new Color(138, 158, 160));
-        confirm.setOpaque(true);
-        confirm.setActionCommand("");
-	    if(turn){
-            confirm.setActionCommand("confirm");
+        if(i == 1){
+            // confirm.setBackground(new Color(79, 88, 94));
+            confirm.setActionCommand("Confirm");
+            confirm.setBackground(new Color(255, 255, 255));
+            confirm.setVisible(true);
+        } if(i == 0){
+            confirm.setActionCommand("None");
+            // confirm.setBackground(new Color(79, 88, 94));
+            confirm.setForeground(new Color(138, 158, 160));
+            confirm.setVisible(false);
         }
-        confirm.addActionListener(this);
     }
 
     @Override
@@ -88,17 +98,26 @@ public class choicePanel extends JPanel implements ActionListener{
         switch(eventName){
             case "Basic Attack":
                 player.setNextTurn(0);
+                resetButtons();
+                basicATK.setBackground(new Color(29,67,71));
                 break;
             case "Ability 1":
                 player.setNextTurn(1);
+                resetButtons();
+                abilityOne.setBackground(new Color(29,67,71));
                 break;
             case "Ultimate":
                 player.setNextTurn(2);
+                resetButtons();
+                ult.setBackground(new Color(29,67,71));
                 break;
             case "Swap":
                 player.setNextTurn(3);
+                resetButtons();
+                swapCharac.setBackground(new Color(29,67,71));
                 break;
             case "Confirm":
+                Turnstile.moveTurn();
                 break;
         }
         System.out.println(TurnStile.playerOne.nextTurn);

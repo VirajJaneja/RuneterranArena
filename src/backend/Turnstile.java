@@ -48,12 +48,22 @@ public class Turnstile {
     }
 
     public static void moveTurn(){
-        if(!gameOver){
-            if(turn  == Turn.P1Turn)
-            turn = Turn.P2Turn;
-        if(turn  == Turn.P1Turn)
-            turn = Turn.P2Turn;
+        Turn nextStep = Turn.P1Turn;
+        if(turn == Turn.P1Turn){
+            nextStep = Turn.P2Turn;
+            gf.gp.cPane.setConfirmButtonPresence(0);
         }
+        if(turn == Turn.P2Turn){
+            nextStep = Turn.P1Turn;
+            gf.gp.cPane.setConfirmButtonPresence(1);
+        }
+        System.out.println(turn);
+        if(!gameOver){
+            System.out.println("here");
+            turn = nextStep;
+            // turn.run();
+        }
+        System.out.println(turn);
     }
     public static void finishGame(){
         gf.mainFrame.dispose();
