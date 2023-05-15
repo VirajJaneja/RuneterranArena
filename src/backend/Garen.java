@@ -1,22 +1,23 @@
 package backend;
 import java.awt.Point;
+import java.util.ArrayList;
 
 public class Garen extends Character{
     private static String region = "Demacian";
     private static String type = "Fighter";
-    private Ability a = new Ability(region, "Decisive Strike", 2, 3, 0.2, 0.1, false);
-    private Ability b = new Ability(region, "Courage", 2, 3, 0.2, 0.1, false);
-    private Ability c = new Ability(region, "Justice", 2, 3, 0.2, 0.1, false);
-    private Ability d = new Ability(region, "Auto Attack", 2, 3, 0.2, 0.1, false);
+    private Ability a = new Ability("Decisive Strike", 40, 0.15, 0.2, false, false, false);
+    private Ability b = new Ability("Courage", 35, 3, 0.2, false, false, true);
+    private Ability c = new Ability("Justice", 65, 3, 0.2, false, false, false);
+    private Ability d = new Ability("Auto Attack", 25, 0.15, 0.2, false, false, false);
     
     public Garen(int diff){
         super(type, region, 120, diff);
-        System.out.println(type + "," + region);
         setAbilities(a, b, c, d);
     }
-    public static void main(String[] arg){
-        new Garen(0);
+    public String getName(){
+        return "Garen";
     }
+
 
 
 }

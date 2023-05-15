@@ -80,4 +80,7 @@ public class Character {
     public void setLevel(String lvl){
         level = lvl;
     }
+    public String getName(){
+        return "";
+    }
 }

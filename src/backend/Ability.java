@@ -5,18 +5,53 @@ public class Ability {
     double critChance, missChance;
     String type, name;
     Boolean effect;
-    
-   public Ability(String type, String name, int a, int b, double c, double d, boolean effect){
-        this.maxDmg = a;
-        this.minDmg = b;
-        this.critChance = c;
-        this.missChance = d;
-        this.type = type;
+    int[] DOTList;
+    int[] CCList;
+    int[] ShieldList;
+
+   public Ability(String name, int minDmg, double critChance, double missChance, boolean DOT, boolean CC, boolean Shield){
+        this.minDmg = minDmg;
+        this.critChance = critChance;
+        this.missChance = missChance;
         this.name = name;
-        this.effect = effect;
-        if(effect){
-            //bs for later
+
+        if(DOT){
+          DOTList = DOT(minDmg, (int)(Math.random()*3));
+        } else{
+          DOTList = null;
         }
+        if(CC){
+          CCList = CC(minDmg, 1);
+        } else{
+          CCList = null;
+        }
+        if(Shield){
+          ShieldList = Shield(minDmg, 1);
+        } else{
+          ShieldList = null;
+        }
+   }
+   
+  //  public Ability(String type2, int i, double d, double e, boolean b, boolean c, boolean f) {
+  //  }
+
+// public Ability(String type2, String string, int i, int j, double d, double e, boolean b, boolean c, boolean f) {
+// }
+
+public int[] DOT(int totaldmg, int turncount){
+      return new int[]{totaldmg, turncount};
+   }
+   public int[] getDOT(){
+    return DOTList;
+   }
+   public int[] Shield(int dmgAbsorb, int turn){
+    return new int[]{dmgAbsorb, turn};
+   }
+   public int[] CC(int dmg, int turns){
+    return new int[]{dmg, turns};
+   }
+   public int[] getCC(){
+    return CCList;
    }
 
    public String getType(){

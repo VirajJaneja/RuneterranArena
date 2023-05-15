@@ -23,6 +23,10 @@ public class Turnstile {
 
     }
 
+    public Turnstile(Board board) {
+        
+    }
+
     public enum Turn {
         P1Turn {
             @Override

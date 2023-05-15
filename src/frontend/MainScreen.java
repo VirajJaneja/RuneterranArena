@@ -1,28 +1,50 @@
 package frontend;
 
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.Point;
-
+import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import backend.Board;
+import backend.ComputerPlayer;
+import backend.Garen;
+import backend.Jinx;
+import backend.KhaZix;
+import backend.Malzahar;
+import backend.Ashe;
+import backend.Ahri;
 import backend.Player;
+import backend.Taric;
+import backend.Turnstile;
 
-
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+import backend.Character.*;
 
 public class MainScreen implements ActionListener {
     private JFrame mainFrame;
@@ -33,6 +55,7 @@ public class MainScreen implements ActionListener {
     private JMenuBar menuBar;
 
     private JMenu menu;
+    private int difficulty;
 
     public MainScreen(Point p) {
             
@@ -77,7 +100,7 @@ public class MainScreen implements ActionListener {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-
+  
         mainFrame.setVisible(true);
     }
 
@@ -208,7 +231,9 @@ public class MainScreen implements ActionListener {
             modeSelect.add(modePanel);
             modeSelect.setSize((int)resolution.getX(), (int)resolution.getY());
             modeSelect.setVisible(true);
+            modeSelect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
+
 
         public void actionPerformed(ActionEvent ae) {
             String act = ae.getActionCommand();
@@ -229,6 +254,7 @@ public class MainScreen implements ActionListener {
         public DifficultySelect(){
             diffFrame = new JFrame();
             diffPanel = new JPanel();
+
 
             JButton diffOne = new JButton("EASY");
             JButton diffTwo = new JButton("MEDIUM");
@@ -266,6 +292,8 @@ public class MainScreen implements ActionListener {
             diffFrame.add(diffPanel);
             diffFrame.setSize((int)resolution.getX(), (int)resolution.getY());
             diffFrame.setVisible(true);
+            diffFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
         }
 
@@ -290,57 +318,259 @@ public class MainScreen implements ActionListener {
     class CharacterSelect extends JFrame implements ActionListener {
         private JFrame characterFrame;
         private JPanel characterPanel;
-        private choicePanel select;
-        private JPanel characterVsCompPanel;
+        private int maxTeamSize = 3;
+        private int characterCount = 0;
         private ArrayList<JButton> characters = new ArrayList<JButton>();
-        private ArrayList<Image> characterImages = new ArrayList<Image>();
+        private ArrayList<JLabel> characterImages = new ArrayList<JLabel>();
+        private ArrayList<JLabel> classLabel = new ArrayList<JLabel>();
+        private GridLayout layout;
+        private JLabel characterList;
+        private boolean[] characterBoolean = new boolean[7];
+        private ArrayList<Character> playerCharacter = new ArrayList<Character>();
+        private ArrayList<Character> computerCharacter = new ArrayList<Character>();
 
-        public CharacterSelect(int i) {
-            characters.add(new JButton("Garen"));
-            characters.add(new JButton("Ashe"));
-            characters.add(new JButton("Ahri"));
 
-            System.out.println(i);
+
+        public CharacterSelect(int diff) {
+            difficulty = diff;
+            for(int i= 0; i<7; i++){
+                characters.add(new JButton("Add to Team"));
+            }
+
+            characters.add(new JButton("Resolve"));
+            
+           
+            characters.get(0).setFont(new Font("Arial", Font.BOLD, 14));
+            characters.get(0).setBorder(BorderFactory.createTitledBorder("Garen - Fighter"));
+    
+            characters.get(1).setFont(new Font("Arial", Font.BOLD, 14));
+            characters.get(1).setBorder(BorderFactory.createTitledBorder("Ashe - Marksman"));
+
+            characters.get(2).setFont(new Font("Arial", Font.BOLD, 14));
+            characters.get(2).setBorder(BorderFactory.createTitledBorder("Ahri - Mage"));
+
+            characters.get(3).setFont(new Font("Arial", Font.BOLD, 14));
+            characters.get(3).setBorder(BorderFactory.createTitledBorder("Taric - Fighter"));
+
+            characters.get(4).setFont(new Font("Arial", Font.BOLD, 14));
+            characters.get(4).setBorder(BorderFactory.createTitledBorder("Jinx - Marksman"));
+
+            characters.get(5).setFont(new Font("Arial", Font.BOLD, 14));
+            characters.get(5).setBorder(BorderFactory.createTitledBorder("Kha'Zix - Fighter"));
+
+            characters.get(6).setFont(new Font("Arial", Font.BOLD, 14));
+            characters.get(6).setBorder(BorderFactory.createTitledBorder("Malzahar - Mage"));
+
+
+            characters.get(characters.size()-1).setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
             // vs computer
             characterFrame = new JFrame("Character Select");
-            characterVsCompPanel = new JPanel();
+            characterPanel = new JPanel();
 
-                JPanel charaOne = new JPanel();
-                charaOne.setSize((int)(resolution.getX()/3), (int)resolution.getY());
-                charaOne.setLocation(0, 0);
+            layout = new GridLayout(3, 7, 20, 0);
+            characterPanel.setLayout(layout);
 
-                JPanel charaTwo = new JPanel();
-                charaTwo.setSize((int)(resolution.getX()/3), (int)(resolution.getY()));
-                charaTwo.setLocation((int)(resolution.getX()*(1/3)), 0);
 
-                JPanel charaThree = new JPanel();
-                charaThree.setSize((int)(resolution.getX()/3), (int)(resolution.getY()));
-                charaThree.setLocation(((int)resolution.getX()*(2/3)), 0);
-;               
-                characterVsCompPanel.add(charaOne);
-                characterVsCompPanel.add(charaTwo);
-                characterVsCompPanel.add(charaThree);
-                
-                characters.get(0).addActionListener(this);  
-                characters.get(0).setActionCommand("Garen");
+
+            JLabel GarenLabel = new JLabel();
+            GarenLabel.setIcon(new javax.swing.ImageIcon("lib/garen icon.png"));
+            //GarenLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
+
+
+            JLabel AsheLabel = new JLabel();
+            AsheLabel.setIcon(new javax.swing.ImageIcon("lib/ashe icon.png"));
+           // AsheLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
+
+            JLabel AhriLabel = new JLabel();
+            AhriLabel.setIcon(new javax.swing.ImageIcon("lib/ahri icon.png"));
+            //AhriLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
+
+            JLabel TaricLabel = new JLabel();
+            TaricLabel.setIcon(new javax.swing.ImageIcon("lib/taric icon.png"));
+            //TaricLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
+
+            JLabel JinxLabel = new JLabel();
+            JinxLabel.setIcon(new javax.swing.ImageIcon("lib/jinx icon.png"));
+            //JinxLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
+
+            JLabel KhaLabel = new JLabel();
+            KhaLabel.setIcon(new javax.swing.ImageIcon("lib/kha icon.png"));
+            //KhaLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
+
+            JLabel MalzLabel = new JLabel();
+            MalzLabel.setIcon(new javax.swing.ImageIcon("lib/malzahar icon.png"));
+            //MalzLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
+           
+
+            characters.get(0).addActionListener(this);  
+            characters.get(0).setActionCommand("Garen");
  
-                characters.get(1).addActionListener(this);
-                characters.get(1).setActionCommand("Ashe");
+            characters.get(1).addActionListener(this);
+            characters.get(1).setActionCommand("Ashe");
 
-                characters.get(2).addActionListener(this);
-                characters.get(2).setActionCommand("Ahri");
+            characters.get(2).addActionListener(this);
+            characters.get(2).setActionCommand("Ahri");
 
-                for(int i = 0; i<characters.size(); i++){
-                    characterVsCompPanel.add(characters.get(i));
+            characters.get(3).addActionListener(this);
+            characters.get(3).setActionCommand("Taric");
+
+            characters.get(4).addActionListener(this);
+            characters.get(4).setActionCommand("Jinx");
+
+            characters.get(5).addActionListener(this);
+            characters.get(5).setActionCommand("Kha'Zix");
+
+            characters.get(6).addActionListener(this);
+            characters.get(6).setActionCommand("Malzahar");
+            
+            //input more characters
+
+            
+            characters.get(characters.size()-1).addActionListener(this);
+            characters.get(characters.size()-1).setActionCommand("Resolve");
+
+            characterImages.add(GarenLabel);
+            characterImages.add(AsheLabel);
+            characterImages.add(AhriLabel);
+            characterImages.add(TaricLabel);
+            characterImages.add(JinxLabel);
+            characterImages.add(KhaLabel);
+            characterImages.add(MalzLabel);
+            
+            for(int i = 0; i<layout.getColumns(); i++){
+                characterPanel.add(characterImages.get(i));
+            }
+            for(int i = 0; i<layout.getColumns(); i++){
+                characterPanel.add(characters.get(i));
+            }
+
+            characterPanel.add(new JLabel());
+            characterPanel.add(new JLabel());
+            characterPanel.add(new JLabel());
+            
+            
+            //resolve index
+            characterPanel.add(characters.get(characters.size()-1));
+        
+            characterPanel.add(new JLabel());
+            characterPanel.add(new JLabel());
+            characterPanel.add(new JLabel());
+
+            setButton();
+            characterFrame.add(characterPanel);
+            characterFrame.setSize((int)resolution.getX(), (int)resolution.getY());
+            characterFrame.setVisible(true);
+            
+            //garen, ashe, ahri
+            }
+
+            public JLabel updateTeam(){
+                String list = "";
+
+                for(int i= 0; i<characters.size(); i++){
+                    list+=characters.get(i).getName() + " - ";
                 }
                 
-                characterFrame.add(characterVsCompPanel);
-                characterFrame.setVisible(true);
-                //garen, ashe, ahri
+                return characterList;
             }
-            public void actionPerformed(ActionEvent e) {
             
+
+            public void actionPerformed(ActionEvent e) {
+                String act = e.getActionCommand();
+                if(characterCount < maxTeamSize){
+                    if(act.equals("Garen")){
+                        characterBoolean[0] = !characterBoolean[0];
+                        setButton();
+
+                    }
+                    else if(act.equals("Ashe")){
+                        characterBoolean[1] = !characterBoolean[1];
+                        setButton();
+    
+                    } else if(act.equals("Ahri")){
+
+                        characterBoolean[2] = !characterBoolean[2];
+                        setButton();
+    
+                    } else if(act.equals("Taric")){
+                        
+                        characterBoolean[3] = !characterBoolean[3];
+                        setButton();
+    
+                    } else if(act.equals("Jinx")){
+                        
+                        characterBoolean[4] = !characterBoolean[4];
+                        setButton();
+    
+                    } 
+                    else if(act.equals("Kha'Zix")){
+                        
+                        characterBoolean[5] = !characterBoolean[5];
+                        setButton();
+    
+                    } 
+                    else if(act.equals("Malzahar")){
+                        
+                        characterBoolean[6] = !characterBoolean[6];
+                        setButton();
+    
+                    } 
+
+                    else if(act.equals("Resolve")){
+                        characters.get(characters.size()-1).setText("Please select 3 characters minimum.");
+                    }
+
+                } else if (characterCount == maxTeamSize){
+                    ArrayList<Integer> posTrue = new ArrayList<Integer>();
+                    for(int i= 0; i<characterBoolean.length; i++){
+                        if(characterBoolean[i])
+                            posTrue.add(i);
+                    }
+                    for(int i= 0; i<posTrue.size(); i++){
+                        switch(posTrue.get(i)){
+                            case 0:
+                                playerCharacter.add(new Garen(difficulty));
+                                break;
+                            case 1:
+                                playerCharacter.add(new Ashe(difficulty));
+                                break;
+                            case 2: 
+                                playerCharacter.add(new Ahri(difficulty));
+                                break;
+                            case 3: 
+                                playerCharacter.add(new Taric(difficulty));
+                                break;
+                            case 4: 
+                                playerCharacter.add(new Jinx(difficulty));
+                                break;
+                            case 5: 
+                                playerCharacter.add(new KhaZix(difficulty));
+                                break;
+                            case 6:
+                                playerCharacter.add(new Malzahar(difficulty));
+                            default:
+                                break;
+                        }
+                    }
+                    new Turnstile(new Player(playerCharacter.size(), playerCharacter), new Player(playerCharacter.size(), playerCharacter));
+                    
+                } 
+
+            }
+            public void setButton(){
+                for(int i = 0; i< characterBoolean.length; i++){
+                    if(characterBoolean[i] == true){
+                        characters.get(i).setBackground(new Color(219,38,38));
+                        characters.get(i).setText("Added to Team");
+                    }
+                    else if(characterBoolean[i] == false){
+                        characters.get(i).setBackground(new Color(50,205,50));
+                        characters.get(i).setText("Add to Team");
+                    }
+                }
             }
     }
+    
 }
                                   
