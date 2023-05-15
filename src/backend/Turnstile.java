@@ -56,6 +56,6 @@ public class Turnstile {
         }
     }
     public static void finishGame(){
-        gf.dispose();
+        gf.mainFrame.dispose();
     }
 }

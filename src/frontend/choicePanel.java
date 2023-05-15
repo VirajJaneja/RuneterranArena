@@ -103,8 +103,4 @@ public class choicePanel extends JPanel implements ActionListener{
         }
         System.out.println(TurnStile.playerOne.nextTurn);
     }
-
-    
-
-
 }
