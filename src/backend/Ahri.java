@@ -12,10 +12,10 @@ public class Ahri extends CharacterWrapperSq{
     private Ability b = new Ability("Fox Fire", 35, 0.35, 0.2, false, false, false);
     private Ability c = new Ability("Charm", 30, 0.2, 0.2, false, false, true);
     private Ability d = new Ability("Auto Attack", 20, 0.2, 0.2, false, false, false);
-    private ImageIcon characterIcon;
-    private ImageIcon basickATKIcon;
-    private ImageIcon abilityIcon;
-    private ImageIcon ultIcon;
+    private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/ahri icon.png");
+    private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/ahri basicATK.png");
+    private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/ahri AB1.png");
+    private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/ahri ult.png");
     private ImageIcon basickAtkAnim;
     private ImageIcon ABAnim;
     private ImageIcon ultAnim;

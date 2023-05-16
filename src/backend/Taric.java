@@ -11,10 +11,10 @@ public class Taric extends CharacterWrapperSq{
     private Ability b = new Ability("Starlight's touch", 45, 0.2, 0.1, true, false, true);
     private Ability c = new Ability("Cosmic Radiance", 45, 0.2, 0.1, false, false, true);
     private Ability d = new Ability("Auto Attack", 40, 0.2, 0.1, false, false, false);
-    private ImageIcon characterIcon;
-    private ImageIcon basickATKIcon;
-    private ImageIcon abilityIcon;
-    private ImageIcon ultIcon;
+    private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/taric icon.png");
+    private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/taric basicATK.png");
+    private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/taric AB1.png");
+    private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/taric ult.png");
     private ImageIcon basickAtkAnim;
     private ImageIcon ABAnim;
     private ImageIcon ultAnim;
