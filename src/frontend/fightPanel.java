@@ -8,12 +8,16 @@ public class fightPanel extends JPanel {
     private JLabel player;
     private JLabel computer;
 
+    private ImageIcon playerCharacter;
+    private ImageIcon computerCharacter;
+
     public fightPanel() {
         setLayout(new BorderLayout());
         setOpaque(false);
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         player = new JLabel();
         ImageIcon playerIcon = new ImageIcon("lib/GarenGreenPlayer.gif");
+        
         // create an AffineTransform object to flip the image over the y-axis
         AffineTransform playerFlip = AffineTransform.getScaleInstance(1, -1);
         playerFlip.translate(0, -playerIcon.getIconHeight());
