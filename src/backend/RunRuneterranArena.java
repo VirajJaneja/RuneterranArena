@@ -17,8 +17,8 @@ public class RunRuneterranArena {
         System.out.println(characs.size());
         characs.add(new Jinx(2));
         characs.add(new KhaZix(2));
-        characs.add(new Malzahar(2));
-        // characs.add(new Taric(2));
+        // characs.add(new Malzahar(2));
+        characs.add(new Taric(2));
         // characs.add(new Ashe(2));
         // characs.add(new Ahri(2));
 
