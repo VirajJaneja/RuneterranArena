@@ -15,12 +15,12 @@ public class Garen extends CharacterWrapperSq{
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/garen basicATK.png");
     private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/garen AB1.png");
     private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/garen ult.png");
-    private ImageIcon basickAtkAnim;
-    private ImageIcon ABAnim;
-    private ImageIcon ultAnim;
-    private ImageIcon deathAnim;
-    private ImageIcon idleAnim;
-    private ImageIcon spawnAnim;
+    
+    private ImageIcon basickAtkAnim = new ImageIcon("lib/animations/Garen/GarenBasicATK.gif");
+    private ImageIcon ABAnim =  new ImageIcon("lib/animations/Garen/GarenAbility.gif");
+    private ImageIcon ultAnim =  new ImageIcon("lib/animations/Garen/GarenUlt.gif");
+    private ImageIcon deathAnim =  new ImageIcon("lib/animations/Garen/GarenDeath.gif");
+    private ImageIcon idleAnim =  new ImageIcon("lib/animations/Garen/GarenIdle.gif");
 
     public Garen(int diff){
         super(type, region, 120, diff);

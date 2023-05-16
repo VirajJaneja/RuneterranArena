@@ -85,6 +85,12 @@ public class Character {
     public int getHealth(){
         return health;
     }
+    public boolean getStatus(){
+        if(getHealth()<=0)
+            return false;
+        return true;
+    }
+    
     public void setLevel(String lvl){
         level = lvl;
     }

@@ -5,8 +5,15 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -57,7 +64,7 @@ class CharacterSelect extends JFrame implements ActionListener {
         // playerCharact.add(new Jinx(0));
         // playerCharact.add(new Malzahar(0));
 
-        for(int i= 0; i<7; i++){
+        for(int i= 0; i<6; i++){
             characters.add(new JButton("Add to Team"));
         }
 
@@ -82,8 +89,8 @@ class CharacterSelect extends JFrame implements ActionListener {
         characters.get(5).setFont(new Font("Arial", Font.BOLD, 14));
         characters.get(5).setBorder(BorderFactory.createTitledBorder("Kha'Zix - Fighter"));
 
-        characters.get(6).setFont(new Font("Arial", Font.BOLD, 14));
-        characters.get(6).setBorder(BorderFactory.createTitledBorder("Malzahar - Mage"));
+        // characters.get(6).setFont(new Font("Arial", Font.BOLD, 14));
+        // characters.get(6).setBorder(BorderFactory.createTitledBorder("Malzahar - Mage"));
 
 
         characters.get(characters.size()-1).setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
@@ -92,7 +99,7 @@ class CharacterSelect extends JFrame implements ActionListener {
         characterFrame = new JFrame("Character Select");
         characterPanel = new JPanel();
 
-        layout = new GridLayout(3, 7, 20, 0);
+        layout = new GridLayout(3, 6, 20, 0);
         characterPanel.setLayout(layout);
 
 
@@ -179,7 +186,6 @@ class CharacterSelect extends JFrame implements ActionListener {
     
         characterPanel.add(new JLabel());
         characterPanel.add(new JLabel());
-        characterPanel.add(new JLabel());
 
         setButton();
         characterFrame.add(characterPanel);
@@ -200,42 +206,64 @@ class CharacterSelect extends JFrame implements ActionListener {
             return characterList;
         }
         
-
+        private void playSound(String s){
+            String sound = "lib/button SE.wav";
+            if(s.equals("Confirm") || s.equals("None"))
+                sound = "lib/Button 2 SE.wav";
+            try {
+                File soundFile = new File(sound);
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+    
+                // Play the sound
+                clip.start();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                ex.printStackTrace();
+            }
+        }
         public void actionPerformed(ActionEvent e) {
             String act = e.getActionCommand();
             if(characterCount < maxTeamSize){
                 if(act.equals("Garen")){
+                    playSound("confirm");
                     characterBoolean[0] = !characterBoolean[0];
                     setButton();
 
                 }
                 else if(act.equals("Ashe")){
+                    playSound("confirm");
                     characterBoolean[1] = !characterBoolean[1];
                     setButton();
 
                 } else if(act.equals("Ahri")){
+                    playSound("confirm");
 
                     characterBoolean[2] = !characterBoolean[2];
                     setButton();
 
                 } else if(act.equals("Taric")){
+                    playSound("confirm");
                     
                     characterBoolean[3] = !characterBoolean[3];
                     setButton();
 
                 } else if(act.equals("Jinx")){
+                    playSound("confirm");
                     
                     characterBoolean[4] = !characterBoolean[4];
                     setButton();
 
                 } 
                 else if(act.equals("Kha'Zix")){
+                    playSound("confirm");
                     
                     characterBoolean[5] = !characterBoolean[5];
                     setButton();
 
                 } 
                 else if(act.equals("Malzahar")){
+                    playSound("confirm");
                     
                     characterBoolean[6] = !characterBoolean[6];
                     setButton();
@@ -243,6 +271,7 @@ class CharacterSelect extends JFrame implements ActionListener {
                 } 
 
                 else if(act.equals("Resolve")){
+                    playSound("confirm");
                     characters.get(characters.size()-1).setText("Please select 3 characters minimum.");
                 }
 

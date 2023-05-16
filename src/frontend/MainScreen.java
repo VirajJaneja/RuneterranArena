@@ -42,6 +42,11 @@ import backend.Taric;
 import backend.Turnstile;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -119,7 +124,22 @@ public class MainScreen implements ActionListener {
         mainFrame.setVisible(true);
 
     }
+    private void playSound(String s){
+        String sound = "lib/button SE.wav";
+        if(s.equals("Confirm") || s.equals("None"))
+            sound = "lib/Button 2 SE.wav";
+        try {
+            File soundFile = new File(sound);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
 
+            // Play the sound
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void setPane(JPanel pane){
         contentPane.removeAll();
@@ -134,13 +154,16 @@ public class MainScreen implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String act = ae.getActionCommand();
         if (act.equals("click")) {
+            playSound("confirm");
             mainFrame.setVisible(false);
             new Mode();
 
         } else if (act.equals("Options")) {
+            playSound("confirm");
             mainFrame.setVisible(false);
             new Settings();
         } else if (act.equals("Help")) {
+            
             mainFrame.setVisible(false);
             System.out.println("Help frq here!");
         }
@@ -198,16 +221,22 @@ public class MainScreen implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String act = e.getActionCommand();
             if (act.equals("res1")) {
+                playSound("confirm");
+
                 setFrame(res1);
                 alterRes(resolution);
                 settingsFrame.setVisible(false);
 
             } else if (act.equals("res2")) {
+                playSound("confirm");
+
                 setFrame(res2);
                 alterRes(resolution);
                 settingsFrame.setVisible(false);
             }
             else if (act.equals("res3")) {
+                playSound("confirm");
+
                 setFrame(res3);
                 alterRes(resolution);
                 settingsFrame.setVisible(false);
@@ -228,80 +257,82 @@ public class MainScreen implements ActionListener {
         ImageIcon backgroundImage;
         JLabel backgroundLabel;
         public Mode() {
-            
             modeSelect = new JFrame();
             modePanel = new JPanel();
-
-            // backgroundImage = new ImageIcon("lib/RiftBG.jpg");
-            // backgroundLabel = new JLabel(backgroundImage);
-            // backgroundLabel.setSize((int) resolution.getX(), (int) resolution.getY());
-            // modeSelect.setContentPane(backgroundLabel);
-
+    
+            backgroundImage = new ImageIcon("lib/RiftBG.jpg");
+            backgroundLabel = new JLabel(backgroundImage);
+            backgroundLabel.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
+    
+            modePanel.setLayout(null);
+            modePanel.add(backgroundLabel);
+    
             easy = new ImageIcon("lib/Easy.png");
             medium = new ImageIcon("lib/Medium.png");
             hard = new ImageIcon("lib/Hard.png");
-            image = easy.getImage(); // transform it 
-            newimg = image.getScaledInstance(215, 50,  java.awt.Image.SCALE_SMOOTH);
-            image = medium.getImage(); // transform it 
-            newimg = image.getScaledInstance(215, 50,  java.awt.Image.SCALE_SMOOTH);
-            image = hard.getImage(); // transform it 
-            newimg = image.getScaledInstance(215, 50,  java.awt.Image.SCALE_SMOOTH);
-
+    
+            int buttonWidth = 500;  // Adjust the width as needed
+            int buttonHeight = 175;  // Adjust the height as needed
+    
             JButton diffOne = new JButton(easy);
-            JButton diffTwo = new JButton(medium);  
-            JButton diffThree = new JButton(hard);
-            diffOne.setBounds((int)resolution.getX()/3, (int)resolution.getY()/3, easy.getIconWidth(), easy.getIconHeight());
-            diffTwo.setBounds((int)resolution.getX()/3, (int)resolution.getY()/3-50, medium.getIconWidth(), medium.getIconHeight());
-            diffThree.setBounds((int)resolution.getX()/3-200, (int)resolution.getY()/3-100, hard.getIconWidth(), hard.getIconHeight());
-
-
-            menuBar = new JMenuBar();
-            menu = new JMenu("Settings");
-            JMenuItem optionsMenuItem = new JMenuItem("Options");
-            JMenuItem helpMenuItem = new JMenuItem("Help");
-            optionsMenuItem.addActionListener(this);
-            optionsMenuItem.setActionCommand("Options");
-            helpMenuItem.addActionListener(this);
-            helpMenuItem.setActionCommand("Help");
-            menu.add(optionsMenuItem);
-            menu.add(helpMenuItem);
-            menuBar.add(menu);
-            mainFrame.setJMenuBar(menuBar);
-
-            modePanel.add(menuBar);
+            diffOne.setBounds(50, 50, buttonWidth, buttonHeight);
             diffOne.addActionListener(this);
             diffOne.setActionCommand("EASY");
-            
-            modePanel.add(diffOne);   
-
+            //diffOne.setBorder(null); // Remove border
+            //diffOne.setContentAreaFilled(false); // Ensure full image display
+    
+            modePanel.add(diffOne);
+    
+            JButton diffTwo = new JButton(medium);
+            diffTwo.setBounds(50, 225, buttonWidth+150, buttonHeight);
             diffTwo.addActionListener(this);
             diffTwo.setActionCommand("MEDIUM");
-            modePanel.add(diffTwo); 
-
+            //diffTwo.setBorder(null); // Remove border
+            //diffTwo.setContentAreaFilled(false); // Ensure full image display
+    
+            modePanel.add(diffTwo);
+    
+            JButton diffThree = new JButton(hard);
+            diffThree.setBounds(50, 400, buttonWidth, buttonHeight);
+            diffThree.setBorder(null); // Remove border
             diffThree.addActionListener(this);
             diffThree.setActionCommand("HARD");
-            modePanel.add(diffThree); 
-
-
+            //diffThree.setActionCommand("EASY");
+            //diffThree.setContentAreaFilled(false); // Ensure full image display
+    
+            modePanel.add(diffThree);
+    
             modePanel.setVisible(true);
             modeSelect.add(modePanel);
-            modeSelect.setSize((int)resolution.getX(), (int)resolution.getY());
+            modeSelect.setSize(backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
             modeSelect.setVisible(true);
             modeSelect.setDefaultCloseOperation(EXIT_ON_CLOSE);
         }
+    
 
 
         public void actionPerformed(ActionEvent ae) {
             String act = ae.getActionCommand();
             if(act.equals("EASY")){
+                playSound("confirm");
+
+                System.out.println("easy");
                 modeSelect.setVisible(false);
                 new CharacterSelect(0, resolution);
             } else if(act.equals("MEDIUM")){
+                playSound("confirm");
+
                 new CharacterSelect(1, resolution);
+                System.out.println("med");
             } else if(act.equals("HARD")){
+                playSound("confirm");
+
                 modeSelect.setVisible(false);
                 new CharacterSelect(2, resolution);
+                System.out.println("hard");
             } else if(act.equals("Options")){
+
+
                 modeSelect.setVisible(false);
                 new Settings();
             }

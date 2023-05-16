@@ -16,12 +16,12 @@ public class Ahri extends CharacterWrapperSq{
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/ahri basicATK.png");
     private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/ahri AB1.png");
     private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/ahri ult.png");
-    private ImageIcon basickAtkAnim;
-    private ImageIcon ABAnim;
-    private ImageIcon ultAnim;
-    private ImageIcon deathAnim;
-    private ImageIcon idleAnim;
-    private ImageIcon spawnAnim;
+
+    private ImageIcon basickAtkAnim = new ImageIcon("lib/animations/Ahri/AhriATK.gif");
+    private ImageIcon ABAnim =  new ImageIcon("lib/animations/Ahri/AhriAbility.gif");
+    private ImageIcon ultAnim =  new ImageIcon("lib/animations/Ahri/AhriUltAnim.gif");
+    private ImageIcon deathAnim =  new ImageIcon("lib/animations/Ahri/AhriDeath.gif");
+    private ImageIcon idleAnim =  new ImageIcon("lib/animations/Ahri/AhriNewIdle.gif");
     
     public Ahri(int diff){
         super(type, region, 100, diff);

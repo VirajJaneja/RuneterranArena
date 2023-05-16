@@ -15,12 +15,14 @@ public class Ashe extends CharacterWrapperSq{
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/ashe basicATK.png");
     private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/ashe AB1.png");
     private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/ashe ult.png");
-    private ImageIcon basickAtkAnim;
-    private ImageIcon ABAnim;
-    private ImageIcon ultAnim;
-    private ImageIcon deathAnim;
-    private ImageIcon idleAnim;
-    private ImageIcon spawnAnim;
+    
+    private ImageIcon basickAtkAnim = new ImageIcon("lib/animations/Ashe/AsheBasicATK.gif");
+    private ImageIcon ABAnim =  new ImageIcon("lib/animations/Ashe/AsheABility.gif");
+    private ImageIcon ultAnim =  new ImageIcon("lib/animations/Ashe/AsheUlt.gif");
+    private ImageIcon deathAnim =  new ImageIcon("lib/animations/Ashe/AsheDeathAnim.gif");
+    private ImageIcon idleAnim =  new ImageIcon("lib/animations/Ashe/AsheIdle.gif");
+    
+
     
     public Ashe(int diff){
         super(type, region, 80, diff);
