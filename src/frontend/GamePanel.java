@@ -46,7 +46,7 @@ public class GamePanel extends JPanel {
         fPane = initFP();
         JButton settingsButton = new JButton("Settings");
         settingsButton.setActionCommand("Settings");
-        System.out.println(cPane.getWidth() + " here");
+        // System.out.println(cPane.getWidth() + " here");
         // if(height == 1080)
         //     System.out.println(cPane.getResponse());;
     }
@@ -61,7 +61,7 @@ public class GamePanel extends JPanel {
         fPane = initFP();
         JButton settingsButton = new JButton("Settings");
         settingsButton.setActionCommand("Settings");
-        System.out.println(cPane.getWidth() + " here");
+        // System.out.println(cPane.getWidth() + " here");
         // if(height == 1080)
         //     System.out.println(cPane.getResponse());;
     }
@@ -113,6 +113,7 @@ public class GamePanel extends JPanel {
 
     private choicePanel initCP(){
         choicePanel cPane = new choicePanel(TurnStile, TurnStile.playerOne);
+        cPane.addSwapButtons(cPane);
         cPane.setLayout(new BoxLayout(cPane, BoxLayout.PAGE_AXIS));
         cPane.add(cPane.basicATK);
         cPane.add(cPane.abilityOne);

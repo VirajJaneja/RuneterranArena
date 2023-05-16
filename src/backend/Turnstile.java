@@ -20,7 +20,6 @@ public class Turnstile {
         gameOver = false;
         gf = new gameFrame(new Point(1980, 1080), this);
         battlefield = new Board(playerOne, playerTwo);
-
     }
 
     public Turnstile(Board board) {
@@ -31,20 +30,29 @@ public class Turnstile {
         P1Turn {
             @Override
             public void run() {
-                if(!(battlefield.gameOver().equals("Ongoing")))
+                // System.out.println("here1");
+                if(!(battlefield.gameOver().equals("Ongoing"))){
                     gameOver = true;
+                    // System.out.println("herez");
+                }
                 else if(!(turnCounter<1)){
                     Board.makeMove(playerTwo.getNextTurn(), playerTwo, playerOne);
+                    // System.out.println("broken");
                 }
             }
         },
         P2Turn {
             @Override
             public void run() {
-                if(!(battlefield.gameOver().equals("Ongoing")))
+                // System.out.println("here2");
+                if(!(battlefield.gameOver().equals("Ongoing"))){
                     gameOver = true;
-                else if(!(turnCounter<1))
-                    Board.makeMove(playerTwo.getNextTurn(), playerTwo, playerOne);
+                    // System.out.println("here");
+                }
+                else{
+                    Board.makeMove(playerOne.getNextTurn(), playerOne, playerTwo);
+                    // System.out.println("broken");
+                }
             }
         };
     
@@ -59,15 +67,17 @@ public class Turnstile {
         }
         if(turn == Turn.P2Turn){
             nextStep = Turn.P1Turn;
+            nextStep.run();
             gf.gp.cPane.setConfirmButtonPresence(1);
         }
         System.out.println(turn);
         if(!gameOver){
-            System.out.println("here");
+            nextStep.run();
+            // System.out.println("here");
             turn = nextStep;
             // turn.run();
         }
-        System.out.println(turn);
+        // System.out.println(turn);
     }
     public static void finishGame(){
         gf.mainFrame.dispose();

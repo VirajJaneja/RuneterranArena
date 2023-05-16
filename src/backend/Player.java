@@ -19,10 +19,10 @@ public class Player {
     public void swapCharacter(int i){
         currentCharacter = i;
     }
-    public Character getCharacter(int i){
+    public CharacterWrapperSq getCharacter(int i){
         return playerRoster.get(i);
     }
-    public Character getCurrentCharacter(){
+    public CharacterWrapperSq getCurrentCharacter(){
         return playerRoster.get(currentCharacter);
     }
     public void addCharacter(CharacterWrapperSq chara){
@@ -36,5 +36,8 @@ public class Player {
     }
     public Integer getNextTurn(){
         return nextTurn;
+    }
+    public void setCharacter(CharacterWrapperSq charac, int oldIndex){
+        playerRoster.set(oldIndex, charac);
     }
 }

@@ -48,7 +48,7 @@ public class gameFrame implements ActionListener {
         // mainPanel.setLayout(null);
         int xMax = gp.getWidth();
         int yMax = gp.getHeight();
-        System.out.println(xMax + ", " + yMax);
+        // System.out.println(xMax + ", " + yMax);
 
         JButton settingsButton = new JButton("Settings");
         settingsButton.setActionCommand("Settings");
@@ -134,9 +134,9 @@ public class gameFrame implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String act = e.getActionCommand();
             if (act.equals("res1")) {
-                System.out.println("Settings res1");
+                // System.out.println("Settings res1");
                 setFrame(res1);
-                System.out.println("resolution"+ resolution);
+                // System.out.println("resolution"+ resolution);
                 alterRes(resolution);
                 settingsFrame.dispose();
 

@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -27,11 +28,13 @@ public class choicePanel extends JPanel implements ActionListener{
     static JButton confirm;
     Player player;
     Icon icons[] = new Icon[4];
+    ArrayList<JButton> teamButtons;
     // public static Boolean turn;
     // private static String nextTurnValue;
 
 
     choicePanel(Turnstile turnstile2, Player Givenplayer) {
+        teamButtons = new ArrayList<>();
         TurnStile = turnstile2;
         player = Givenplayer;
         // turn = false;
@@ -53,13 +56,20 @@ public class choicePanel extends JPanel implements ActionListener{
 	    abilityOne.setBackground(new Color(255, 255, 255));
 	    ult.setBackground(new Color(255, 255, 255));
 	    swapCharac.setBackground(new Color(255, 255, 255));
+        for(JButton b: teamButtons){
+            b.setBackground(new Color(255, 255, 255));
+        }
     }
 
     private void initButtons(){
+        for(int i = 0; i<player.getSize();i++){
+            teamButtons.add(new JButton(player.getCharacter(i).getName()));
+            setupButton(teamButtons.get(i), player.getCharacter(i).getName());
+        }
         setupButton(basicATK, "Basic Attack");
         setupButton(abilityOne, "Ability 1");
         setupButton(ult, "Ultimate");
-        setupButton(swapCharac, "Swap");
+        setupButton(swapCharac, "swap");
         setupButton(confirm, "None");
         setConfirmButtonPresence(1);
     }
@@ -72,7 +82,16 @@ public class choicePanel extends JPanel implements ActionListener{
 	    b.setOpaque(true);
 	    b.setActionCommand(s);
 	    b.addActionListener(this);
+
         // b.setAlignmentX(CENTER_ALIGNMENT);
+    }
+
+    public void addSwapButtons(choicePanel cp){
+        for(int i = 0; i<player.getSize();i++){
+            teamButtons.get(i).setActionCommand((i*10)+3+"");
+            cp.add(teamButtons.get(i));
+        }
+        swapRotate("cancel");
     }
 
     public void setConfirmButtonPresence(Integer i) {
@@ -90,10 +109,31 @@ public class choicePanel extends JPanel implements ActionListener{
         }
     }
 
+    public void swapRotate(String swap){
+        if(swap.equals("swap")){
+            basicATK.setVisible(false);
+            abilityOne.setVisible(false);
+            ult.setVisible(false);
+            swapCharac.setActionCommand("cancel");
+            for(JButton b: teamButtons){
+                b.setVisible(true);
+            }
+        }
+        if(swap.equals("cancel")){
+            basicATK.setVisible(true);
+            abilityOne.setVisible(true);
+            ult.setVisible(true);
+            swapCharac.setActionCommand("swap");
+            for(JButton b: teamButtons){
+                b.setVisible(false);
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String eventName = e.getActionCommand();
-        // System.out.println(eventName);
+        System.out.println(eventName);
         // nextTurnValue = eventName;
         switch(eventName){
             case "Basic Attack":
@@ -111,15 +151,26 @@ public class choicePanel extends JPanel implements ActionListener{
                 resetButtons();
                 ult.setBackground(new Color(29,67,71));
                 break;
-            case "Swap":
-                player.setNextTurn(3);
-                resetButtons();
-                swapCharac.setBackground(new Color(29,67,71));
+            case "cancel":
+                swapRotate(eventName);
+                break;
+            case "swap":
+                swapRotate(eventName);
                 break;
             case "Confirm":
+                resetButtons();
                 Turnstile.moveTurn();
                 break;
+            case "3":
+            case "13":
+            case "23":
+            case "33":
+            case "43":
+                player.setNextTurn(Integer.parseInt(eventName));
+                resetButtons();
+                teamButtons.get((Integer.parseInt(eventName)-3)/10).setBackground(new Color(29,67,71));
+                break; 
         }
-        System.out.println(TurnStile.playerOne.nextTurn);
+        // System.out.println(TurnStile.playerOne.nextTurn);
     }
 }
