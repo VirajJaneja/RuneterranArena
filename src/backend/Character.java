@@ -18,6 +18,8 @@ public class Character {
     private final double Gold = 2.5;
     private Image sprite;
 
+
+
     public Character(){
         this.region = "placeholder";
     }
