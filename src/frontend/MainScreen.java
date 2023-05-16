@@ -1,14 +1,19 @@
 package frontend;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.Point;
@@ -22,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.RootPaneContainer;
 
 import backend.Board;
 import backend.ComputerPlayer;
@@ -56,55 +62,64 @@ public class MainScreen implements ActionListener {
 
     private JMenu menu;
     private int difficulty;
+    
+
 
     public MainScreen(Point p) {
-            
+
         resolution = p;
         mainFrame = new JFrame("Menu");
-        contentPane = new JPanel();
-        mainPanel = new JPanel();
-        menuBar = new JMenuBar(); 
-        menu = new JMenu("Settings");
-
-
-
-        mainPanel.setBounds(0, 0, (int) resolution.getX(), (int) resolution.getY());
-        // mainPanel.setLayout(null);
-        int xMax = mainPanel.getWidth();
-        int yMax = mainPanel.getHeight();
-        System.out.println(xMax + ", " + yMax);
-        
-  
-        // create menuitems
-        JMenuItem m1 = new JMenuItem("Options");
-        m1.addActionListener(this);
-        m1.setActionCommand("Options");
-        JMenuItem m2 = new JMenuItem("Help");
-        m2.addActionListener(this);
-        m2.setActionCommand("Help");
-
-        menu.add(m1);
-        menu.add(m2);
-        menu.setBounds(100, 100, xMax, yMax);
-        menuBar.add(menu);
-  
-        JButton modes = new JButton("Mode");
-        modes.setActionCommand("Mode");
-        modes.setBounds(xMax / 2, yMax / 2, 100, 100);
-        modes.addActionListener(this);
-        mainPanel.add(modes);
-
-        mainPanel.add(menuBar);
-        contentPane.add(mainPanel);
-
-        mainFrame.setContentPane(contentPane);
-        mainFrame.setSize((int) resolution.getX(), (int) resolution.getY());
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Set the background image
+        ImageIcon backgroundImage = new ImageIcon("lib/RuneterraArenaBG.png");
+        JLabel backgroundLabel = new JLabel(backgroundImage);
+        backgroundLabel.setSize((int) resolution.getX(), (int) resolution.getY());
+        mainFrame.setContentPane(backgroundLabel);
 
-  
+        ImageIcon start = new ImageIcon("lib/woodStart.png");
+        Image image = start.getImage();
+        Image scaledImage = image.getScaledInstance(480, 360, java.awt.Image.SCALE_SMOOTH);
+        
+        ImageIcon buttonIcon = new ImageIcon(scaledImage);
+        JButton centerButton = new JButton(buttonIcon);
+        centerButton.addActionListener(this);
+        centerButton.setActionCommand("click");
+        
+        Dimension buttonSize = new Dimension(scaledImage.getWidth(null), scaledImage.getHeight(null));
+        centerButton.setBorder(null); // Remove border
+        centerButton.setContentAreaFilled(false); // Ensure full image display
+
+        centerButton.setPreferredSize(buttonSize);
+        centerButton.setMinimumSize(buttonSize);
+        centerButton.setMaximumSize(buttonSize);
+        centerButton.setSize(buttonSize);
+        
+        centerButton.setBounds((int) resolution.getX() / 2 - buttonSize.width / 2, (int) resolution.getY() / 2 - buttonSize.height / 2, buttonSize.width-10, buttonSize.height-10);
+        mainFrame.add(centerButton);
+        
+
+        menuBar = new JMenuBar();
+        menu = new JMenu("Settings");
+        JMenuItem optionsMenuItem = new JMenuItem("Options");
+        JMenuItem helpMenuItem = new JMenuItem("Help");
+        optionsMenuItem.addActionListener(this);
+        optionsMenuItem.setActionCommand("Options");
+        helpMenuItem.addActionListener(this);
+        helpMenuItem.setActionCommand("Help");
+        menu.add(optionsMenuItem);
+        menu.add(helpMenuItem);
+        menuBar.add(menu);
+        mainFrame.setJMenuBar(menuBar);
+
+        int xval = (int) p.getX();
+        int yval = (int) p.getY();
+        mainFrame.setSize(xval, yval);
+        mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+
     }
+
 
     public void setPane(JPanel pane){
         contentPane.removeAll();
@@ -118,7 +133,7 @@ public class MainScreen implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         String act = ae.getActionCommand();
-        if (act.equals("Mode")) {
+        if (act.equals("click")) {
             mainFrame.setVisible(false);
             new Mode();
 
@@ -132,8 +147,10 @@ public class MainScreen implements ActionListener {
     }
 
     public static void main(String args[]) {
-        new MainScreen(new Point(1980, 1080));
+
+        new MainScreen(new Point(900, 900));
     }
+
     //
 
     class Settings extends JFrame implements ActionListener {
@@ -203,116 +220,89 @@ public class MainScreen implements ActionListener {
     class Mode extends JFrame implements ActionListener {
         private JFrame modeSelect;
         private JPanel modePanel;
-
+        ImageIcon easy;
+        ImageIcon medium;
+        ImageIcon hard;
+        Image newimg;
+        Image image;
+        ImageIcon backgroundImage;
+        JLabel backgroundLabel;
         public Mode() {
             
             modeSelect = new JFrame();
             modePanel = new JPanel();
 
-            JButton modeSel2 = new JButton("VS COMPUTER");
+            // backgroundImage = new ImageIcon("lib/RiftBG.jpg");
+            // backgroundLabel = new JLabel(backgroundImage);
+            // backgroundLabel.setSize((int) resolution.getX(), (int) resolution.getY());
+            // modeSelect.setContentPane(backgroundLabel);
 
-            JMenuBar menuBar = new JMenuBar();
-            JMenu menus= new JMenu("Settings");
-            JMenuItem m1 = new JMenuItem("Options");
-            m1.addActionListener(this);
-            m1.setActionCommand("Options");
-            JMenuItem m2 = new JMenuItem("Help");
-            m2.addActionListener(this);
-            m2.setActionCommand("Help");
+            easy = new ImageIcon("lib/Easy.png");
+            medium = new ImageIcon("lib/Medium.png");
+            hard = new ImageIcon("lib/Hard.png");
+            image = easy.getImage(); // transform it 
+            newimg = image.getScaledInstance(215, 50,  java.awt.Image.SCALE_SMOOTH);
+            image = medium.getImage(); // transform it 
+            newimg = image.getScaledInstance(215, 50,  java.awt.Image.SCALE_SMOOTH);
+            image = hard.getImage(); // transform it 
+            newimg = image.getScaledInstance(215, 50,  java.awt.Image.SCALE_SMOOTH);
 
-            menus.add(m1);
-            menus.add(m2);
-            menuBar.add(menus);
+            JButton diffOne = new JButton(easy);
+            JButton diffTwo = new JButton(medium);  
+            JButton diffThree = new JButton(hard);
+            diffOne.setBounds((int)resolution.getX()/3, (int)resolution.getY()/3, easy.getIconWidth(), easy.getIconHeight());
+            diffTwo.setBounds((int)resolution.getX()/3, (int)resolution.getY()/3-50, medium.getIconWidth(), medium.getIconHeight());
+            diffThree.setBounds((int)resolution.getX()/3-200, (int)resolution.getY()/3-100, hard.getIconWidth(), hard.getIconHeight());
 
-            modeSel2.addActionListener(this);
-            modeSel2.setActionCommand("Computer");
-            modePanel.add(modeSel2);   
+
+            menuBar = new JMenuBar();
+            menu = new JMenu("Settings");
+            JMenuItem optionsMenuItem = new JMenuItem("Options");
+            JMenuItem helpMenuItem = new JMenuItem("Help");
+            optionsMenuItem.addActionListener(this);
+            optionsMenuItem.setActionCommand("Options");
+            helpMenuItem.addActionListener(this);
+            helpMenuItem.setActionCommand("Help");
+            menu.add(optionsMenuItem);
+            menu.add(helpMenuItem);
+            menuBar.add(menu);
+            mainFrame.setJMenuBar(menuBar);
+
             modePanel.add(menuBar);
+            diffOne.addActionListener(this);
+            diffOne.setActionCommand("EASY");
+            
+            modePanel.add(diffOne);   
+
+            diffTwo.addActionListener(this);
+            diffTwo.setActionCommand("MEDIUM");
+            modePanel.add(diffTwo); 
+
+            diffThree.addActionListener(this);
+            diffThree.setActionCommand("HARD");
+            modePanel.add(diffThree); 
+
 
             modePanel.setVisible(true);
             modeSelect.add(modePanel);
             modeSelect.setSize((int)resolution.getX(), (int)resolution.getY());
             modeSelect.setVisible(true);
-            modeSelect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            modeSelect.setDefaultCloseOperation(EXIT_ON_CLOSE);
         }
 
 
         public void actionPerformed(ActionEvent ae) {
             String act = ae.getActionCommand();
-            System.out.println(ae);
-            if (act.equals("Computer")) {
-                modeSelect.setVisible(false);
-                new DifficultySelect();
-            } else if(act.equals("Options")){
-                modeSelect.setVisible(false);
-                new Settings();
-            }
-        }
-    }
-    class DifficultySelect extends JFrame implements ActionListener {
-        private JFrame diffFrame;
-        private JPanel diffPanel;
-
-        public DifficultySelect(){
-            diffFrame = new JFrame();
-            diffPanel = new JPanel();
-
-
-            JButton diffOne = new JButton("EASY");
-            JButton diffTwo = new JButton("MEDIUM");
-            JButton diffThree = new JButton("HARD");
-
-            JMenuBar menuBar = new JMenuBar();
-            JMenu menus= new JMenu("Settings");
-            JMenuItem m1 = new JMenuItem("Options");
-            m1.addActionListener(this);
-            m1.setActionCommand("Options");
-            JMenuItem m2 = new JMenuItem("Help");
-            m2.addActionListener(this);
-            m2.setActionCommand("Help");
-
-            menus.add(m1);
-            menus.add(m2);
-            menuBar.add(menus);
-
-            diffOne.addActionListener(this);
-            diffOne.setActionCommand("EASY");
-            diffPanel.add(diffOne);   
-
-            diffTwo.addActionListener(this);
-            diffTwo.setActionCommand("MEDIUM");
-            diffPanel.add(diffTwo); 
-
-            diffThree.addActionListener(this);
-            diffThree.setActionCommand("HARD");
-            diffPanel.add(diffThree); 
-
-
-            diffPanel.add(menuBar);
-
-            diffPanel.setVisible(true);
-            diffFrame.add(diffPanel);
-            diffFrame.setSize((int)resolution.getX(), (int)resolution.getY());
-            diffFrame.setVisible(true);
-            diffFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
-        }
-
-
-
-        public void actionPerformed(ActionEvent e) {
-            String act = e.getActionCommand();
             if(act.equals("EASY")){
-                diffFrame.setVisible(false);
+                modeSelect.setVisible(false);
                 new CharacterSelect(0, resolution);
             } else if(act.equals("MEDIUM")){
                 new CharacterSelect(1, resolution);
             } else if(act.equals("HARD")){
-                diffFrame.setVisible(false);
+                modeSelect.setVisible(false);
                 new CharacterSelect(2, resolution);
             } else if(act.equals("Options")){
-                diffFrame.setVisible(false);
+                modeSelect.setVisible(false);
                 new Settings();
             }
         }

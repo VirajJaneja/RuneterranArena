@@ -1,26 +1,29 @@
 package frontend;
-import java.awt.GridLayout;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class fightPanel extends JPanel{
+public class fightPanel extends JPanel {
     private JLabel player;
     private JLabel computer;
-    private GridLayout layout;
 
-    public fightPanel(){
-        layout = new GridLayout(0, 2, 0, 0);
-        setLayout(layout);
-
+    public fightPanel() {
+        setLayout(new BorderLayout());
+        setOpaque(false);
+        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         player = new JLabel();
-        player.setIcon(new javax.swing.ImageIcon("lib/GarenGreenPlayer.gif"));
+        player.setIcon(new ImageIcon("lib/GarenGreenPlayer.gif"));
+        player.setPreferredSize(new Dimension(700, 250));
+        centerPanel.add(player);
 
+        add(centerPanel, BorderLayout.CENTER);
+
+        JPanel eastPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         computer = new JLabel();
-        computer.setIcon(new javax.swing.ImageIcon("lib/GarenGreenComputer.gif"));
-        add(player);
-        add(computer);
-    }
+        computer.setIcon(new ImageIcon("lib/GarenGreenComputer.gif"));
+        computer.setPreferredSize(new Dimension(500, 250));
+        eastPanel.add(computer);
 
-    public static void main(String[] args){
+        add(eastPanel, BorderLayout.EAST);
     }
 }

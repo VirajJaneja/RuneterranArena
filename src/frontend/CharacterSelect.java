@@ -19,6 +19,7 @@ import backend.Ashe;
 import backend.CharacterRegistry;
 import backend.CharacterWrapper;
 import backend.CharacterWrapperSq;
+import backend.ComputerPlayer;
 import backend.Garen;
 import backend.Jinx;
 import backend.KhaZix;
@@ -301,7 +302,7 @@ class CharacterSelect extends JFrame implements ActionListener {
                     }
                 }
                 characterFrame.setVisible(false);
-                new Turnstile(new Player(playerCharact.size(), playerCharact), new Player(compChar.size(), compChar));
+                new Turnstile(new Player(playerCharact.size(), playerCharact), new ComputerPlayer(compChar.size(), compChar));
             } if(act.equals("Garen")){
                 characterBoolean[0] = !characterBoolean[0];
                 setButton();

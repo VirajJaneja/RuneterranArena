@@ -3,6 +3,9 @@ package backend;
 import backend.Ability;
 
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+
 import java.awt.Image;
 
 public class Character {
@@ -85,5 +88,66 @@ public class Character {
     }
     public String getName(){
         return "";
+    }
+    public ImageIcon getIcon(String s){
+        if(s.equals("icon")){
+            return getIcon();
+        } else if(s.equals("basicATKicon")){
+            return getBasicAttackIcon();
+        } else if(s.equals("AB1icon")){
+            return getAbilityIcon();
+        } else if(s.equals("ultIcon")){
+            return getUltIcon();
+        }
+        return null;
+    }
+
+    public ImageIcon getAnimation(String s){
+        if(s.equals("basicATKanim")){
+            return getBasicATKAnim();
+        } else if(s.equals("ABanim")){
+            return getAbilityAnim();
+        } else if(s.equals("ultAnim")){
+            return getUltAnim();
+        } else if(s.equals("deathAnim")){
+            return getDeathAnim();
+        } else if(s.equals("idleAnim")){
+            return getIdleAnim();
+        } else if(s.equals("spawnAnim")){
+            return getSpawnAnim();
+        }
+        return null;
+
+    }
+
+    public ImageIcon getIcon(){
+        return null;
+    }
+    public ImageIcon getBasicAttackIcon(){
+        return null;
+    }
+    public ImageIcon getAbilityIcon(){
+        return null;
+    }
+    public ImageIcon getUltIcon(){
+        return null;
+    }
+    public ImageIcon getBasicATKAnim(){
+        return null;
+    }
+    public ImageIcon getUltAnim(){
+        return null;
+    }
+    public ImageIcon getAbilityAnim(){
+        return null;
+    }
+    public ImageIcon getIdleAnim(){
+        return null;
+    }
+    public ImageIcon getDeathAnim(){
+        return null;
+    }
+    public ImageIcon getSpawnAnim(){
+        return null;
     }
 }

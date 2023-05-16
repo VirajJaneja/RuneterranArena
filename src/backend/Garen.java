@@ -2,6 +2,8 @@ package backend;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class Garen extends CharacterWrapperSq{
     private static String region = "Demacian";
     private static String type = "Fighter";
@@ -17,7 +19,10 @@ public class Garen extends CharacterWrapperSq{
     public String getName(){
         return "Garen";
     }
-
+    
+    public ImageIcon getIcon(){
+        return new ImageIcon("lib/placeholder");
+    }
 
 
 }
