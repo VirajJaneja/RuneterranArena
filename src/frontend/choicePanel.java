@@ -43,7 +43,7 @@ public class choicePanel extends JPanel implements ActionListener{
         icons[1] = new ImageIcon("lib/Demacian_Justice.png");
         icons[2] = new ImageIcon("lib/Demacian_Justice.png");
         icons[3] = new ImageIcon("lib/Demacian_Justice.png");
-        basicATK = new JButton(player.getCharacter(0).getIcon("lib/icons/abilities/garen basicATK.png"));
+        basicATK = new JButton("Basic Attack");
         abilityOne = new JButton("Ability 1");
         ult = new JButton("Ultimate");
         swapCharac = new JButton("Swap Character");
@@ -83,7 +83,7 @@ public class choicePanel extends JPanel implements ActionListener{
 	    b.setActionCommand(s);
 	    b.addActionListener(this);
 
-        // b.setAlignmentX(CENTER_ALIGNMENT);
+        b.setAlignmentX(CENTER_ALIGNMENT);
     }
 
     public void addSwapButtons(choicePanel cp){
