@@ -15,12 +15,12 @@ public class Taric extends CharacterWrapperSq{
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/taric basicATK.png");
     private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/taric AB1.png");
     private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/taric ult.png");
-    private ImageIcon basickAtkAnim;
-    private ImageIcon ABAnim;
-    private ImageIcon ultAnim;
-    private ImageIcon deathAnim;
-    private ImageIcon idleAnim;
-    private ImageIcon spawnAnim;
+    private ImageIcon basickAtkAnim = new ImageIcon("lib/animations/Taric/TaricATK.gif");
+    private ImageIcon ABAnim = new ImageIcon("lib/animations/Taric/TaricAbility.gif");
+    private ImageIcon ultAnim = new ImageIcon("lib/animations/Taric/TaricUlt.gif");
+    private ImageIcon deathAnim = new ImageIcon("lib/animations/Taric/TaricDeath.gif");
+    private ImageIcon idleAnim = new ImageIcon("lib/animations/Taric/TaricIdle.gif");
+    private ImageIcon spawnAnim = new ImageIcon("lib/animations/Taric/TaricIdle.gif");
     
     public Taric(int diff){
         super(type, region, 80, diff);

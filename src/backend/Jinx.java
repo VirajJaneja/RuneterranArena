@@ -16,12 +16,12 @@ public class Jinx extends CharacterWrapperSq{
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/jinx basicATK.png");
     private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/jinx AB1.png");
     private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/jinx ult.png");
-    private ImageIcon basickAtkAnim;
-    private ImageIcon ABAnim;
-    private ImageIcon ultAnim;
-    private ImageIcon deathAnim;
-    private ImageIcon idleAnim;
-    private ImageIcon spawnAnim;
+    private ImageIcon basickAtkAnim = new ImageIcon("lib/animations/jinx/JinxATK.gif");
+    private ImageIcon ABAnim = new ImageIcon("lib/animations/jinx/JinxAbility.gif");
+    private ImageIcon ultAnim = new ImageIcon("lib/animations/jinx/JinxUlt.gif");
+    private ImageIcon deathAnim = new ImageIcon("lib/animations/jinx/JinxDeath.gif");
+    private ImageIcon idleAnim = new ImageIcon("lib/animations/jinx/JinxIdle.gif");
+    private ImageIcon spawnAnim = new ImageIcon("lib/animations/jinx/JinxIdle.gif");
     public Jinx(int diff){
         super(type, region, 80, diff);
         System.out.println(type + "," + region);

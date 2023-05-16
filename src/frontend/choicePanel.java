@@ -4,8 +4,15 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -109,6 +116,23 @@ public class choicePanel extends JPanel implements ActionListener{
         }
     }
 
+    private void playSound(String s){
+        String sound = "lib/button SE.wav";
+        if(s.equals("Confirm") || s.equals("None"))
+            sound = "lib/Button 2 SE.wav";
+        try {
+            File soundFile = new File(sound);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+
+            // Play the sound
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void swapRotate(String swap){
         if(swap.equals("swap")){
             basicATK.setVisible(false);
@@ -171,6 +195,8 @@ public class choicePanel extends JPanel implements ActionListener{
                 teamButtons.get((Integer.parseInt(eventName)-3)/10).setBackground(new Color(29,67,71));
                 break; 
         }
+
+        playSound(eventName);
         // System.out.println(TurnStile.playerOne.nextTurn);
     }
 }

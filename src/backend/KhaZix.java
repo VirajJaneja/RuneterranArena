@@ -16,12 +16,12 @@ public class KhaZix extends CharacterWrapperSq{
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/khazix basicATK.png");
     private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/khazix AB1.png");
     private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/khazix ult.png");
-    private ImageIcon basickAtkAnim;
-    private ImageIcon ABAnim;
-    private ImageIcon ultAnim;
-    private ImageIcon deathAnim;
-    private ImageIcon idleAnim;
-    private ImageIcon spawnAnim;
+    private ImageIcon basickAtkAnim = new ImageIcon("lib/animations/khazix/KhaATK.gif");
+    private ImageIcon ABAnim = new ImageIcon("lib/animations/khazix/KhaAbility.gif");
+    private ImageIcon ultAnim = new ImageIcon("lib/animations/khazix/KhaUlt.gif");
+    private ImageIcon deathAnim = new ImageIcon("lib/animations/khazix/KhaDeath.gif");
+    private ImageIcon idleAnim = new ImageIcon("lib/animations/khazix/KhaIdle.gif");
+    private ImageIcon spawnAnim = new ImageIcon("lib/animations/khazix/KhaIdle.gif");
     
     public KhaZix(int diff){
         super(type, region, 80, diff);
@@ -29,7 +29,7 @@ public class KhaZix extends CharacterWrapperSq{
         setAbilities(a, b, c, d);
     }
     public String getName(){
-        return "Kha'Zix";
+        return "khazix'Zix";
     }
     public ImageIcon getIcon(String s, boolean b){
         if(s.equals("icon")){
