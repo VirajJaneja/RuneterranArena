@@ -12,10 +12,10 @@ public class KhaZix extends CharacterWrapperSq{
     private Ability b = new Ability("Void Spike", 45, 0.2, 0.1, false, false, false);
     private Ability c = new Ability("Taste their Fear", 45, 0.5, 0.1, false, false, true);
     private Ability d = new Ability("Auto Attack", 40, 0.2, 0.1, false, false, false);
-    private ImageIcon characterIcon;
-    private ImageIcon basickATKIcon;
-    private ImageIcon abilityIcon;
-    private ImageIcon ultIcon;
+    private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/khazix icon.png");
+    private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/khazix basicATK.png");
+    private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/khazix AB1.png");
+    private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/khazix ult.png");
     private ImageIcon basickAtkAnim;
     private ImageIcon ABAnim;
     private ImageIcon ultAnim;

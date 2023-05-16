@@ -12,10 +12,10 @@ public class Jinx extends CharacterWrapperSq{
     private Ability b = new Ability("Flame Chompers", 45, 0.2, 0.1, false, false, false);
     private Ability c = new Ability("Super Mega Death Rocket!", 45, 0.2, 0.1, false, false, true);
     private Ability d = new Ability("Auto Attack", 40, 0.2, 0.1, false, false, false);
-    private ImageIcon characterIcon;
-    private ImageIcon basickATKIcon;
-    private ImageIcon abilityIcon;
-    private ImageIcon ultIcon;
+    private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/jinx icon.png");
+    private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/jinx basicATK.png");
+    private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/jinx AB1.png");
+    private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/jinx ult.png");
     private ImageIcon basickAtkAnim;
     private ImageIcon ABAnim;
     private ImageIcon ultAnim;

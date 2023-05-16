@@ -13,10 +13,10 @@ public class Malzahar extends CharacterWrapperSq{
     private Ability b = new Ability("Call of the Void", 45, 0.2, 0.1, false, false, true);
     private Ability c = new Ability("Null Zone", 45, 0.2, 0.1, false, true, true);
     private Ability d = new Ability("Auto Attack", 40, 0.2, 0.1, false, false, false);
-    private ImageIcon characterIcon;
-    private ImageIcon basickATKIcon;
-    private ImageIcon abilityIcon;
-    private ImageIcon ultIcon;
+    private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/malzahar icon.png");
+    private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/malzahar basicATK.png");
+    private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/malzahar AB1.png");
+    private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/malzahar ult.png");
     private ImageIcon basickAtkAnim;
     private ImageIcon ABAnim;
     private ImageIcon ultAnim;

@@ -11,10 +11,10 @@ public class Garen extends CharacterWrapperSq{
     private Ability b = new Ability("Courage", 35, 3, 0.2, false, false, true);
     private Ability c = new Ability("Justice", 65, 3, 0.2, false, false, false);
     private Ability d = new Ability("Auto Attack", 25, 0.15, 0.2, false, false, false);
-    private ImageIcon characterIcon;
-    private ImageIcon basickATKIcon;
-    private ImageIcon abilityIcon;
-    private ImageIcon ultIcon;
+    private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/garen icon.png");
+    private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/garen basicATK.png");
+    private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/garen AB1.png");
+    private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/garen ult.png");
     private ImageIcon basickAtkAnim;
     private ImageIcon ABAnim;
     private ImageIcon ultAnim;
