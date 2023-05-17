@@ -19,7 +19,10 @@ public class Turnstile {
         playerTwo = pTwo;
         gameOver = false;
         battlefield = new Board(playerOne, playerTwo, gf.gp.fPane);
-        gf = new gameFrame(new Point(1980, 1080), this);
+        gf = new gameFrame(new Point(1080, 520), this);
+        for(int i=0;i<pOne.getSize();i++){
+            System.out.println(pOne.getCharacter(i).getName());
+        }
     }
 
     public enum Turn {
