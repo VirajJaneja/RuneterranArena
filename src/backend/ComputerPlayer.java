@@ -11,7 +11,7 @@ public class ComputerPlayer extends Player{
     public void setNextTurn(){
         switch(difficulty){
             case 0:
-                nextTurn = (int)(Math.random()*4);
+                nextTurn = 0;
                 break;
             default:
                 nextTurn = (int)(Math.random()*3);

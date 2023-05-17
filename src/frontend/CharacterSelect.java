@@ -2,6 +2,9 @@ package frontend;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Font;
+import java.awt.Graphics;
 
 import backend.Ahri;
 import backend.Ashe;
@@ -45,11 +49,14 @@ class CharacterSelect extends JFrame implements ActionListener {
     private ArrayList<JLabel> classLabel = new ArrayList<JLabel>();
     private GridLayout layout;
     private JLabel characterList;
-    private boolean[] characterBoolean = new boolean[7];
+    private boolean[] characterBoolean = new boolean[6];
     private ArrayList<CharacterWrapperSq> playerCharact = new ArrayList<CharacterWrapperSq>();
     private ArrayList<CharacterWrapperSq> compChar = new ArrayList<CharacterWrapperSq>();
     private int difficulty;
     private Point resolution;
+    private ImageIcon backgroundImage;
+    private JLabel backgroundLabel;
+    private JPanel backgroundPanel;
 
     public CharacterSelect(int diff, Point resolution) {
         this.resolution = resolution;
@@ -67,7 +74,6 @@ class CharacterSelect extends JFrame implements ActionListener {
         for(int i= 0; i<6; i++){
             characters.add(new JButton("Add to Team"));
         }
-
         characters.add(new JButton("Resolve"));
         
        
@@ -93,11 +99,27 @@ class CharacterSelect extends JFrame implements ActionListener {
         // characters.get(6).setBorder(BorderFactory.createTitledBorder("Malzahar - Mage"));
 
 
-        characters.get(characters.size()-1).setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
+        characters.get(6).setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         // vs computer
         characterFrame = new JFrame("Character Select");
         characterPanel = new JPanel();
+
+    
+        backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Image backgroundImage = new ImageIcon("lib/RiftBG.jpg").getImage();
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+            }
+        };
+        
+        characterFrame.setContentPane(backgroundPanel);
+        
+        // backgroundImage = new ImageIcon("lib/RiftBG.jpg");
+        // backgroundLabel = new JLabel(backgroundImage);
+        // backgroundLabel.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
+        //characterPanel.setBackground(new Color(167, 166, 186));
 
         layout = new GridLayout(3, 6, 20, 0);
         characterPanel.setLayout(layout);
@@ -105,33 +127,34 @@ class CharacterSelect extends JFrame implements ActionListener {
 
 
         JLabel GarenLabel = new JLabel();
-        GarenLabel.setIcon(new javax.swing.ImageIcon("lib/garen icon.png"));
+
+        GarenLabel.setIcon(new javax.swing.ImageIcon("lib/icons/pfps/garen icon.png"));
         //GarenLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
 
 
         JLabel AsheLabel = new JLabel();
-        AsheLabel.setIcon(new javax.swing.ImageIcon("lib/ashe icon.png"));
+        AsheLabel.setIcon(new javax.swing.ImageIcon("lib/icons/pfps/ashe icon.png"));
        // AsheLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
 
         JLabel AhriLabel = new JLabel();
-        AhriLabel.setIcon(new javax.swing.ImageIcon("lib/ahri icon.png"));
+        AhriLabel.setIcon(new javax.swing.ImageIcon("lib/icons/pfps/ahri icon.png"));
         //AhriLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
 
         JLabel TaricLabel = new JLabel();
-        TaricLabel.setIcon(new javax.swing.ImageIcon("lib/taric icon.png"));
+        TaricLabel.setIcon(new javax.swing.ImageIcon("lib/icons/pfps/taric icon.png"));
         //TaricLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
 
         JLabel JinxLabel = new JLabel();
-        JinxLabel.setIcon(new javax.swing.ImageIcon("lib/jinx icon.png"));
+        JinxLabel.setIcon(new javax.swing.ImageIcon("lib/icons/pfps/jinx icon.png"));
         //JinxLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
 
         JLabel KhaLabel = new JLabel();
-        KhaLabel.setIcon(new javax.swing.ImageIcon("lib/kha icon.png"));
+        KhaLabel.setIcon(new javax.swing.ImageIcon("lib/icons/pfps/kha icon (5).png"));
         //KhaLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
 
-        JLabel MalzLabel = new JLabel();
-        MalzLabel.setIcon(new javax.swing.ImageIcon("lib/malzahar icon.png"));
-        //MalzLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
+        // JLabel MalzLabel = new JLabel();
+        // MalzLabel.setIcon(new javax.swing.ImageIcon("lib/malzahar icon.png"));
+        // //MalzLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
        
 
         characters.get(0).addActionListener(this);  
@@ -152,14 +175,13 @@ class CharacterSelect extends JFrame implements ActionListener {
         characters.get(5).addActionListener(this);
         characters.get(5).setActionCommand("Kha'Zix");
 
-        characters.get(6).addActionListener(this);
-        characters.get(6).setActionCommand("Malzahar");
+        // characters.get(6).addActionListener(this);
+        //characters.get(6).setActionCommand("Malzahar");
         
         //input more characters
-
-        
-        characters.get(characters.size()-1).addActionListener(this);
-        characters.get(characters.size()-1).setActionCommand("Resolve");
+        characters.get(6).addActionListener(this);
+        characters.get(6).setActionCommand("Resolve");
+        characters.get(6).setText("Resolve");
 
         characterImages.add(GarenLabel);
         characterImages.add(AsheLabel);
@@ -167,7 +189,6 @@ class CharacterSelect extends JFrame implements ActionListener {
         characterImages.add(TaricLabel);
         characterImages.add(JinxLabel);
         characterImages.add(KhaLabel);
-        characterImages.add(MalzLabel);
         
         for(int i = 0; i<layout.getColumns(); i++){
             characterPanel.add(characterImages.get(i));
@@ -178,11 +199,11 @@ class CharacterSelect extends JFrame implements ActionListener {
 
         characterPanel.add(new JLabel());
         characterPanel.add(new JLabel());
-        characterPanel.add(new JLabel());
         
         
         //resolve index
-        characterPanel.add(characters.get(characters.size()-1));
+        characters.get(6).setText("Resolve");
+        characterPanel.add(characters.get(6));
     
         characterPanel.add(new JLabel());
         characterPanel.add(new JLabel());
@@ -205,11 +226,20 @@ class CharacterSelect extends JFrame implements ActionListener {
             
             return characterList;
         }
+
+        private static String getPath(String characName, String icon){
+            String result = "";
+            result = "lib/" + characName +" "+"icon.png";
+            return result;
+        }
+
         
         private void playSound(String s){
             String sound = "lib/button SE.wav";
             if(s.equals("Confirm") || s.equals("None"))
                 sound = "lib/Button 2 SE.wav";
+            else if(s.equals("Select"))
+                sound = "lib/selectHard.wav";
             try {
                 File soundFile = new File(sound);
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
@@ -262,13 +292,6 @@ class CharacterSelect extends JFrame implements ActionListener {
                     setButton();
 
                 } 
-                else if(act.equals("Malzahar")){
-                    playSound("confirm");
-                    
-                    characterBoolean[6] = !characterBoolean[6];
-                    setButton();
-
-                } 
 
                 else if(act.equals("Resolve")){
                     playSound("confirm");
@@ -277,6 +300,7 @@ class CharacterSelect extends JFrame implements ActionListener {
 
             } else if (characterCount >= maxTeamSize){
                 if(act.equals("Resolve")){
+                playSound("Select");
                 ArrayList<Integer> posTrue = new ArrayList<Integer>();
                 for(int i= 0; i<characterBoolean.length; i++){
                     if(characterBoolean[i])
@@ -302,8 +326,6 @@ class CharacterSelect extends JFrame implements ActionListener {
                         case 5: 
                             playerCharact.add(new KhaZix(1));
                             break;
-                        case 6:
-                            playerCharact.add(new Malzahar(1));
                         default:
                             break;
                     }
@@ -323,8 +345,6 @@ class CharacterSelect extends JFrame implements ActionListener {
                     }else if(rand<=0.75){
                         compChar.add(new KhaZix(difficulty));
                     }else if(rand<=0.85){
-                        compChar.add(new Malzahar(difficulty));
-                    }else if(rand<=0.95){
                         compChar.add(new Garen(difficulty));
                     }else if(rand<=1){
                         compChar.add(new Taric(difficulty));
@@ -333,39 +353,38 @@ class CharacterSelect extends JFrame implements ActionListener {
                 characterFrame.setVisible(false);
                 new Turnstile(new Player(playerCharact.size(), playerCharact), new ComputerPlayer(compChar.size(), compChar));
             } if(act.equals("Garen")){
+                playSound("confirm");
                 characterBoolean[0] = !characterBoolean[0];
                 setButton();
-
             }
             else if(act.equals("Ashe")){
+                playSound("confirm");
                 characterBoolean[1] = !characterBoolean[1];
                 setButton();
 
             } else if(act.equals("Ahri")){
+                playSound("confirm");
 
                 characterBoolean[2] = !characterBoolean[2];
                 setButton();
 
             } else if(act.equals("Taric")){
+                playSound("confirm");
                 
                 characterBoolean[3] = !characterBoolean[3];
                 setButton();
 
             } else if(act.equals("Jinx")){
+                playSound("confirm");
                 
                 characterBoolean[4] = !characterBoolean[4];
                 setButton();
 
             } 
             else if(act.equals("Kha'Zix")){
+                playSound("confirm");
                 
                 characterBoolean[5] = !characterBoolean[5];
-                setButton();
-
-            } 
-            else if(act.equals("Malzahar")){
-                
-                characterBoolean[6] = !characterBoolean[6];
                 setButton();
 
             } 
@@ -386,23 +405,6 @@ class CharacterSelect extends JFrame implements ActionListener {
                 }
             }
         }
-        // private Character getCharaValue(int i, int diff){
-        //     switch(i){
-        //         case 0:
-        //             return new Garen(diff);
-        //         case 1:
-        //             return new Ashe(diff);
-        //         case 2:
-        //             return new Ahri(diff);
-        //         case 3:
-        //             return new Taric(diff);
-        //         case 4:
-        //             return new Jinx(diff);
-        //         case 5:
-        //             return new KhaZix(diff);
-        //         case 6:
-        //             return new Malzahar(diff);
-        //     }
-        // }
+       
         
 }
