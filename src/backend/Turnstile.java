@@ -83,4 +83,9 @@ public class Turnstile {
     public static void finishGame(){
         gf.mainFrame.dispose();
     }
+    public Player getPlayer(boolean b){
+        if(b)
+            return playerOne;
+        return playerTwo;
+    }
 }

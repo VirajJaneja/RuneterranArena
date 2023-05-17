@@ -31,6 +31,9 @@ public class Player {
     public int getSize(){
         return playerRoster.size();
     }
+    public ArrayList<CharacterWrapperSq> getRoster(){
+        return playerRoster;
+    }
     public void setNextTurn(int i){
         nextTurn = i;
     }

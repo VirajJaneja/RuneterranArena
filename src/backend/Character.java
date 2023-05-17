@@ -13,6 +13,7 @@ public class Character {
     private String type, region, level;
     private Ability a,b,c,d;
     private int health;
+    private final int maxHp;
     private final double Bronze = 0.5;
     private final double Silver = 1;
     private final double Gold = 2.5;
@@ -22,12 +23,14 @@ public class Character {
 
     public Character(){
         this.region = "placeholder";
+        this.maxHp = health;
     }
-    public Character(String Inputtype, String region, Image image, double health){
+    public Character(String Inputtype, String region, Image image, int health){
         type = Inputtype;
         this.region = region;
         abilitySet = new ArrayList<Ability>(4);
         this.sprite = image;
+        this.maxHp = health;
         setHealth(level, health);
     }
 
@@ -35,6 +38,7 @@ public class Character {
         type = Inputtype;
         this.region = region;
         this.abilitySet = new ArrayList<Ability>(4);
+        this.maxHp = health;
         difficultyManagement(diff);
         setHealth(level, hp);
     }
@@ -47,7 +51,7 @@ public class Character {
             default: level = "Silver";
         }
     }
-    public void setHealth(String level, double baseHp){
+    public void setHealth(String level, int baseHp){
         if(level.equals("Bronze")){
             this.health = (int)(baseHp * Bronze);
         }
@@ -84,6 +88,9 @@ public class Character {
 
     public int getHealth(){
         return health;
+    }
+    public int getMaxHealth(){
+        return maxHp;
     }
     public boolean getStatus(){
         if(getHealth()<=0)
