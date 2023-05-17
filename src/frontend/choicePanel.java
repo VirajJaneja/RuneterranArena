@@ -43,12 +43,16 @@ public class choicePanel extends JPanel implements ActionListener{
     // public static Boolean turn;
     // private static String nextTurnValue
     private Image backgroundImage;
-    JLabel warningLabel;
-    JLabel skillPoints;
+    static JLabel warningLabel;
+    JLabel skillPointsLabel;
 
     
 
     choicePanel(Turnstile turnstile2, Player Givenplayer) {
+        warningLabel = new JLabel("");
+        skillPointsLabel = new JLabel("Skill Points: " + Givenplayer.skillPoints);
+        warningLabel.setForeground(new Color(255, 255, 255));
+        skillPointsLabel.setForeground(new Color(255, 255, 255));
         teamButtons = new ArrayList<>();
         TurnStile = turnstile2;
         player = Givenplayer;
@@ -153,7 +157,7 @@ public class choicePanel extends JPanel implements ActionListener{
             ult.setVisible(false);
             swapCharac.setActionCommand("cancel");
             for(int i = 0; i<player.getSize();i++){
-                if(player.getCharacter(i).getStatus())
+                // if(player.getCharacter(i).getStatus())
                     teamButtons.get(i).setVisible(true);
             }
         }
@@ -199,6 +203,8 @@ public class choicePanel extends JPanel implements ActionListener{
                 if(validMove()){
                     resetButtons();
                     Turnstile.moveTurn();
+                    warningLabel.setText("");
+                    skillPointsLabel.setText("Skill Points: " + Player.skillPoints);
                 }
                 break;
             case "3":
@@ -218,11 +224,23 @@ public class choicePanel extends JPanel implements ActionListener{
     }
 
     private static boolean validMove(){
-        System.out.println("UNO");
+        // System.out.println("UNO");
         if(player.getNextTurn()>2){
-            System.out.println("DOS");
+            // System.out.println("DOS");
             if(!(player.getCharacter((player.getNextTurn()-3)/10).getStatus())){
-                System.out.println("TRES");
+                // System.out.println("TRES");
+                warningLabel.setText("Warning: Character Dead");
+                return false;
+            }
+        }
+        if(player.getNextTurn() == 1){
+            if(player.skillPoints < 1){
+                warningLabel.setText("Warning: Not Enough Points");
+                return false;
+            }
+        } else if(player.getNextTurn() == 2){
+            if(player.skillPoints < 3){
+                warningLabel.setText("Warning: Not Enough Points");
                 return false;
             }
         }

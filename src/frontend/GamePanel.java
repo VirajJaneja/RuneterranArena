@@ -119,6 +119,8 @@ public class GamePanel extends JPanel {
         cPane.add(cPane.ult);
         cPane.add(cPane.swapCharac);
         cPane.add(cPane.confirm);
+        cPane.add(cPane.skillPointsLabel);
+        cPane.add(cPane.warningLabel);
         
         return cPane;
     }

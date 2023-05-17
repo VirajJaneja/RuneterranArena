@@ -42,8 +42,35 @@ public class Board {
         // System.out.println("here");
         switch(i){
             case 0:
+            aggressor.skillPoints += 1;
+                dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
+                fPane.doAction(aggressor, i);
+                if(!(target.getStatus())){
+                    if(!(allDead(idlePlayer))){
+                        // System.out.println(target.getHealth());
+                        // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
+                        fPane.killCharacter(idlePlayer, idlePlayer.getCharacter(getCharacPos(idlePlayer)), idlePlayer.getCharacter(getNextAlive(idlePlayer)));
+                        swapCharacters(idlePlayer, target, getCharacPos(idlePlayer), getNextAlive(idlePlayer));
+                        System.out.println("uno: " + idlePlayer);
+                        }   
+                }
+                break;
             case 1:
+                aggressor.skillPoints -= 1;
+                dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
+                fPane.doAction(aggressor, i);
+                if(!(target.getStatus())){
+                    if(!(allDead(idlePlayer))){
+                        // System.out.println(target.getHealth());
+                        // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
+                        fPane.killCharacter(idlePlayer, idlePlayer.getCharacter(getCharacPos(idlePlayer)), idlePlayer.getCharacter(getNextAlive(idlePlayer)));
+                        swapCharacters(idlePlayer, target, getCharacPos(idlePlayer), getNextAlive(idlePlayer));
+                        System.out.println("uno: " + idlePlayer);
+                        }   
+                }
+                break;
             case 2:
+                aggressor.skillPoints -= 3;
                 dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
                 fPane.doAction(aggressor, i);
                 if(!(target.getStatus())){
@@ -66,9 +93,9 @@ public class Board {
                 System.out.println("do smth");
                 break;
         }
-        System.out.println(deployedCharacterOne.getName());
-        System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
-
+        // System.out.println("this other one right here" + aggressor);
+        // System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
+        // System.out.println(aggressor.skillPoints);
         return false;
     }
 
