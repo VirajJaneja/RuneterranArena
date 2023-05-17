@@ -145,7 +145,7 @@ public class teamPanel extends JPanel{
         int health = playerList.get(i).getHealth();
         if(health < 0)
             health = 0;
-        return health;
+        return health-1;
     }
 
 }
