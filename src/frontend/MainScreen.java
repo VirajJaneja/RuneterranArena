@@ -125,6 +125,8 @@ public class MainScreen implements ActionListener {
         mainFrame.setVisible(true);
 
     }
+    public MainScreen(int i, int j) {
+    }
     private void playSound(String s){
         String sound = "lib/button SE.wav";
         if(s.equals("Confirm") || s.equals("None"))
@@ -262,58 +264,57 @@ public class MainScreen implements ActionListener {
         public Mode() {
             modeSelect = new JFrame();
             modePanel = new JPanel();
-    
+        
             backgroundImage = new ImageIcon("lib/RiftBG.jpg");
             backgroundLabel = new JLabel(backgroundImage);
             backgroundLabel.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
-    
+        
             modePanel.setLayout(null);
             modePanel.add(backgroundLabel);
-    
+
             easy = new ImageIcon("lib/Easy.png");
             medium = new ImageIcon("lib/Medium.png");
             hard = new ImageIcon("lib/Hard.png");
-    
-            int buttonWidth = 500;  
-            int buttonHeight = 175;  
-    
+        
+            int buttonWidth = 500;
+            int buttonHeight = 175;
+        
             JButton diffOne = new JButton(easy);
             diffOne.setBounds(50, 50, buttonWidth, buttonHeight);
             diffOne.addActionListener(this);
             diffOne.setActionCommand("EASY");
             modePanel.add(diffOne);
-            diffOne.setVisible(true); // Set visibility to true
-            
+        
             JButton diffTwo = new JButton(medium);
             diffTwo.setBounds(50, 225, buttonWidth + 150, buttonHeight);
             diffTwo.addActionListener(this);
             diffTwo.setActionCommand("MEDIUM");
             modePanel.add(diffTwo);
-            diffTwo.setVisible(true); // Set visibility to true
-            
+        
             JButton diffThree = new JButton(hard);
             diffThree.setBounds(50, 400, buttonWidth, buttonHeight);
             diffThree.setBorder(null);
             diffThree.addActionListener(this);
             diffThree.setActionCommand("HARD");
             modePanel.add(diffThree);
-            diffThree.setVisible(true); // Set visibility to true
-            
-            
+        
             JButton bottomRightButton = new JButton("Bottom Right");
             int buttonSize = 100;
             int buttonMargin = 10;
             int buttonX = modeSelect.getWidth() - buttonSize - buttonMargin;
             int buttonY = modeSelect.getHeight() - buttonSize - buttonMargin;
             bottomRightButton.setBounds(buttonX, buttonY, buttonSize, buttonSize);
-
             modePanel.add(bottomRightButton);
-            modePanel.setVisible(true);
+        
+            // Set the preferred size of modePanel
+            modePanel.setPreferredSize(new Dimension(backgroundImage.getIconWidth(), backgroundImage.getIconHeight()));
+        
             modeSelect.add(modePanel);
-            modeSelect.setSize(backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
+            modeSelect.pack();
             modeSelect.setVisible(true);
-            modeSelect.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            modeSelect.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         }
+        
     
 
 
@@ -321,7 +322,6 @@ public class MainScreen implements ActionListener {
             String act = ae.getActionCommand();
             if(act.equals("EASY")){
                 playSound("Select");
-
                 System.out.println("easy");
                 modeSelect.setVisible(false);
                 new CharacterSelect(0, resolution);
@@ -337,8 +337,6 @@ public class MainScreen implements ActionListener {
                 new CharacterSelect(2, resolution);
                 System.out.println("hard");
             } else if(act.equals("Options")){
-
-
                 modeSelect.setVisible(false);
                 new Settings();
                 

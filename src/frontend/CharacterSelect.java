@@ -38,6 +38,7 @@ import backend.Malzahar;
 import backend.Player;
 import backend.Taric;
 import backend.Turnstile;
+import frontend.MainScreen.Mode;
 
 class CharacterSelect extends JFrame implements ActionListener {
     private JFrame characterFrame;
@@ -196,21 +197,24 @@ class CharacterSelect extends JFrame implements ActionListener {
         for(int i = 0; i<layout.getColumns(); i++){
             characterPanel.add(characters.get(i));
         }
-
-        characterPanel.add(new JLabel());
-        characterPanel.add(new JLabel());
         
         
-        //resolve index
+        
         characters.get(6).setText("Resolve");
         characterPanel.add(characters.get(6));
     
         characterPanel.add(new JLabel());
         characterPanel.add(new JLabel());
+        characterPanel.add(new JLabel());
+        characterPanel.add(new JLabel());
+        //for(int i = 0; i<)
+
+
 
         setButton();
+        characterPanel.setBackground(new Color(156, 186, 156));
         characterFrame.add(characterPanel);
-        characterFrame.setSize((int)resolution.getX(), (int)resolution.getY());
+        characterFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         characterFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         characterFrame.setVisible(true);
         
@@ -254,6 +258,9 @@ class CharacterSelect extends JFrame implements ActionListener {
         }
         public void actionPerformed(ActionEvent e) {
             String act = e.getActionCommand();
+            if(act.equals("back")){
+                new MainScreen(new Point(600,600));
+            }
             if(characterCount < maxTeamSize){
                 if(act.equals("Garen")){
                     playSound("confirm");
@@ -292,7 +299,6 @@ class CharacterSelect extends JFrame implements ActionListener {
                     setButton();
 
                 } 
-
                 else if(act.equals("Resolve")){
                     playSound("confirm");
                     characters.get(characters.size()-1).setText("3 characters min.");
