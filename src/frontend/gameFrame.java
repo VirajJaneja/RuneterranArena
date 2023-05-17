@@ -28,7 +28,7 @@ import javax.swing.JMenuItem;
 
 public class gameFrame implements ActionListener {
     public JFrame mainFrame;
-    private JPanel mainPanel;
+    // private JPanel mainPanel;
     private JPanel backupPane;
     private Point resolution;
     JPanel contentPane;

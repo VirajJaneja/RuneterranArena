@@ -33,9 +33,6 @@ public class fightPanel extends JPanel {
         computerIMG.repaint();
         add(playerIMG);
         add(computerIMG);
-
-        
-
     }
     
 
@@ -67,6 +64,7 @@ public class fightPanel extends JPanel {
     private static String getPath(String characName, String anim){
         String result = "";
         result = "lib/animations/" + characName.toLowerCase() + "/" + characName + anim+".gif";
+        System.out.println(result);
         return result;
     }
     
