@@ -12,7 +12,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
-
 import javax.swing.*;
 
 public class GamePanel extends JPanel {
@@ -86,7 +85,7 @@ public class GamePanel extends JPanel {
         fPane.setPreferredSize(new Dimension(fpX, fpY));
 
         cPane.setBackground(new Color(221, 232, 96));
-        tPane.setBackground(new Color(00, 00, 200));
+        tPane.setBackground(new Color(06, 18, 23));
         fPane.setBackground(new Color(191, 191, 191));
 
 

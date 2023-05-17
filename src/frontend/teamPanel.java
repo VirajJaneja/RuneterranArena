@@ -111,8 +111,9 @@ public class teamPanel extends JPanel{
     add(row1Panel);
     add(row2Panel);
     repaint();
-
     }
+
+
     private String getImageIcon(String character){
         System.out.println("lib/icons/pfps/"+character.toLowerCase()+" icon.png");
         return "lib/icons/pfps/"+character.toLowerCase()+" icon.png";
@@ -123,7 +124,7 @@ public class teamPanel extends JPanel{
         super.paintComponent(g);
 
     // Draw the background image
-    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    // g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
     java.awt.FontMetrics fontMetrics = g.getFontMetrics();
 
@@ -132,7 +133,7 @@ public class teamPanel extends JPanel{
         String fraction = fractionList.get(i);
 
         Rectangle labelBounds = label.getBounds();
-        int labelX = labelBounds.x;
+        int labelX = labelBounds.x+25;
         int labelY = labelBounds.y + labelBounds.height + fontMetrics.getAscent();
 
         g.setColor(Color.WHITE);

@@ -20,6 +20,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
@@ -42,6 +43,8 @@ public class choicePanel extends JPanel implements ActionListener{
     // public static Boolean turn;
     // private static String nextTurnValue
     private Image backgroundImage;
+    JLabel warningLabel;
+    JLabel skillPoints;
 
     
 

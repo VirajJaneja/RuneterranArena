@@ -66,9 +66,52 @@ public class gameFrame implements ActionListener {
         mainFrame.setJMenuBar(menuBar);
         mainFrame.setVisible(true);
         mainFrame.setResizable(false);
+        firstTimeRun();
     }
+
+    public gameFrame(Point p, Turnstile turnstile2, int i) {
+        turnstile = turnstile2;
+        contentPane = new JPanel();
+        resolution = p;
+        menuBar = new JMenuBar();
+        mainFrame = new JFrame("Runeterran Arena");
+        gp = new GamePanel(p, turnstile);
+        gp.setBounds(0, 0, (int) resolution.getX(), (int) resolution.getY());
+        // mainPanel.setLayout(null);
+        int xMax = gp.getWidth();
+        int yMax = gp.getHeight();
+        // System.out.println(xMax + ", " + yMax);
+
+        JButton settingsButton = new JButton("Settings");
+        settingsButton.setActionCommand("Settings");
+        settingsButton.setBounds(xMax / 2, yMax / 2, 100, 100);
+        settingsButton.addActionListener(this);
+        // contentPane.setPane
+        GamePanel.initGP(gp);
+        mainFrame.setContentPane(contentPane);
+        contentPane.add(gp);
+        menuBar.add(settingsButton);
+        mainFrame.setSize((int) resolution.getX(), (int) resolution.getY());
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        mainFrame.setJMenuBar(menuBar);
+        mainFrame.setVisible(true);
+        mainFrame.setResizable(false);
+    }
+
+
+    public void firstTimeRun() {
+        mainFrame.setVisible(false);
+        new gameFrame(new Point(1280-200, 720-100), turnstile, 1);
+    }
+
+    public void setFrame(Point p) {
+        resolution = p;
+    }
+
     public void alterRes(Point p) {
-        new gameFrame(p, turnstile);
+        new gameFrame(p, turnstile, 1);
     }
 
 
