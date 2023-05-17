@@ -125,7 +125,7 @@ public class GamePanel extends JPanel {
     }
 
     private teamPanel initTP(){
-        teamPanel tPane = new teamPanel();
+        teamPanel tPane = new teamPanel(TurnStile);
         return tPane;
     }
     
