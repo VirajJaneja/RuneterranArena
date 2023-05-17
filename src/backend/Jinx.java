@@ -12,20 +12,26 @@ public class Jinx extends CharacterWrapperSq{
     private Ability b = new Ability("Flame Chompers", 45, 0.2, 0.1, false, false, false);
     private Ability c = new Ability("Super Mega Death Rocket!", 45, 0.2, 0.1, false, false, true);
     private Ability d = new Ability("Auto Attack", 40, 0.2, 0.1, false, false, false);
-    private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/jinx icon.png");
-    private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/jinx basicATK.png");
-    private ImageIcon abilityIcon = new ImageIcon("lib/icons/abilities/jinx AB1.png");
-    private ImageIcon ultIcon = new ImageIcon("lib/icons/abilities/jinx ult.png");
-    private ImageIcon basickAtkAnim = new ImageIcon("lib/animations/jinx/JinxATK.gif");
-    private ImageIcon ABAnim = new ImageIcon("lib/animations/jinx/JinxAbility.gif");
-    private ImageIcon ultAnim = new ImageIcon("lib/animations/jinx/JinxUlt.gif");
-    private ImageIcon deathAnim = new ImageIcon("lib/animations/jinx/JinxDeath.gif");
-    private ImageIcon idleAnim = new ImageIcon("lib/animations/jinx/JinxIdle.gif");
-    private ImageIcon spawnAnim = new ImageIcon("lib/animations/jinx/JinxIdle.gif");
+    private ImageIcon characterIcon =  new ImageIcon("lib/icons/abilities/jinx icon.png");
+    private ImageIcon basickATKIcon =  new ImageIcon("lib/icons/abilities/jinx basicATK.png");
+    private ImageIcon abilityIcon =  new ImageIcon("lib/icons/abilities/jinx AB1.png");
+    private ImageIcon ultIcon =  new ImageIcon("lib/icons/abilities/jinx ult.png");
+    private String basickAtkAnim =  "lib/animations/jinx/JinxATK.gif";
+    private String ABAnim =  "lib/animations/jinx/JinxAbility.gif";
+    private String ultAnim =  "lib/animations/jinx/JinxUlt.gif";
+    private String deathAnim =  "lib/animations/jinx/JinxDeath.gif";
+    private String idleAnim =  "lib/animations/jinx/JinxIdle.gif";
+    private String spawnAnim =  "lib/animations/jinx/JinxIdle.gif";
     public Jinx(int diff){
         super(type, region, 80, diff);
         System.out.println(type + "," + region);
         setAbilities(a, b, c, d);
+        basickAtkAnim =  "lib/animations/jinx/JinxATK.gif";
+        ABAnim =  "lib/animations/jinx/JinxAbility.gif";
+        ultAnim =  "lib/animations/jinx/JinxUlt.gif";
+        deathAnim =  "lib/animations/jinx/JinxDeath.gif";
+        idleAnim =  "lib/animations/jinx/JinxIdle.gif";
+        spawnAnim =  "lib/animations/jinx";
     }
     public String getName(){
         return "Jinx";
@@ -43,7 +49,7 @@ public class Jinx extends CharacterWrapperSq{
         return null;
     }
 
-    public ImageIcon getAnimation(String s, boolean b){
+    public String getAnimation(String s, boolean b){
         if(s.equals("basicATKanim")){
             return getBasicATKAnim(b);
         } else if(s.equals("ABanim")){
@@ -73,22 +79,22 @@ public class Jinx extends CharacterWrapperSq{
     public ImageIcon getUltIcon(boolean b){
         return ultIcon;
     }
-    public ImageIcon getBasicATKAnim(boolean b){
+    public  String getBasicATKAnim(boolean b){
         return basickAtkAnim;
     }
-    public ImageIcon getUltAnim(boolean b){
+    public  String getUltAnim(boolean b){
         return ultAnim;
     }
-    public ImageIcon getAbilityAnim(boolean b){
+    public  String getAbilityAnim(boolean b){
         return ABAnim;
     }
-    public ImageIcon getIdleAnim(boolean b){
+    public  String getIdleAnim(boolean b){
         return idleAnim;
     }
-    public ImageIcon getDeathAnim(boolean b){
+    public  String getDeathAnim(boolean b){
         return deathAnim;
     }
-    public ImageIcon getSpawnAnim(boolean b){
+    public  String getSpawnAnim(boolean b){
         return spawnAnim;
     }
 

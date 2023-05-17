@@ -5,7 +5,7 @@ import java.awt.Point;
 import frontend.gameFrame;
 
 public class Turnstile {
-    static Board battlefield;
+    public static Board battlefield;
     public static Player playerOne;
     static Player playerTwo;
     static double turnCounter;
@@ -18,12 +18,8 @@ public class Turnstile {
         playerOne = pOne;
         playerTwo = pTwo;
         gameOver = false;
+        battlefield = new Board(playerOne, playerTwo, gf.gp.fPane);
         gf = new gameFrame(new Point(1980, 1080), this);
-        battlefield = new Board(playerOne, playerTwo);
-    }
-
-    public Turnstile(Board board) {
-        
     }
 
     public enum Turn {

@@ -20,8 +20,8 @@ public class GamePanel extends JPanel {
     int width;
     Turnstile TurnStile;
     public static choicePanel cPane;
-    static teamPanel tPane;
-    static fightPanel fPane;
+    public static teamPanel tPane;
+    public static fightPanel fPane;
     JButton settingsButton;
 
 
@@ -87,7 +87,7 @@ public class GamePanel extends JPanel {
 
         cPane.setBackground(new Color(221, 232, 96));
         tPane.setBackground(new Color(00, 00, 200));
-        fPane.setBackground(new Color(200, 0, 0));
+        fPane.setBackground(new Color(191, 191, 191));
 
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -104,8 +104,8 @@ public class GamePanel extends JPanel {
         gbc.gridwidth = 2;
         gbc.gridwidth = 1;
         gp.add(fPane, gbc);
-        gbc.gridx = 2;  
-        gbc.gridy = 1;  
+        gbc.gridx = 2; 
+        gbc.gridy = 1; 
         gp.add(cPane, gbc);
 
         return gp;
@@ -130,7 +130,7 @@ public class GamePanel extends JPanel {
     }
     
     private fightPanel initFP(){
-        fightPanel fPane = new fightPanel();
+        fightPanel fPane = new fightPanel(TurnStile);
         return fPane;
     }
     

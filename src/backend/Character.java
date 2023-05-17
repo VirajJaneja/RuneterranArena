@@ -110,7 +110,7 @@ public class Character {
         return null;
     }
 
-    public ImageIcon getAnimation(String s){
+    public String getAnimation(String s){
         if(s.equals("basicATKanim")){
             return getBasicATKAnim();
         } else if(s.equals("ABanim")){
@@ -140,22 +140,22 @@ public class Character {
     public ImageIcon getUltIcon(){
         return null;
     }
-    public ImageIcon getBasicATKAnim(){
+    public String getBasicATKAnim(){
         return null;
     }
-    public ImageIcon getUltAnim(){
+    public String getUltAnim(){
         return null;
     }
-    public ImageIcon getAbilityAnim(){
+    public String getAbilityAnim(){
         return null;
     }
-    public ImageIcon getIdleAnim(){
+    public String getIdleAnim(){
         return null;
     }
-    public ImageIcon getDeathAnim(){
+    public String getDeathAnim(){
         return null;
     }
-    public ImageIcon getSpawnAnim(){
+    public String getSpawnAnim(){
         return null;
     }
 }

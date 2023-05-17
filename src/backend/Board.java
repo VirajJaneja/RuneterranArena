@@ -4,15 +4,19 @@ import java.lang.annotation.Target;
 
 import org.omg.CORBA.ARG_IN;
 
+import frontend.fightPanel;
+
 public class Board {
     public static Player playerOne;
-    static CharacterWrapperSq deployedCharacterOne;
-    static CharacterWrapperSq deployedCharacterTwo;
+    public static CharacterWrapperSq deployedCharacterOne;
+    public static CharacterWrapperSq deployedCharacterTwo;
     public static Player playerTwo;
     public static int P1CPos;
     public static int P2CPos;
+    public static fightPanel fPane;
 
-    public Board(Player playerUno, Player playerDos){
+    public Board(Player playerUno, Player playerDos, fightPanel fp){
+        fPane = fp;
         playerOne = playerUno;
         playerTwo = playerDos;
         deployedCharacterOne = playerOne.getCharacter(0);
@@ -46,6 +50,7 @@ public class Board {
             case 33:
             case 43:
                 swapCharacters(aggressor, target, getCharacPos(aggressor), (i-3)/10);
+                fPane.swapCharacter(aggressor, getCharacter(aggressor));
                 System.out.println("do smth");
                 break;
         }
@@ -71,13 +76,13 @@ public class Board {
 
     }
 
-    // private static CharacterWrapperSq getCharacter(Player player){
-    //     if(player.equals(playerOne)){
-    //         return deployedCharacterOne;
-    //     } else {
-    //         return deployedCharacterTwo;
-    //     }
-    // }
+    private static CharacterWrapperSq getCharacter(Player player){
+        if(player.equals(playerOne)){
+            return deployedCharacterOne;
+        } else {
+            return deployedCharacterTwo;
+        }
+    }
 
     private static int getCharacPos(Player player){
         if(player.equals(playerOne)){
