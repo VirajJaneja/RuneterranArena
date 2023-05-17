@@ -10,7 +10,7 @@ public class teamPanel extends JPanel{
 
     public teamPanel() {
         // Load the background image
-        backgroundImage = new ImageIcon("lib/c46ac69720c0e93e1aa9ca9182027cd7.png").getImage();
+        backgroundImage = new ImageIcon("lib/league template 2.png").getImage();
     }
 
     @Override

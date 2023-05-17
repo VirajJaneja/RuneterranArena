@@ -44,6 +44,8 @@ public class Board {
             case 1:
             case 2:
                 dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
+                fPane.doAction(aggressor, i);
+                break;
             case 3:
             case 13:
             case 23:

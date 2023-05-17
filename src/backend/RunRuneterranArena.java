@@ -13,6 +13,7 @@ public class RunRuneterranArena {
         ArrayList<CharacterWrapperSq> testCharacter = new ArrayList<CharacterWrapperSq>();
 
         ArrayList<CharacterWrapperSq> characs = new ArrayList<CharacterWrapperSq>();
+        characs.add(new Ahri(2));
         characs.add(new Garen(2));
         System.out.println(characs.size());
         characs.add(new Jinx(2));

@@ -1,6 +1,9 @@
 package frontend;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,8 +40,10 @@ public class choicePanel extends JPanel implements ActionListener{
     Icon icons[] = new Icon[4];
     ArrayList<JButton> teamButtons;
     // public static Boolean turn;
-    // private static String nextTurnValue;
+    // private static String nextTurnValue
+    private Image backgroundImage;
 
+    
 
     choicePanel(Turnstile turnstile2, Player Givenplayer) {
         teamButtons = new ArrayList<>();
@@ -46,6 +51,7 @@ public class choicePanel extends JPanel implements ActionListener{
         player = Givenplayer;
         // turn = false;
         // nextTurnValue = "";
+        backgroundImage = new ImageIcon("lib/league template.png").getImage();
         icons[0] = new ImageIcon("E:/lib/Demacian_Justice.png");
         icons[1] = new ImageIcon("lib/Demacian_Justice.png");
         icons[2] = new ImageIcon("lib/Demacian_Justice.png");
@@ -56,6 +62,10 @@ public class choicePanel extends JPanel implements ActionListener{
         swapCharac = new JButton("Swap Character");
         confirm = new JButton("Confirm");
         initButtons();
+    }
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth()-5, getHeight()-70, this);
     }
 
     private void resetButtons(){

@@ -8,6 +8,8 @@ import backend.Turnstile;
 import backend.Turnstile.Turn;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -18,19 +20,23 @@ public class fightPanel extends JPanel {
     private ImageIcon playerCharacter;
     private ImageIcon computerCharacter;
     private GridLayout layout;
-    Turnstile TS;
+    public static Turnstile TS;
 
     public fightPanel(Turnstile turnstile) {
         layout = new GridLayout(0, 2, 0, 0);
         setLayout(layout);
         TS = turnstile;
+        System.out.println("h: " + this.getWidth());
 
-        playerIMG = new JLabel("hello");
-        playerIMG.setIcon(new javax.swing.ImageIcon(getPath(TS.battlefield.deployedCharacterOne.getName(), "Idle")));
+        playerIMG = new JLabel();
+        playerIMG.setBorder(null);
+        playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), "Idle")));
 
         computerIMG = new JLabel();
-        computerIMG.setIcon(flipVertically(new javax.swing.ImageIcon(getPath(TS.battlefield.deployedCharacterTwo.getName(), "Idle"))));
-        computerIMG.repaint();
+        computerIMG.setIcon(new javax.swing.ImageIcon(getPathRight(TS.battlefield.deployedCharacterTwo.getName(), "Idle")));
+        computerIMG.setBorder(null);
+
+        // computerIMG.repaint();
         add(playerIMG);
         add(computerIMG);
     }
@@ -40,19 +46,44 @@ public class fightPanel extends JPanel {
     public static void swapCharacter(Player player, CharacterWrapperSq charac){
         // if(player)
         if(getSide(player).equals("left")){
-            
-            playerIMG.setIcon(new javax.swing.ImageIcon(getPath(charac.getName(), "Idle")));
+            playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(charac.getName(), "Idle")));
+        }
+        if(getSide(player).equals("right")){
+            playerIMG.setIcon(new javax.swing.ImageIcon(getPathRight(charac.getName(), "Idle")));
         }
     }
+    
 
-    public static void doAction(Player player){
+
+    public static void doAction(Player player, Integer i){
+        String action = getActionFromI(i);
+        System.out.println(action);
         if(getSide(player).equals("left")){
+            ImageIcon x = new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(),action));
+            playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), action)));
+            System.out.println(action + " " + x);
+            Timer timer = new Timer(1200, new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // TODO Auto-generated method stub
+                    playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), "Idle")));
+                    // drawImageOnIcon(new ImageIcon("lib/woodStart.png"), playerIMG.getIcon()));
+                }
+                
+            });
             
+            timer.setRepeats(false); // Only fire once
+            timer.start();
+            // playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), "idle")));
+
         } 
     }
 
     private static String getSide(Player player){
-        if(player.equals(Turnstile.playerOne))
+        System.out.println(Turnstile.playerOne);
+        System.out.println(player);
+        if(player == Turnstile.playerOne)
             return "left";
         return "right";
     }
@@ -61,31 +92,42 @@ public class fightPanel extends JPanel {
         return ii;
     }
 
-    private static String getPath(String characName, String anim){
+    private static String getPathLeft(String characName, String anim){
         String result = "";
-        result = "lib/animations/" + characName.toLowerCase() + "/" + characName + anim+".gif";
+        result = "lib/animations/" + characName + "/Player/" + characName + anim+".gif";
         System.out.println(result);
         return result;
     }
     
-    public static ImageIcon flipVertically(ImageIcon icon) {
-        int width = icon.getIconWidth();
-        int height = icon.getIconHeight();
+    private static String getPathRight(String characName, String anim){
+        String result = "";
+        result = "lib/animations/" + characName.toLowerCase() + "/Computer/" + characName + anim+"Comp.gif";
+        System.out.println(result);
+        System.out.println("lib/animations/Ahri/Computer/AhriIdleComp.gif");
+        return result;
+    }
+
+    private static String getActionFromI(Integer i){
+        switch(i){
+            case 0:
+                return "ATK";
+            case 1:
+                return "Ability";
+            case 2:
+                return "Ult";
+        }
+        return "Idle";
+    }
+
+    public static void drawImageOnIcon(ImageIcon icon, Image image) {
+        // Scale the image to fit the icon
+        Image scaledImage = image.getScaledInstance(icon.getIconWidth(), icon.getIconHeight(), Image.SCALE_SMOOTH);
     
-        // Create a BufferedImage to hold the flipped image
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        // Create a new image icon with the scaled image
+        ImageIcon newIcon = new ImageIcon(scaledImage);
     
-        // Get the graphics context of the image
-        Graphics2D g2d = image.createGraphics();
-    
-        // Flip the image vertically using an AffineTransform object
-        AffineTransform transform = AffineTransform.getScaleInstance(1, -1);
-        transform.translate(0, -height);
-        g2d.drawImage(icon.getImage(), transform, null);
-        g2d.dispose();
-    
-        // Create a new ImageIcon from the flipped image
-        return new ImageIcon(image);
+        // Set the new icon on the label
+        icon.setImage(newIcon.getImage());
     }
     
 

@@ -90,21 +90,21 @@ public class Ahri extends CharacterWrapperSq{
         return deathAnim;
     }
     public ImageIcon getSpawnAnim(boolean b){
-        return spawnAnim;
+        return idleAnim;
     }
 
 
     
-    public static void main(String[] arg){
-        ArrayList<Character> testCharacter = new ArrayList<Character>();
-        testCharacter.add(new Garen(0));
-        testCharacter.add(new Ahri(0));
+    // public static void main(String[] arg){
+    //     ArrayList<Character> testCharacter = new ArrayList<Character>();
+    //     testCharacter.add(new Garen(0));
+    //     testCharacter.add(new Ahri(0));
         
-        Player player1 = new Player(1, testCharacter);
-        Player player2 = new Player(1, testCharacter);
-        Board board = new Board(player1, player2);
-        Turnstile turnstile = new Turnstile(board);
-    }
+    //     Player player1 = new Player(1, testCharacter);
+    //     Player player2 = new Player(1, testCharacter);
+    //     Board board = new Board(player1, player2);
+    //     Turnstile turnstile = new Turnstile(board);
+    // }
 
 
 

@@ -23,6 +23,8 @@ public class Turnstile {
         for(int i=0;i<pOne.getSize();i++){
             System.out.println(pOne.getCharacter(i).getName());
         }
+        System.out.println(playerOne);
+        System.out.println(playerTwo);
     }
 
     public enum Turn {
