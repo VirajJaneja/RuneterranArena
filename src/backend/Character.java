@@ -13,7 +13,7 @@ public class Character {
     private String type, region, level;
     private Ability a,b,c,d;
     private int health;
-    private final int maxHp;
+    private int maxHp;
     private final double Bronze = 0.5;
     private final double Silver = 1;
     private final double Gold = 2.5;
@@ -30,17 +30,18 @@ public class Character {
         this.region = region;
         abilitySet = new ArrayList<Ability>(4);
         this.sprite = image;
-        this.maxHp = health;
         setHealth(level, health);
+        this.maxHp = health;
     }
 
     public Character(String Inputtype, String region, int hp, int diff){
         type = Inputtype;
         this.region = region;
         this.abilitySet = new ArrayList<Ability>(4);
-        this.maxHp = health;
+
         difficultyManagement(diff);
         setHealth(level, hp);
+        this.maxHp = health;
     }
     
     public void difficultyManagement(int diff){
