@@ -141,11 +141,12 @@ public class teamPanel extends JPanel{
         }
     }
 
-    private int getHealth(int i){
+    private String getHealth(int i){
         int health = playerList.get(i).getHealth();
-        if(health < 0)
-            health = 0;
-        return health-1;
+        String result = health + "";
+        if(health <= 0)
+            result = "Dead";
+        return result +"";
     }
 
 }
