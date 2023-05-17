@@ -52,7 +52,7 @@ public class teamPanel extends JPanel{
 
 
         for(int i = 0; i<playerList.size(); i++){
-            fractionList.add("("+playerList.get(i).getHealth() +" / "+ playerList.get(i).getMaxHealth()+")");
+            fractionList.add("("+getHealth(i) +" / "+ playerList.get(i).getMaxHealth()+")");
         }
         //     frac.setPreferredSize(new Dimension(prefSize, prefSize));
         //     row2Panel.add(frac, Box.createHorizontalGlue());
@@ -62,7 +62,7 @@ public class teamPanel extends JPanel{
         // row2Panel.add(frac, Box.createHorizontalGlue());
 
         for(int i = 0; i<compList.size(); i++){
-            fractionList.add("("+compList.get(i).getHealth() +" / "+ compList.get(i).getMaxHealth()+")");
+            fractionList.add("("+getHealth(i) +" / "+ compList.get(i).getMaxHealth()+")");
         }
         
         
@@ -123,22 +123,29 @@ public class teamPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-    // Draw the background image
-    // g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        // Draw the background image
+        // g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
-    java.awt.FontMetrics fontMetrics = g.getFontMetrics();
+        java.awt.FontMetrics fontMetrics = g.getFontMetrics();
 
-    for (int i = 0; i < allLabel.size(); i++) {
-        JLabel label = allLabel.get(i);
-        String fraction = fractionList.get(i);
+        for (int i = 0; i < allLabel.size(); i++) {
+            JLabel label = allLabel.get(i);
+            String fraction = fractionList.get(i);
 
-        Rectangle labelBounds = label.getBounds();
-        int labelX = labelBounds.x+25;
-        int labelY = labelBounds.y + labelBounds.height + fontMetrics.getAscent();
+            Rectangle labelBounds = label.getBounds();
+            int labelX = labelBounds.x+25;
+            int labelY = labelBounds.y + labelBounds.height + fontMetrics.getAscent();
 
-        g.setColor(Color.WHITE);
-        g.drawString(fraction, labelX, labelY);
+            g.setColor(Color.WHITE);
+            g.drawString(fraction, labelX, labelY);
+        }
     }
-}
+
+    private int getHealth(int i){
+        int health = playerList.get(i).getHealth();
+        if(health < 0)
+            health = 0;
+        return health;
+    }
 
 }
