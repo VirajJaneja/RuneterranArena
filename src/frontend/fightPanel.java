@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
 
 public class fightPanel extends JPanel {
     private static JLabel playerIMG;
-    private JLabel computerIMG;
+    private static JLabel computerIMG;
 
     private ImageIcon playerCharacter;
     private ImageIcon computerCharacter;
@@ -45,23 +45,54 @@ public class fightPanel extends JPanel {
 
     public static void swapCharacter(Player player, CharacterWrapperSq charac){
         // if(player)
+        System.out.println("uno: " + player);
+        System.out.println(getSide(player));
         if(getSide(player).equals("left")){
             playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(charac.getName(), "Idle")));
         }
         if(getSide(player).equals("right")){
-            playerIMG.setIcon(new javax.swing.ImageIcon(getPathRight(charac.getName(), "Idle")));
+            computerIMG.setIcon(new javax.swing.ImageIcon(getPathRight(charac.getName(), "Idle")));
         }
     }
     
+    public static void killCharacter(Player player, CharacterWrapperSq charac, CharacterWrapperSq nextCharac){
+        // if(player)
 
+        if(getSide(player).equals("left")){
+            playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(charac.getName(), "Death")));
+        }
+        if(getSide(player).equals("right")){
+            computerIMG.setIcon(new javax.swing.ImageIcon(getPathRight(charac.getName(), "Death")));
+        }  
+
+        Timer timer = new Timer(2100, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+
+                System.out.println("got to event BINGO BINGO BINGO");
+                // System.out.println(getSide(player));
+                if(getSide(player).equals("left")){
+                    playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(nextCharac.getName(), "Idle")));
+                }
+                if(getSide(player).equals("right")){
+                    computerIMG.setIcon(new javax.swing.ImageIcon(getPathRight(nextCharac.getName(), "Idle")));
+                }                
+            }
+        });
+        timer.setRepeats(false); // Only fire once
+        timer.start();
+
+    }
 
     public static void doAction(Player player, Integer i){
         String action = getActionFromI(i);
         System.out.println(action);
         if(getSide(player).equals("left")){
-            ImageIcon x = new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(),action));
+            // ImageIcon x = new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(),action));
             playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), action)));
-            System.out.println(action + " " + x);
+            // System.out.println(action + " " + x);
             Timer timer = new Timer(1200, new ActionListener() {
 
                 @Override
@@ -78,19 +109,39 @@ public class fightPanel extends JPanel {
             // playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), "idle")));
 
         } 
+        if(getSide(player).equals("right")){
+            // ImageIcon x = new javax.swing.ImageIcon(getPathRight(TS.battlefield.deployedCharacterOne.getName(),action));
+            computerIMG.setIcon(new javax.swing.ImageIcon(getPathRight(TS.battlefield.deployedCharacterTwo.getName(), action)));
+            // System.out.println(action + " " + x);
+            Timer timer = new Timer(1200, new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // TODO Auto-generated method stub
+                    computerIMG.setIcon(new javax.swing.ImageIcon(getPathRight(TS.battlefield.deployedCharacterTwo.getName(), "Idle")));
+                    // drawImageOnIcon(new ImageIcon("lib/woodStart.png"), playerIMG.getIcon()));
+                }
+                
+            });
+            
+            timer.setRepeats(false); // Only fire once
+            timer.start();
+            // playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), "idle")));
+
+        } 
     }
 
     private static String getSide(Player player){
-        System.out.println(Turnstile.playerOne);
-        System.out.println(player);
+        // System.out.println(Turnstile.playerOne);
+        // System.out.println(player);
         if(player == Turnstile.playerOne)
             return "left";
         return "right";
     }
 
-    private static ImageIcon flipGIF(ImageIcon ii){
-        return ii;
-    }
+    // private static ImageIcon flipGIF(ImageIcon ii){
+    //     return ii;
+    // }
 
     private static String getPathLeft(String characName, String anim){
         String result = "";
@@ -109,6 +160,8 @@ public class fightPanel extends JPanel {
 
     private static String getActionFromI(Integer i){
         switch(i){
+            case -1:
+                return "Death";
             case 0:
                 return "ATK";
             case 1:

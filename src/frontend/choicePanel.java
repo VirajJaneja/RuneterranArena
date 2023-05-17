@@ -36,7 +36,7 @@ public class choicePanel extends JPanel implements ActionListener{
     static JButton ult;
     static JButton swapCharac;
     static JButton confirm;
-    Player player;
+    static Player player;
     Icon icons[] = new Icon[4];
     ArrayList<JButton> teamButtons;
     // public static Boolean turn;
@@ -52,10 +52,10 @@ public class choicePanel extends JPanel implements ActionListener{
         // turn = false;
         // nextTurnValue = "";
         backgroundImage = new ImageIcon("lib/league template.png").getImage();
-        icons[0] = new ImageIcon("E:/lib/Demacian_Justice.png");
-        icons[1] = new ImageIcon("lib/Demacian_Justice.png");
-        icons[2] = new ImageIcon("lib/Demacian_Justice.png");
-        icons[3] = new ImageIcon("lib/Demacian_Justice.png");
+        // icons[0] = new ImageIcon("E:/lib/Demacian_Justice.png");
+        // icons[1] = new ImageIcon("lib/Demacian_Justice.png");
+        // icons[2] = new ImageIcon("lib/Demacian_Justice.png");
+        // icons[3] = new ImageIcon("lib/Demacian_Justice.png");
         basicATK = new JButton("Basic Attack");
         abilityOne = new JButton("Ability 1");
         ult = new JButton("Ultimate");
@@ -149,8 +149,9 @@ public class choicePanel extends JPanel implements ActionListener{
             abilityOne.setVisible(false);
             ult.setVisible(false);
             swapCharac.setActionCommand("cancel");
-            for(JButton b: teamButtons){
-                b.setVisible(true);
+            for(int i = 0; i<player.getSize();i++){
+                if(player.getCharacter(i).getStatus())
+                    teamButtons.get(i).setVisible(true);
             }
         }
         if(swap.equals("cancel")){
@@ -192,8 +193,10 @@ public class choicePanel extends JPanel implements ActionListener{
                 swapRotate(eventName);
                 break;
             case "Confirm":
-                resetButtons();
-                Turnstile.moveTurn();
+                if(validMove()){
+                    resetButtons();
+                    Turnstile.moveTurn();
+                }
                 break;
             case "3":
             case "13":
@@ -205,9 +208,23 @@ public class choicePanel extends JPanel implements ActionListener{
                 teamButtons.get((Integer.parseInt(eventName)-3)/10).setBackground(new Color(29,67,71));
                 break; 
         }
+        
 
         playSound(eventName);
         // System.out.println(TurnStile.playerOne.nextTurn);
+    }
+
+    private static boolean validMove(){
+        System.out.println("UNO");
+        if(player.getNextTurn()>2){
+            System.out.println("DOS");
+            if(!(player.getCharacter((player.getNextTurn()-3)/10).getStatus())){
+                System.out.println("TRES");
+                return false;
+            }
+        }
+
+        return true;
     }
     
 }

@@ -29,6 +29,9 @@ public class RunRuneterranArena {
         //     System.out.println(characs.get(i).getIcon("AB1icon"));
         //     System.out.println(characs.get(i).getIcon("ultIcon"));
         // }
+
+        characs.get(1).setHealth("Bronze", 0);
+        characs.get(0).setHealth("Bronze", 3);
         
         Player player1 = new Player(characs.size(), characs);
         Player player2 = new Player(characs.size(), characs);

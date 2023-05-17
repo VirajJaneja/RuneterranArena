@@ -27,6 +27,7 @@ public class Board {
 
 
     public static boolean makeMove(int i, Player aggressor, Player idlePlayer){
+        System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
         // System.out.println("PLEASE WORK FOR THE LOVE OF GOD");
         CharacterWrapperSq target;
         CharacterWrapperSq targetter;
@@ -45,6 +46,15 @@ public class Board {
             case 2:
                 dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
                 fPane.doAction(aggressor, i);
+                if(!(target.getStatus())){
+                    if(!(allDead(idlePlayer))){
+                        // System.out.println(target.getHealth());
+                        // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
+                        fPane.killCharacter(idlePlayer, idlePlayer.getCharacter(getCharacPos(idlePlayer)), idlePlayer.getCharacter(getNextAlive(idlePlayer)));
+                        swapCharacters(idlePlayer, target, getCharacPos(idlePlayer), getNextAlive(idlePlayer));
+                        System.out.println("uno: " + idlePlayer);
+                        }   
+                }
                 break;
             case 3:
             case 13:
@@ -57,6 +67,8 @@ public class Board {
                 break;
         }
         System.out.println(deployedCharacterOne.getName());
+        System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
+
         return false;
     }
 
@@ -136,15 +148,23 @@ public class Board {
         return "Ongoing";
     }
 
-    private boolean allDead(Player player){
+    private static boolean allDead(Player player){
         int counter = 0;
         for(int i = 0; i<player.getSize();i++){
             if(player.getCharacter(i).getHealth() <= 0)
                 counter++;
         }
-        if(counter == 3)
+        if(counter >= player.getSize())
             return true;
         return false;
+    }
+    private static Integer getNextAlive(Player player){
+        for(int i = 0;i<player.getSize();i++){
+            if(player.getCharacter(i).getStatus())
+                return i;
+        }
+
+        return -1;
     }
 
 }

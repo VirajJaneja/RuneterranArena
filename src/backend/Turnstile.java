@@ -38,6 +38,9 @@ public class Turnstile {
                 }
                 else if(!(turnCounter<1)){
                     Board.makeMove(playerTwo.getNextTurn(), playerTwo, playerOne);
+                    if(!(battlefield.gameOver().equals("Ongoing"))){
+                        finishGame(battlefield.gameOver());
+                    }
                     // System.out.println("broken");
                 }
             }
@@ -49,9 +52,13 @@ public class Turnstile {
                 if(!(battlefield.gameOver().equals("Ongoing"))){
                     gameOver = true;
                     // System.out.println("here");
+                    
                 }
                 else{
                     Board.makeMove(playerOne.getNextTurn(), playerOne, playerTwo);
+                    if(!(battlefield.gameOver().equals("Ongoing"))){
+                        finishGame(battlefield.gameOver());
+                    }
                     // System.out.println("broken");
                 }
             }
@@ -80,7 +87,7 @@ public class Turnstile {
         }
         // System.out.println(turn);
     }
-    public static void finishGame(){
+    public static void finishGame(String s){
         gf.mainFrame.dispose();
     }
     public Player getPlayer(boolean b){
