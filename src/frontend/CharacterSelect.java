@@ -149,7 +149,7 @@ class CharacterSelect extends JFrame implements ActionListener {
         //JinxLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
 
         JLabel KhaLabel = new JLabel();
-        KhaLabel.setIcon(new javax.swing.ImageIcon("lib/icons/pfps/kha icon (5).png"));
+        KhaLabel.setIcon(new javax.swing.ImageIcon("lib/icons/pfps/KhaResize.png"));
         //KhaLabel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
 
         // JLabel MalzLabel = new JLabel();
@@ -295,7 +295,7 @@ class CharacterSelect extends JFrame implements ActionListener {
 
                 else if(act.equals("Resolve")){
                     playSound("confirm");
-                    characters.get(characters.size()-1).setText("Please select 3 characters minimum.");
+                    characters.get(characters.size()-1).setText("3 characters min.");
                 }
 
             } else if (characterCount >= maxTeamSize){
@@ -349,9 +349,17 @@ class CharacterSelect extends JFrame implements ActionListener {
                     }else if(rand<=1){
                         compChar.add(new Taric(difficulty));
                     }
+                    
                 }
+                for(int i = 0; i<playerCharact.size(); i++){
+                    System.out.println("COMP:"+ compChar.get(i).getName());
+                    System.out.println("Player:" + playerCharact.get(i).getName());
+                }
+
                 characterFrame.setVisible(false);
+
                 new Turnstile(new Player(playerCharact.size(), playerCharact), new ComputerPlayer(compChar.size(), compChar));
+
             } if(act.equals("Garen")){
                 playSound("confirm");
                 characterBoolean[0] = !characterBoolean[0];

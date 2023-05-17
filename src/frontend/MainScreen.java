@@ -281,25 +281,24 @@ public class MainScreen implements ActionListener {
             diffOne.setBounds(50, 50, buttonWidth, buttonHeight);
             diffOne.addActionListener(this);
             diffOne.setActionCommand("EASY");
-
-    
             modePanel.add(diffOne);
-    
+            diffOne.setVisible(true); // Set visibility to true
+            
             JButton diffTwo = new JButton(medium);
-            diffTwo.setBounds(50, 225, buttonWidth+150, buttonHeight);
+            diffTwo.setBounds(50, 225, buttonWidth + 150, buttonHeight);
             diffTwo.addActionListener(this);
             diffTwo.setActionCommand("MEDIUM");
- 
             modePanel.add(diffTwo);
-    
+            diffTwo.setVisible(true); // Set visibility to true
+            
             JButton diffThree = new JButton(hard);
             diffThree.setBounds(50, 400, buttonWidth, buttonHeight);
-            diffThree.setBorder(null); 
+            diffThree.setBorder(null);
             diffThree.addActionListener(this);
             diffThree.setActionCommand("HARD");
-
-    
             modePanel.add(diffThree);
+            diffThree.setVisible(true); // Set visibility to true
+            
             
             JButton bottomRightButton = new JButton("Bottom Right");
             int buttonSize = 100;
@@ -307,7 +306,7 @@ public class MainScreen implements ActionListener {
             int buttonX = modeSelect.getWidth() - buttonSize - buttonMargin;
             int buttonY = modeSelect.getHeight() - buttonSize - buttonMargin;
             bottomRightButton.setBounds(buttonX, buttonY, buttonSize, buttonSize);
-            
+
             modePanel.add(bottomRightButton);
             modePanel.setVisible(true);
             modeSelect.add(modePanel);
