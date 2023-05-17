@@ -4,11 +4,14 @@ import java.awt.Image;
 
 import javax.swing.*;
 
+import backend.Turnstile;
+
 
 public class teamPanel extends JPanel{
     private Image backgroundImage;
 
-    public teamPanel() {
+    
+    public teamPanel(Turnstile ts) {
         // Load the background image
         backgroundImage = new ImageIcon("lib/league template 2.png").getImage();
     }

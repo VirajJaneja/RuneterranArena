@@ -125,8 +125,6 @@ public class MainScreen implements ActionListener {
         mainFrame.setVisible(true);
 
     }
-    public MainScreen(int i, int j) {
-    }
     private void playSound(String s){
         String sound = "lib/button SE.wav";
         if(s.equals("Confirm") || s.equals("None"))
