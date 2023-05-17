@@ -175,7 +175,7 @@ public class choicePanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String eventName = e.getActionCommand();
-        System.out.println(eventName);
+        // System.out.println(eventName);
         // nextTurnValue = eventName;
         switch(eventName){
             case "Basic Attack":

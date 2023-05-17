@@ -115,7 +115,7 @@ public class teamPanel extends JPanel{
 
 
     private String getImageIcon(String character){
-        System.out.println("lib/icons/pfps/"+character.toLowerCase()+" icon.png");
+        // System.out.println("lib/icons/pfps/"+character.toLowerCase()+" icon.png");
         return "lib/icons/pfps/"+character.toLowerCase()+" icon.png";
     }
 

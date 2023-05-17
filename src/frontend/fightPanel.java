@@ -58,8 +58,8 @@ public class fightPanel extends JPanel {
 
     public static void swapCharacter(Player player, CharacterWrapperSq charac){
         // if(player)
-        System.out.println("uno: " + player);
-        System.out.println(getSide(player));
+        // System.out.println("uno: " + player);
+        // System.out.println(getSide(player));
         if(getSide(player).equals("left")){
             playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(charac.getName(), "Idle")));
         }
@@ -84,7 +84,7 @@ public class fightPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
 
-                System.out.println("got to event BINGO BINGO BINGO");
+                // System.out.println("got to event BINGO BINGO BINGO");
                 // System.out.println(getSide(player));
                 if(getSide(player).equals("left")){
                     playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(nextCharac.getName(), "Idle")));
@@ -101,7 +101,7 @@ public class fightPanel extends JPanel {
 
     public static void doAction(Player player, Integer i){
         String action = getActionFromI(i);
-        System.out.println(action);
+        // System.out.println(action);
         if(getSide(player).equals("left")){
             // ImageIcon x = new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(),action));
             playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), action)));
@@ -159,15 +159,15 @@ public class fightPanel extends JPanel {
     private static String getPathLeft(String characName, String anim){
         String result = "";
         result = "lib/animations/" + characName + "/Player/" + characName + anim+".gif";
-        System.out.println(result);
+        // System.out.println(result);
         return result;
     }
     
     private static String getPathRight(String characName, String anim){
         String result = "";
         result = "lib/animations/" + characName.toLowerCase() + "/Computer/" + characName + anim+"Comp.gif";
-        System.out.println(result);
-        System.out.println("lib/animations/Ahri/Computer/AhriIdleComp.gif");
+        // System.out.println(result);
+        // System.out.println("lib/animations/Ahri/Computer/AhriIdleComp.gif");
         return result;
     }
 

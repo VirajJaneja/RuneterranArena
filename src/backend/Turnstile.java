@@ -1,6 +1,9 @@
 package backend;
 
 import java.awt.Point;
+import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.awt.event.ActionEvent;
 
 import frontend.gameFrame;
 
@@ -42,7 +45,7 @@ public class Turnstile {
                     if(!(battlefield.gameOver().equals("Ongoing"))){
                         finishGame(battlefield.gameOver());
                     }
-                    // System.out.println("broken");
+                    System.out.println("broken");
                 }
             }
         },
@@ -62,6 +65,8 @@ public class Turnstile {
                         finishGame(battlefield.gameOver());
                     }
                     // System.out.println("broken");
+                    moveTurn();
+
                 }
             }
         };
@@ -73,9 +78,11 @@ public class Turnstile {
         Turn nextStep = Turn.P1Turn;
         if(turn == Turn.P1Turn){
             nextStep = Turn.P2Turn;
+            nextStep.run();
             gf.gp.cPane.setConfirmButtonPresence(0);
         }
         if(turn == Turn.P2Turn){
+            System.out.println("this one right here");
             nextStep = Turn.P1Turn;
             nextStep.run();
             gf.gp.cPane.setConfirmButtonPresence(1);
@@ -89,6 +96,8 @@ public class Turnstile {
         }
         // System.out.println(turn);
     }
+
+
     public static void finishGame(String s){
         gf.mainFrame.dispose();
     }

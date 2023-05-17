@@ -27,7 +27,7 @@ public class Board {
 
 
     public static boolean makeMove(int i, Player aggressor, Player idlePlayer){
-        System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
+        // System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
         // System.out.println("PLEASE WORK FOR THE LOVE OF GOD");
         CharacterWrapperSq target;
         CharacterWrapperSq targetter;
@@ -38,11 +38,12 @@ public class Board {
             targetter = deployedCharacterOne;
             target = deployedCharacterTwo;
         }
-        System.out.println(deployedCharacterOne.getName());
+        // System.out.println(deployedCharacterOne.getName());
         // System.out.println("here");
         switch(i){
             case 0:
-            aggressor.skillPoints += 1;
+                aggressor.skillPoints += 1;
+                System.out.println("adding one rn");
                 dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
                 fPane.doAction(aggressor, i);
                 if(!(target.getStatus())){
@@ -51,7 +52,7 @@ public class Board {
                         // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
                         fPane.killCharacter(idlePlayer, idlePlayer.getCharacter(getCharacPos(idlePlayer)), idlePlayer.getCharacter(getNextAlive(idlePlayer)));
                         swapCharacters(idlePlayer, target, getCharacPos(idlePlayer), getNextAlive(idlePlayer));
-                        System.out.println("uno: " + idlePlayer);
+                        // System.out.println("uno: " + idlePlayer);
                         }   
                 }
                 break;
@@ -65,7 +66,7 @@ public class Board {
                         // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
                         fPane.killCharacter(idlePlayer, idlePlayer.getCharacter(getCharacPos(idlePlayer)), idlePlayer.getCharacter(getNextAlive(idlePlayer)));
                         swapCharacters(idlePlayer, target, getCharacPos(idlePlayer), getNextAlive(idlePlayer));
-                        System.out.println("uno: " + idlePlayer);
+                        // System.out.println("uno: " + idlePlayer);
                         }   
                 }
                 break;
@@ -79,7 +80,7 @@ public class Board {
                         // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
                         fPane.killCharacter(idlePlayer, idlePlayer.getCharacter(getCharacPos(idlePlayer)), idlePlayer.getCharacter(getNextAlive(idlePlayer)));
                         swapCharacters(idlePlayer, target, getCharacPos(idlePlayer), getNextAlive(idlePlayer));
-                        System.out.println("uno: " + idlePlayer);
+                        // System.out.println("uno: " + idlePlayer);
                         }   
                 }
                 break;
@@ -90,7 +91,7 @@ public class Board {
             case 43:
                 swapCharacters(aggressor, target, getCharacPos(aggressor), (i-3)/10);
                 fPane.swapCharacter(aggressor, getCharacter(aggressor));
-                System.out.println("do smth");
+                // System.out.println("do smth");
                 break;
         }
         // System.out.println("this other one right here" + aggressor);
