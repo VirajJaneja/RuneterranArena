@@ -21,22 +21,35 @@ public class fightPanel extends JPanel {
     private ImageIcon computerCharacter;
     private GridLayout layout;
     public static Turnstile TS;
-
+    public gameFrame frame;
+    public int height;
+    public int width;
     public fightPanel(Turnstile turnstile) {
-        layout = new GridLayout(0, 2, 0, 0);
+        layout = new GridLayout(1, 2, 0, 0);
         setLayout(layout);
         TS = turnstile;
-        System.out.println("h: " + this.getWidth());
+        
+        this.frame = TS.getGF();
+        height = getHeight();
+        width = getWidth();
+
+        int prefSize = resize(sizeSML(width,height));
 
         playerIMG = new JLabel();
         playerIMG.setBorder(null);
         playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), "Idle")));
-
         computerIMG = new JLabel();
         computerIMG.setIcon(new javax.swing.ImageIcon(getPathRight(TS.battlefield.deployedCharacterTwo.getName(), "Idle")));
         computerIMG.setBorder(null);
 
+        
         // computerIMG.repaint();
+        // System.out.println(prefSize+", size");
+        // playerIMG = reshapedLabel(computerIMG, prefSize);
+        // computerIMG = reshapedLabel(computerIMG, prefSize);
+        // System.out.println(playerIMG.getHeight() +"+"+playerIMG.getWidth());
+        // System.out.println(computerIMG.getHeight() +"+"+playerIMG.getWidth());
+     // Replace with the path to your image
         add(playerIMG);
         add(computerIMG);
     }
@@ -182,6 +195,34 @@ public class fightPanel extends JPanel {
         // Set the new icon on the label
         icon.setImage(newIcon.getImage());
     }
+    private int sizeSML(int x, int y){
+        if(x <= 1000 ){
+            return 0;
+        } else if (x<=1800){
+            return 1;
+        }
+        return 2;
+    }
+    private int resize(int x){
+        if(x == 0){
+            return 400;
+        } else if (x ==1) {
+            return 450;
+        } else if (x==2){
+            return 500;
+        }
+        return 100;
+    }
+    // public JLabel reshapedLabel(String name, int width, int height, boolean b) {
+    //     name.
+    //     label.setPreferredSize(new Dimension(width, height));
+    //     return label;
+    // }
     
+
+    public JLabel reshapedLabel(JLabel label, int x){
+        label.setPreferredSize(new Dimension(x, x));
+        return label;
+    }
 
 }

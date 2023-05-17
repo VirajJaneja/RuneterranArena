@@ -103,7 +103,7 @@ public class gameFrame implements ActionListener {
 
     public void firstTimeRun() {
         mainFrame.setVisible(false);
-        new gameFrame(new Point(1800-200, 920-100), turnstile, 1);
+        new gameFrame(new Point(1750-200, 920-100), turnstile, 1);
     }
 
     public void setFrame(Point p) {

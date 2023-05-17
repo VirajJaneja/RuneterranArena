@@ -182,7 +182,7 @@ public class MainScreen implements ActionListener {
     class Settings extends JFrame implements ActionListener {
         private JPanel settingsPanel;
         private JFrame settingsFrame;
-        private final Point res1 = new Point(1280-200, 720-200);
+        private final Point res1 = new Point(1000, 520);
         private final Point res2 = new Point(1980-200, 1080-200);
         private final Point res3 = new Point(2560-200, 1440-200);
 
@@ -260,7 +260,6 @@ public class MainScreen implements ActionListener {
         ImageIcon backgroundImage;
         JLabel backgroundLabel;
         public Mode() {
-            modeSelect = new JFrame();
             modePanel = new JPanel();
         
             backgroundImage = new ImageIcon("lib/RiftBG.jpg");
@@ -299,18 +298,18 @@ public class MainScreen implements ActionListener {
             JButton bottomRightButton = new JButton("Bottom Right");
             int buttonSize = 100;
             int buttonMargin = 10;
-            int buttonX = modeSelect.getWidth() - buttonSize - buttonMargin;
-            int buttonY = modeSelect.getHeight() - buttonSize - buttonMargin;
+            int buttonX = getWidth() - buttonSize - buttonMargin;
+            int buttonY = getHeight() - buttonSize - buttonMargin;
             bottomRightButton.setBounds(buttonX, buttonY, buttonSize, buttonSize);
             modePanel.add(bottomRightButton);
         
             // Set the preferred size of modePanel
             modePanel.setPreferredSize(new Dimension(backgroundImage.getIconWidth(), backgroundImage.getIconHeight()));
         
-            modeSelect.add(modePanel);
-            modeSelect.pack();
-            modeSelect.setVisible(true);
-            modeSelect.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            add(modePanel);
+            pack();
+            setVisible(true);
+            setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         }
         
     
@@ -321,21 +320,21 @@ public class MainScreen implements ActionListener {
             if(act.equals("EASY")){
                 playSound("Select");
                 System.out.println("easy");
-                modeSelect.setVisible(false);
+                setVisible(false);
                 new CharacterSelect(0, resolution);
             } else if(act.equals("MEDIUM")){
                 playSound("Select");
-
+                setVisible(false);
                 new CharacterSelect(1, resolution);
                 System.out.println("med");
             } else if(act.equals("HARD")){
                 playSound("Select");
 
-                modeSelect.setVisible(false);
+                setVisible(false);
                 new CharacterSelect(2, resolution);
                 System.out.println("hard");
             } else if(act.equals("Options")){
-                modeSelect.setVisible(false);
+                setVisible(false);
                 new Settings();
                 
             }

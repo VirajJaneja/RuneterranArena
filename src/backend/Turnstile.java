@@ -11,7 +11,7 @@ public class Turnstile {
     static double turnCounter;
     static Turn turn;
     static boolean gameOver;
-    static gameFrame gf;
+    public static gameFrame gf;
     public Turnstile(Player pOne, Player pTwo){
         turn = Turn.P1Turn;
         turnCounter =0;
@@ -38,6 +38,7 @@ public class Turnstile {
                 }
                 else if(!(turnCounter<1)){
                     Board.makeMove(playerTwo.getNextTurn(), playerTwo, playerOne);
+                    gf.gp.tPane.repaint();
                     if(!(battlefield.gameOver().equals("Ongoing"))){
                         finishGame(battlefield.gameOver());
                     }
@@ -56,6 +57,7 @@ public class Turnstile {
                 }
                 else{
                     Board.makeMove(playerOne.getNextTurn(), playerOne, playerTwo);
+                    gf.gp.tPane.repaint();
                     if(!(battlefield.gameOver().equals("Ongoing"))){
                         finishGame(battlefield.gameOver());
                     }
@@ -94,5 +96,8 @@ public class Turnstile {
         if(b)
             return playerOne;
         return playerTwo;
+    }
+    public gameFrame getGF(){
+        return gf;
     }
 }

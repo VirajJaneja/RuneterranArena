@@ -89,7 +89,7 @@ public class Garen extends CharacterWrapperSq{
         return deathAnim;
     }
     public ImageIcon getSpawnAnim(boolean b){
-        return spawnAnim;
+        return null;
     }
 
 

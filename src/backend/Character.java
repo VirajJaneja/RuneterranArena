@@ -42,14 +42,22 @@ public class Character {
         difficultyManagement(diff);
         setHealth(level, hp);
         this.maxHp = health;
+        System.out.println("Base Health: " + hp+"\nMaxHP: "+ maxHp);
     }
     
     public void difficultyManagement(int diff){
         switch(diff){
-            case 0: level = "Bronze";
-            case 1: level = "Silver";
-            case 2: level = "Gold";
-            default: level = "Silver";
+            case 0: 
+            level = "Bronze";
+
+            case 1: 
+            level = "Silver";
+
+            case 2: 
+            level = "Gold";
+
+            default: 
+                level = "Silver";
         }
     }
     public void setHealth(String level, int baseHp){
