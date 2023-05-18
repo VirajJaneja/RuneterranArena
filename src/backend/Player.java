@@ -27,6 +27,10 @@ public class Player {
     public CharacterWrapperSq getCurrentCharacter(){
         return playerRoster.get(currentCharacter);
     }
+    public void setCurrentCharacter(int i){
+        currentCharacter = i;
+    }
+
     public void addCharacter(CharacterWrapperSq chara){
         playerRoster.add(chara);
     }

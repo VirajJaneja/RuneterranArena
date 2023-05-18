@@ -69,6 +69,7 @@ public class Turnstile {
                     // System.out.println("broken");
                 }
                 // gf.gp.cPane.setConfirmButtonPresence(1);
+                battlefield.printPackage(playerOne, playerTwo);
             }
         },
         P2Turn {
@@ -82,6 +83,7 @@ public class Turnstile {
                 }
                 else{
                     Board.makeMove(playerOne.getNextTurn(), playerOne, playerTwo);
+                    battlefield.printPackage(playerOne, playerTwo);
                     gf.gp.tPane.repaint();
                     if(!(battlefield.gameOver().equals("Ongoing"))){
                         finishGame(battlefield.gameOver());
@@ -119,7 +121,6 @@ public class Turnstile {
         }
         // System.out.println(turn);
         // System.out.println("whole loop");
-        battlefield.printPackage(playerOne, playerTwo);
     }
 
 

@@ -36,20 +36,24 @@ public class Board {
         CharacterWrapperSq target;
         CharacterWrapperSq targetter;
         if(aggressor.equals(playerOne)){
-            target = deployedCharacterOne;
-            targetter = deployedCharacterTwo;
-        } else {
             targetter = deployedCharacterOne;
             target = deployedCharacterTwo;
+        } else{
+            targetter = deployedCharacterTwo;
+            target = deployedCharacterOne;
         }
+
+        System.out.println(playerTwo + " == " + aggressor);
         // System.out.println(deployedCharacterOne.getName());
         // System.out.println("here");
+
+
         switch(i){
             case 0:
                 aggressor.setSkillPoints(aggressor.getskillPoints()+1);
                 // System.out.println(aggressor + " 's SKILLPOINTS ARE: " + aggressor.skillPoints);
                 // System.out.println("adding one rn");
-                dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i), output)));
+                dealDamage(target, (int)(calculateDamage(target, targetter, targetter.getAbility(i), output)));
                 fPane.doAction(aggressor, i);
                 if(!(target.getStatus())){
                     output[3] = 1;
@@ -58,6 +62,7 @@ public class Board {
                         // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
                         fPane.killCharacter(idlePlayer, idlePlayer.getCharacter(getCharacPos(idlePlayer)), idlePlayer.getCharacter(getNextAlive(idlePlayer)));
                         swapCharacters(idlePlayer, target, getCharacPos(idlePlayer), getNextAlive(idlePlayer));
+
                         // System.out.println("uno: " + idlePlayer);
                         }   
                 }
@@ -159,6 +164,7 @@ public class Board {
     }
 
     private static void swapCharacters(Player player, CharacterWrapperSq charac, int old, int newIndex){
+        player.setCurrentCharacter(newIndex);
         player.setCharacter(charac, old);
         if(player.equals(playerOne)){
             deployedCharacterOne = player.getCharacter(newIndex);
@@ -238,12 +244,12 @@ public class Board {
     private static String getSentence(Player aggressor, Player target, int[] x){
         // dmg, miss, crit, killed
         String result = "";
-        result = aggressor.getName() + " " + aggressor.getCurrentCharacter().getName() + " dealt " + x[0] + " damage to " + target.getName() + " " + target.getCurrentCharacter().getName();
+        result = aggressor.getName() + " " + getCharacter(aggressor).getName() + " dealt " + x[0] + " damage to " + target.getName() + " " + getCharacter(target).getName();
 
         if(x[1] == 1)
-            result = aggressor.getName() + " " + aggressor.getCurrentCharacter().getName() + " missed their attack on " + target.getName() + " " + target.getCurrentCharacter().getName();
+            result = aggressor.getName() + " " + getCharacter(aggressor).getName() + " missed their attack on " + target.getName() + " " + getCharacter(target).getName();
         if(x[2] == 1)
-            result = aggressor.getName() + " " + aggressor.getCurrentCharacter().getName() + " crit for " + x[0] + " damage to " + target.getName() + " " + target.getCurrentCharacter().getName();
+            result = aggressor.getName() + " " + getCharacter(aggressor).getName() + " crit for " + x[0] + " damage to " + target.getName() + " " + getCharacter(target).getName();
 
 
         if(x[3] == 1)
