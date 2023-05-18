@@ -40,6 +40,7 @@ public class fightPanel extends JPanel {
         layout = new GridLayout(1, 2, 0, 0);
 
         animPane = new JPanel(layout);
+        animPane.setBackground(new Color(191, 191, 191));
         chatPane = new JScrollPane(chat);
         chatPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         // scrollBar = new JScrollBar(ScrollPaneConstants.VERTICAL);

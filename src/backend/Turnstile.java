@@ -128,7 +128,7 @@ public class Turnstile {
     public static void finishGame(String s){
         gf.mainFrame.dispose();
         gf.mainFrame.setVisible(false);
-        endingScreen ed = new endingScreen(gf.getPoint(), s);
+        endingScreen ed = new endingScreen(gf.getPoint(), s, battlefield);
     }
     public Player getPlayer(boolean b){
         if(b)

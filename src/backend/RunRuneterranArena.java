@@ -15,9 +15,9 @@ public class RunRuneterranArena {
         ArrayList<CharacterWrapperSq> characs = new ArrayList<CharacterWrapperSq>();
         ArrayList<CharacterWrapperSq> characs1 = new ArrayList<CharacterWrapperSq>();
 
-        characs.add(new Ahri(1));
-        characs.add(new Ahri(2));
-        characs.add(new Ahri(0));
+        // characs.add(new Ahri(1));
+        // characs.add(new Ahri(2));
+        // characs.add(new Ahri(0));
         characs.add(new Garen(1));
         System.out.println(characs.size());
         characs.add(new Jinx(1));
@@ -28,7 +28,7 @@ public class RunRuneterranArena {
         System.out.println(characs.get(2).getMaxHealth());
         characs1.add(new KhaZix(1));
         // characs.add(new Malzahar(2));
-        // characs.add(new Taric(1));
+        characs.add(new Taric(1));
 
         characs1.add(new Ashe(1));
         characs1.add(new Ahri(1));

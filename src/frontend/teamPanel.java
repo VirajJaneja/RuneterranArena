@@ -151,7 +151,7 @@ public class teamPanel extends JPanel{
             String fraction = fractionList.get(i);
 
             Rectangle labelBounds = label.getBounds();
-            int labelX = labelBounds.x+25;
+            int labelX = labelBounds.x+150;
             int labelY = labelBounds.y + labelBounds.height + fontMetrics.getAscent();
 
             g.setColor(Color.WHITE);

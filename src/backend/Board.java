@@ -18,7 +18,6 @@ public class Board {
     private static int turnCounter;
 
     public Board(Player playerUno, Player playerDos, fightPanel fp){
-        turnCounter = 0;
         fPane = fp;
         playerOne = playerUno;
         playerTwo = playerDos;
@@ -259,7 +258,7 @@ public class Board {
         if(x[3] == 1)
             result.concat(", killing it");
         if(x[4] != 0)
-            result = aggressor.getName() + " " + getCharacter(aggressor).getName() + " has been swapped out";
+            result = aggressor.getName() + " character has been swapped out for " + getCharacter(aggressor).getName();
         result = result.substring(0, 1).toUpperCase() + result.substring(1) + ".";
 
         return result;
