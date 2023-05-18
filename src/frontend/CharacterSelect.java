@@ -74,7 +74,9 @@ class CharacterSelect extends JFrame implements ActionListener {
     private GridLayout firstLayout;
     private GridLayout secondLayout;
     private JButton resolve;
-    public CharacterSelect(int diff, Point resolution) {
+    private Clip clip;
+    public CharacterSelect(int diff, Point resolution, boolean sound) {
+        System.out.println(sound);
         this.resolution = resolution;
         difficulty = diff;
 
@@ -84,7 +86,7 @@ class CharacterSelect extends JFrame implements ActionListener {
         firstPane.setLayout(firstLayout);
 
         secondPane = new JPanel();
-        secondLayout = new GridLayout(1,2, 185, 0);
+        secondLayout = new GridLayout(1,2, 30, 0);
         secondPane.setLayout(secondLayout);
         secondPane.setOpaque(false);
         thirdLayout = new GridLayout(1,3);
@@ -244,7 +246,9 @@ class CharacterSelect extends JFrame implements ActionListener {
         secondPane.add(resolve);
         //for(int i = 0; i<)
 
-        JLabel status = new JLabel("Team: ");
+        JButton status = new JButton("Mute");
+        status.addActionListener(this);
+        status.setActionCommand("mute");
         secondPane.add(status);
         add(firstPane);
         add(thirdPane);
@@ -254,7 +258,7 @@ class CharacterSelect extends JFrame implements ActionListener {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        
+        playIdle(sound);
         //garen, ashe, ahri
         }
 
@@ -313,7 +317,32 @@ class CharacterSelect extends JFrame implements ActionListener {
             result = "lib/" + characName +" "+"icon.png";
             return result;
         }
-
+        private void playIdle(boolean b){
+            String sound = "lib/SelectMusic.wav";
+            if(b){
+                try {
+                    File soundFile = new File(sound);
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+                    clip = AudioSystem.getClip();
+                    clip.open(audioInputStream);
+        
+                    // Play the sound
+                    clip.start();
+                    clip.loop(clip.LOOP_CONTINUOUSLY);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                    ex.printStackTrace();
+                }
+        }
+            
+    }
+        private void stopSound() {
+            if (clip != null && clip.isRunning()) {
+                clip.stop();
+            } else{
+                clip.start();
+            }
+        }
+        
         
         private void playSound(String s){
             String sound = "lib/button SE.wav";
@@ -338,7 +367,12 @@ class CharacterSelect extends JFrame implements ActionListener {
             if (act.equals("back")) {
                 setVisible(false);
                 new MainScreen(new Point(600, 600));
-            } else if (act.equals("Resolve")) {
+                stopSound();
+            } else if (act.equals("mute")) {
+                playSound("confirm");
+                stopSound();
+            }
+            else if (act.equals("Resolve")) {
                 if (characterCount < 3) {
                     playSound("confirm");
                     resolve.setText("Please select at least 3 characters.");
@@ -434,9 +468,6 @@ class CharacterSelect extends JFrame implements ActionListener {
             }
         }
         
-        private void stopSound() {
-
-        }
 
         public void setButton() {
             characterCount = 0;

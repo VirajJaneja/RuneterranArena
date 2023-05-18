@@ -68,8 +68,8 @@ public class MainScreen implements ActionListener {
     private JFrame mainFrame;
     private JPanel mainPanel;
     private JPanel contentPane;
-
-    private Point resolution;
+    private boolean music = true;
+    private Point resolution;   
     private JMenuBar menuBar;
 
     private JMenu menu;
@@ -159,7 +159,11 @@ public class MainScreen implements ActionListener {
     }
     private void stopSound() {
         if (clip != null && clip.isRunning()) {
+            music = false;
             clip.stop();
+        } else{
+            music = true;
+            clip.start();
         }
     }
     
@@ -229,23 +233,23 @@ public class MainScreen implements ActionListener {
             settingsPanel = new JPanel();
             settingsFrame = new JFrame("Settings");
             //Create the panel that contains the "cards".
-            JButton resolution1 = new JButton("Lower Volume");
-            resolution1.setBounds(100, 200, 100, 100);
-            JButton resolution2 = new JButton("Increase Volume");
-            resolution2.setBounds(100, 200, 100, 100);
-            JButton resolution3 = new JButton("Mute");
+            // JButton resolution1 = new JButton("Lower Volume");
+            // resolution1.setBounds(100, 200, 100, 100);
+            // JButton resolution2 = new JButton("Increase Volume");
+            // resolution2.setBounds(100, 200, 100, 100);
+            JButton resolution3 = new JButton("Modify Sound");
             resolution3.setBounds(100, 200, 100, 100);
 
-            resolution1.addActionListener(this);    
-            resolution2.addActionListener(this);
+            // resolution1.addActionListener(this);    
+            // resolution2.addActionListener(this);
             resolution3.addActionListener(this);
 
-            resolution1.setActionCommand("low");
-            resolution2.setActionCommand("high");
+            // resolution1.setActionCommand("low");
+            // resolution2.setActionCommand("high");
             resolution3.setActionCommand("mute");
 
-            settingsPanel.add(resolution1);
-            settingsPanel.add(resolution2);
+            // settingsPanel.add(resolution1);
+            // settingsPanel.add(resolution2);
             settingsPanel.add(resolution3);
 
             settingsFrame.setSize(300, 300);
@@ -405,23 +409,25 @@ class Mode extends JFrame implements ActionListener {
 
         public void actionPerformed(ActionEvent ae) {
             String act = ae.getActionCommand();
-            stopSound();
             if(act.equals("EASY")){
                 playSound("Select");
                 System.out.println("easy");
                 setVisible(false);
-                new CharacterSelect(0, resolution);
+                new CharacterSelect(0, resolution, music);
+                stopSound();
             } else if(act.equals("MEDIUM")){
                 playSound("Select");
                 setVisible(false);
-                new CharacterSelect(1, resolution);
+                new CharacterSelect(1, resolution, music);
+                stopSound();
                 System.out.println("med");
             } else if(act.equals("HARD")){
                 playSound("Select");
 
                 setVisible(false);
-                new CharacterSelect(2, resolution);
+                new CharacterSelect(2, resolution, music);
                 System.out.println("hard");
+                stopSound();
             } else if(act.equals("Options")){
                 setVisible(false);
                 new Settings();
@@ -429,7 +435,7 @@ class Mode extends JFrame implements ActionListener {
             } else if(act.equals("back")){
                 setVisible(false);
                 new MainScreen(new Point(900, 900));
-                
+                stopSound();
             }
         }
     }
