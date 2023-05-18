@@ -25,10 +25,13 @@ public class fightPanel extends JPanel {
     private GridLayout layout;
     public static Turnstile TS;
     public gameFrame frame;
+    public JScrollBar scrollBar;
     public int height;
     public int width;
     private JTextArea chat;
+    public int counter;
     public fightPanel(Turnstile turnstile) {
+        counter = 1;
 
         setLayout(new BorderLayout());
         chat = new JTextArea(10, getWidth());
@@ -38,6 +41,9 @@ public class fightPanel extends JPanel {
 
         animPane = new JPanel(layout);
         chatPane = new JScrollPane(chat);
+        chatPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        // scrollBar = new JScrollBar(ScrollPaneConstants.VERTICAL);
+        // chatPane.add(scrollBar);
 
         TS = turnstile;
         
@@ -72,14 +78,19 @@ public class fightPanel extends JPanel {
 
         chatPane.setVisible(true);
         add(chatPane, BorderLayout.CENTER);
+        Font newFont = new Font("Arial", Font.BOLD, 22);
+        chatPane.setFont(newFont);
 
-        updateField("Thanos, with his giant, 3 foot, macedonian chicken.");
     }
     
-    public void updateField(String s){
-        chat.append("   "+s);
+    public void updateField(String s) {
+        String currentText = chat.getText(); // Get the current text in the JTextArea
+        String newText =  "  \t\t\t\t    Turn " + counter + ": " + s + "\n" + currentText; // Prepend the new text with string s and a line break
+        chat.setText(newText); // Set the updated text in the JTextArea
+        counter++;
         chatPane.repaint();
     }
+    
 
     public String commentary(String charactername, String charactername2, String action){
        if(action.equals("swap")){

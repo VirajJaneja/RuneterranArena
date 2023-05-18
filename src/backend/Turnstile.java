@@ -25,6 +25,7 @@ public class Turnstile {
         gameOver = false;
         battlefield = new Board(playerOne, playerTwo, gf.gp.fPane);
         gf = new gameFrame(new Point(1080, 520), this);
+        battlefield.updateFPane(gf.gp.fPane);
         for(int i=0;i<pOne.getSize();i++){
             // System.out.println(pOne.getCharacter(i).getName());
         }

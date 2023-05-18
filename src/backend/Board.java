@@ -15,8 +15,10 @@ public class Board {
     public static int P2CPos;
     public static fightPanel fPane;
     public Object printPackage;
+    private static int turnCounter;
 
     public Board(Player playerUno, Player playerDos, fightPanel fp){
+        turnCounter = 0;
         fPane = fp;
         playerOne = playerUno;
         playerTwo = playerDos;
@@ -28,7 +30,7 @@ public class Board {
 
 
     public static boolean makeMove(int i, Player aggressor, Player idlePlayer){
-        int[] output = {0, 0, 0, 0};
+        int[] output = {0, 0, 0, 0, 0};
         // System.out.println("CHARACS: AGGRESSOR: " + aggressor.getCurrentCharacter().getName() + " AND IDLE: " + idlePlayer.getCurrentCharacter().getName());
         // System.out.println(aggressor + " is dealing damage");
         // System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
@@ -108,6 +110,7 @@ public class Board {
             case 23:
             case 33:
             case 43:
+                output[4] = 1;
                 swapCharacters(aggressor, target, getCharacPos(aggressor), (i-3)/10);
                 fPane.swapCharacter(aggressor, getCharacter(aggressor));
                 // System.out.println("do smth");
@@ -120,8 +123,10 @@ public class Board {
         // printPackage(aggressor, idlePlayer);
         for(int x: output)
             System.out.println(x);
-        // fPane.updateField(getSentence(aggressor, idlePlayer, output));       
+        // if(turnCounter >1)
+            fPane.updateField(getSentence(aggressor, idlePlayer, output));
         System.out.println((getSentence(aggressor, idlePlayer, output)));
+        // turnCounter++;
         return false;
     }
 
@@ -245,16 +250,22 @@ public class Board {
         // dmg, miss, crit, killed
         String result = "";
         result = aggressor.getName() + " " + getCharacter(aggressor).getName() + " dealt " + x[0] + " damage to " + target.getName() + " " + getCharacter(target).getName();
-
+        if(x[2] == 1)
+                    result = aggressor.getName() + " " + getCharacter(aggressor).getName() + " crit for " + x[0] + " damage to " + target.getName() + " " + getCharacter(target).getName();
         if(x[1] == 1)
             result = aggressor.getName() + " " + getCharacter(aggressor).getName() + " missed their attack on " + target.getName() + " " + getCharacter(target).getName();
-        if(x[2] == 1)
-            result = aggressor.getName() + " " + getCharacter(aggressor).getName() + " crit for " + x[0] + " damage to " + target.getName() + " " + getCharacter(target).getName();
-
+        
 
         if(x[3] == 1)
             result.concat(", killing it");
+        if(x[4] != 0)
+            result = aggressor.getName() + " " + getCharacter(aggressor).getName() + " has been swapped out";
+        result = result.substring(0, 1).toUpperCase() + result.substring(1) + ".";
+
         return result;
+    }
+    public static void updateFPane(fightPanel fp){
+        fPane = fp;
     }
 
 
