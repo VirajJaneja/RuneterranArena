@@ -1,13 +1,19 @@
 package frontend;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
 import java.awt.Point;
+import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,12 +24,16 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import backend.Ahri;
 import backend.Ashe;
@@ -58,25 +68,36 @@ class CharacterSelect extends JFrame implements ActionListener {
     private ImageIcon backgroundImage;
     private JLabel backgroundLabel;
     private JPanel backgroundPanel;
-
+    private JPanel thirdPane;
+    private GridLayout thirdLayout;
+    private JPanel firstPane, secondPane;
+    private GridLayout firstLayout;
+    private GridLayout secondLayout;
+    private JButton resolve;
     public CharacterSelect(int diff, Point resolution) {
         this.resolution = resolution;
         difficulty = diff;
 
-        
-        // playerCharact.add(new Ahri(0));
-        // playerCharact.add(new Garen(0));
-        // playerCharact.add(new Taric(0));
-        // playerCharact.add(new KhaZix(0));
-        // playerCharact.add(new Ashe(0));
-        // playerCharact.add(new Jinx(0));
-        // playerCharact.add(new Malzahar(0));
+       
+        firstPane = new JPanel();
+        firstLayout = new GridLayout(1,3);
+        firstPane.setLayout(firstLayout);
+
+        secondPane = new JPanel();
+        secondLayout = new GridLayout(1,2, 185, 0);
+        secondPane.setLayout(secondLayout);
+        secondPane.setOpaque(false);
+        thirdLayout = new GridLayout(1,3);
+        thirdPane = new JPanel(thirdLayout);
+
+
+
+        setLayout(new GridLayout(3,1));
+
 
         for(int i= 0; i<6; i++){
             characters.add(new JButton("Add to Team"));
-        }
-        characters.add(new JButton("Resolve"));
-        
+        }        
        
         characters.get(0).setFont(new Font("Arial", Font.BOLD, 14));
         characters.get(0).setBorder(BorderFactory.createTitledBorder("Garen - Fighter"));
@@ -99,10 +120,13 @@ class CharacterSelect extends JFrame implements ActionListener {
         // characters.get(6).setFont(new Font("Arial", Font.BOLD, 14));
         // characters.get(6).setBorder(BorderFactory.createTitledBorder("Malzahar - Mage"));
 
+        resolve = new JButton();
+        resolve.setFont(new Font("Arial", Font.BOLD, 14));
+        resolve.setBorder(BorderFactory.createTitledBorder("Confirm Your Team"));
 
-        characters.get(6).setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
         // vs computer
-        characterFrame = new JFrame("Character Select");
+        //characterFrame = new JFrame("Character Select");
         characterPanel = new JPanel();
 
     
@@ -115,16 +139,7 @@ class CharacterSelect extends JFrame implements ActionListener {
             }
         };
         
-        characterFrame.setContentPane(backgroundPanel);
-        
-        // backgroundImage = new ImageIcon("lib/RiftBG.jpg");
-        // backgroundLabel = new JLabel(backgroundImage);
-        // backgroundLabel.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
-        //characterPanel.setBackground(new Color(167, 166, 186));
-
-        layout = new GridLayout(3, 6, 20, 0);
-        characterPanel.setLayout(layout);
-
+        setContentPane(backgroundPanel);
 
 
         JLabel GarenLabel = new JLabel();
@@ -160,29 +175,37 @@ class CharacterSelect extends JFrame implements ActionListener {
 
         characters.get(0).addActionListener(this);  
         characters.get(0).setActionCommand("Garen");
+        characters.get(0).setIcon(GarenLabel.getIcon());
 
         characters.get(1).addActionListener(this);
         characters.get(1).setActionCommand("Ashe");
+        characters.get(1).setIcon(AsheLabel.getIcon());
+
 
         characters.get(2).addActionListener(this);
         characters.get(2).setActionCommand("Ahri");
+        characters.get(2).setIcon(AhriLabel.getIcon());
 
+
+        characters.get(3).setIcon(TaricLabel.getIcon());
         characters.get(3).addActionListener(this);
         characters.get(3).setActionCommand("Taric");
 
         characters.get(4).addActionListener(this);
         characters.get(4).setActionCommand("Jinx");
+        characters.get(4).setIcon(JinxLabel.getIcon());
 
         characters.get(5).addActionListener(this);
         characters.get(5).setActionCommand("Kha'Zix");
-
+        characters.get(5).setIcon(KhaLabel.getIcon());
         // characters.get(6).addActionListener(this);
         //characters.get(6).setActionCommand("Malzahar");
         
         //input more characters
-        characters.get(6).addActionListener(this);
-        characters.get(6).setActionCommand("Resolve");
-        characters.get(6).setText("Resolve");
+        resolve.addActionListener(this);
+        resolve.setActionCommand("Resolve");
+        resolve.setText("Resolve");
+        resolve.setSize(100,100);
 
         characterImages.add(GarenLabel);
         characterImages.add(AsheLabel);
@@ -191,35 +214,89 @@ class CharacterSelect extends JFrame implements ActionListener {
         characterImages.add(JinxLabel);
         characterImages.add(KhaLabel);
         
-        for(int i = 0; i<layout.getColumns(); i++){
-            characterPanel.add(characterImages.get(i));
+        
+        // for(int i = 0; i< characters.size(); i++){
+        //     //firstPane.add(characterImages.get(i));
+        // }
+        for (int i = 0; i < 3; i++) {
+            firstPane.add(characters.get(i));
         }
-        for(int i = 0; i<layout.getColumns(); i++){
-            characterPanel.add(characters.get(i));
+        
+        //add(new JButton(new ImageIcon("lib/trans (1).png")));
+        
+        resolve.setText("Resolve");
+
+        
+        
+        //add(new JButton(new ImageIcon("lib/trans (1).png")));
+        for (int i = 3; i < characters.size(); i++) {
+            thirdPane.add(characters.get(i));
         }
-        
-        
-        
-        characters.get(6).setText("Resolve");
-        characterPanel.add(characters.get(6));
-    
-        characterPanel.add(new JLabel());
-        characterPanel.add(new JLabel());
-        characterPanel.add(new JLabel());
-        characterPanel.add(new JLabel());
+
+        ImageIcon back = new ImageIcon("lib/Backbutton (1).png");
+        JButton backButton = createMaskedButton(back);
+        backButton.setSize(back.getIconWidth(), back.getIconWidth());
+        backButton.setBorder(null);
+        backButton.setOpaque(false);
+        backButton.addActionListener(this);
+        backButton.setActionCommand("back");
+        secondPane.add(backButton);
+        secondPane.add(resolve);
         //for(int i = 0; i<)
 
-
+        JLabel status = new JLabel("Team: ");
+        secondPane.add(status);
+        add(firstPane);
+        add(thirdPane);
+        add(secondPane);
 
         setButton();
-        characterPanel.setBackground(new Color(156, 186, 156));
-        characterFrame.add(characterPanel);
-        characterFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        characterFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        characterFrame.setVisible(true);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
         
         //garen, ashe, ahri
         }
+
+        private JButton createMaskedButton(ImageIcon icon) {
+            // Create a buffered image to hold the button image
+            BufferedImage buttonImage = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = buttonImage.createGraphics();
+    
+            // Draw the button image onto the buffered image
+            icon.paintIcon(null, g2d, 0, 0);
+            g2d.dispose();
+    
+            // Create a new button with the masked image
+            JButton maskedButton = new JButton(new ImageIcon(createMaskedImage(buttonImage)));
+            maskedButton.setContentAreaFilled(false);
+            maskedButton.setBorder(null);
+    
+            return maskedButton;
+        }
+    
+        private BufferedImage createMaskedImage(BufferedImage image) {
+            // Create a new buffered image with transparency
+            BufferedImage maskedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = maskedImage.createGraphics();
+    
+            // Create a shape based on the image bounds
+            Shape shape = new Rectangle2D.Float(0, 0, image.getWidth(), image.getHeight());
+    
+            // Create an area with the shape
+            Area area = new Area(shape);
+    
+            // Set the shape as the clip for the graphics object
+            g2d.setClip(area);
+    
+            // Draw the original image onto the masked image, using the clip to mask it
+            g2d.drawImage(image, 0, 0, null);
+    
+            g2d.dispose();
+    
+            return maskedImage;
+        }
+    
 
         public JLabel updateTeam(){
             String list = "";
@@ -258,167 +335,123 @@ class CharacterSelect extends JFrame implements ActionListener {
         }
         public void actionPerformed(ActionEvent e) {
             String act = e.getActionCommand();
-            if(act.equals("back")){
-                new MainScreen(new Point(600,600));
-            }
-            if(characterCount < maxTeamSize){
-                if(act.equals("Garen")){
+            if (act.equals("back")) {
+                setVisible(false);
+                new MainScreen(new Point(600, 600));
+            } else if (act.equals("Resolve")) {
+                if (characterCount < 3) {
                     playSound("confirm");
-                    characterBoolean[0] = !characterBoolean[0];
-                    setButton();
-
-                }
-                else if(act.equals("Ashe")){
-                    playSound("confirm");
-                    characterBoolean[1] = !characterBoolean[1];
-                    setButton();
-
-                } else if(act.equals("Ahri")){
-                    playSound("confirm");
-
-                    characterBoolean[2] = !characterBoolean[2];
-                    setButton();
-
-                } else if(act.equals("Taric")){
-                    playSound("confirm");
-                    
-                    characterBoolean[3] = !characterBoolean[3];
-                    setButton();
-
-                } else if(act.equals("Jinx")){
-                    playSound("confirm");
-                    
-                    characterBoolean[4] = !characterBoolean[4];
-                    setButton();
-
-                } 
-                else if(act.equals("Kha'Zix")){
-                    playSound("confirm");
-                    
-                    characterBoolean[5] = !characterBoolean[5];
-                    setButton();
-
-                } 
-                else if(act.equals("Resolve")){
-                    playSound("confirm");
-                    characters.get(characters.size()-1).setText("3 characters min.");
-                }
-
-            } else if (characterCount >= maxTeamSize){
-                if(act.equals("Resolve")){
-                playSound("Select");
-                ArrayList<Integer> posTrue = new ArrayList<Integer>();
-                for(int i= 0; i<characterBoolean.length; i++){
-                    if(characterBoolean[i])
-                        posTrue.add(i);
-                }
-                for(int i= 0; i<posTrue.size(); i++){
-                    switch(posTrue.get(i)){
-                        case 0:
-                            playerCharact.add(new Garen(1));
-                            break;
-                        case 1:
-                            playerCharact.add(new Ashe(1));
-                            break;
-                        case 2: 
-                            playerCharact.add(new Ahri(1));
-                            break;
-                        case 3: 
-                            playerCharact.add(new Taric(1));
-                            break;
-                        case 4: 
-                            playerCharact.add(new Jinx(1));
-                            break;
-                        case 5: 
-                            playerCharact.add(new KhaZix(1));
-                            break;
-                        default:
-                            break;
+                    resolve.setText("Please select at least 3 characters.");
+                } else {
+                    playSound("select");
+                    ArrayList<Integer> posTrue = new ArrayList<Integer>();
+                    for (int i = 0; i < characterBoolean.length; i++) {
+                        if (characterBoolean[i]) {
+                            posTrue.add(i);
+                        }
                     }
-                }
-                for(int i = 0; i<playerCharact.size(); i++){
-                    double rand = Math.random();
-                    if(rand>=0.15){
-                        compChar.add(new Garen(difficulty));
-                    } else if(rand<=0.25){
-                        compChar.add(new Ashe(difficulty));
-                    }else if(rand<=0.4){
-                        compChar.add(new Ahri(difficulty));
-                    }else if(rand<=0.5){
-                        compChar.add(new Taric(difficulty));
-                    }else if(rand<=0.6){
-                        compChar.add(new Jinx(difficulty));
-                    }else if(rand<=0.75){
-                        compChar.add(new KhaZix(difficulty));
-                    }else if(rand<=0.85){
-                        compChar.add(new Garen(difficulty));
-                    }else if(rand<=1){
-                        compChar.add(new Taric(difficulty));
+                    for (int i = 0; i < posTrue.size(); i++) {
+                        int pos = posTrue.get(i);
+                        switch (pos) {
+                            case 0:
+                                playerCharact.add(new Garen(1));
+                                break;
+                            case 1:
+                                playerCharact.add(new Ashe(1));
+                                break;
+                            case 2:
+                                playerCharact.add(new Ahri(1));
+                                break;
+                            case 3:
+                                playerCharact.add(new Taric(1));
+                                break;
+                            case 4:
+                                playerCharact.add(new Jinx(1));
+                                break;
+                            case 5:
+                                playerCharact.add(new KhaZix(1));
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                    
+                    for (int i = 0; i < playerCharact.size(); i++) {
+                        double rand = Math.random();
+                        if (rand <= 0.16) {
+                            compChar.add(new Garen(difficulty));
+                        } else if (rand <= 0.32) {
+                            compChar.add(new Ashe(difficulty));
+                        } else if (rand <= 0.48) {
+                            compChar.add(new Ahri(difficulty));
+                        } else if (rand <= 0.64) {
+                            compChar.add(new Taric(difficulty));
+                        } else if (rand <= 0.80) {
+                            compChar.add(new Jinx(difficulty));
+                        } else if (rand <= 0.96) {
+                            compChar.add(new KhaZix(difficulty));
+                        } else if (rand <= 1) {
+                            compChar.add(new Garen(difficulty));
+                        }
+                    }
+                    for (int i = 0; i < playerCharact.size(); i++) {
+                        System.out.println("COMP: " + compChar.get(i).getName());
+                        System.out.println("Player: " + playerCharact.get(i).getName());
+                    }
+                    setButton(); // Add this line
+
+                    setVisible(false);
+                    new Turnstile(new Player(playerCharact.size(), playerCharact), new ComputerPlayer(compChar.size(), compChar));
                 }
-                for(int i = 0; i<playerCharact.size(); i++){
-                    System.out.println("COMP:"+ compChar.get(i).getName());
-                    System.out.println("Player:" + playerCharact.get(i).getName());
-                }
-
-                characterFrame.setVisible(false);
-
-                new Turnstile(new Player(playerCharact.size(), playerCharact), new ComputerPlayer(compChar.size(), compChar));
-
-            } if(act.equals("Garen")){
+            } else if (act.equals("Garen") || act.equals("Ashe") || act.equals("Ahri") || act.equals("Taric") || act.equals("Jinx") || act.equals("Kha'Zix")) {
                 playSound("confirm");
-                characterBoolean[0] = !characterBoolean[0];
-                setButton();
+                int index = -1;
+                switch (act) {
+                    case "Garen":
+                        index = 0;
+                        break;
+                    case "Ashe":
+                        index = 1;
+                        break;
+                    case "Ahri":
+                        index = 2;
+                        break;
+                    case "Taric":
+                        index = 3;
+                        break;
+                    case "Jinx":
+                        index = 4;
+                        break;
+                    case "Kha'Zix":
+                        index = 5;
+                        break;
+                    default:
+                        break;
+                }
+                if (index >= 0) {
+                    characterBoolean[index] = !characterBoolean[index];
+                    setButton();
+                }
             }
-            else if(act.equals("Ashe")){
-                playSound("confirm");
-                characterBoolean[1] = !characterBoolean[1];
-                setButton();
-
-            } else if(act.equals("Ahri")){
-                playSound("confirm");
-
-                characterBoolean[2] = !characterBoolean[2];
-                setButton();
-
-            } else if(act.equals("Taric")){
-                playSound("confirm");
-                
-                characterBoolean[3] = !characterBoolean[3];
-                setButton();
-
-            } else if(act.equals("Jinx")){
-                playSound("confirm");
-                
-                characterBoolean[4] = !characterBoolean[4];
-                setButton();
-
-            } 
-            else if(act.equals("Kha'Zix")){
-                playSound("confirm");
-                
-                characterBoolean[5] = !characterBoolean[5];
-                setButton();
-
-            } 
-         } 
-
         }
-        public void setButton(){
+        
+        public void setButton() {
             characterCount = 0;
-            for(int i = 0; i< characterBoolean.length; i++){
-                if(characterBoolean[i] == true){
-                    characters.get(i).setBackground(new Color(219,38,38));
+            for (int i = 0; i < characterBoolean.length; i++) {
+                if (characterBoolean[i]) {
+                    characters.get(i).setBackground(new Color(219, 38, 38));
                     characters.get(i).setText("Added to Team");
                     characterCount++;
-                }
-                else if(characterBoolean[i] == false){
-                    characters.get(i).setBackground(new Color(50,205,50));
+                } else {
+                    characters.get(i).setBackground(new Color(50, 205, 50));
                     characters.get(i).setText("Add to Team");
                 }
             }
+            
+            if (characterCount < 3) {
+                resolve.setText("Please select 3 characters minimum.");
+            } else {
+                resolve.setText("Resolve");
+            }
         }
-       
         
-}
+    }        
