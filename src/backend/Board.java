@@ -44,9 +44,9 @@ public class Board {
         // System.out.println("here");
         switch(i){
             case 0:
-                aggressor.skillPoints += 1;
-                System.out.println("SKILLPOINTS ARE: " + aggressor.skillPoints);
-                System.out.println("adding one rn");
+                aggressor.setSkillPoints(aggressor.getskillPoints()+1);
+                // System.out.println(aggressor + " 's SKILLPOINTS ARE: " + aggressor.skillPoints);
+                // System.out.println("adding one rn");
                 dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
                 fPane.doAction(aggressor, i);
                 if(!(target.getStatus())){
@@ -60,7 +60,13 @@ public class Board {
                 }
                 break;
             case 1:
-                aggressor.skillPoints -= 1;
+            //     System.out.println("taking 1 does " + aggressor.skillPoints);
+            //     System.out.println("shouldnt be touching does " + idlePlayer.skillPoints);
+            //     System.out.println("taking 1 from" + aggressor + "--------------------");
+                // System.out.println("shouldnt be touching" + idlePlayer);
+                aggressor.setSkillPoints(aggressor.getskillPoints()-1);
+                // System.out.println("taking 1 does " + aggressor.skillPoints);
+                // System.out.println("shouldnt be touching does " + idlePlayer.skillPoints);
                 dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
                 fPane.doAction(aggressor, i);
                 if(!(target.getStatus())){
@@ -74,7 +80,7 @@ public class Board {
                 }
                 break;
             case 2:
-                aggressor.skillPoints -= 3;
+                aggressor.setSkillPoints(aggressor.getskillPoints()-3);
                 dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
                 fPane.doAction(aggressor, i);
                 if(!(target.getStatus())){
@@ -97,7 +103,7 @@ public class Board {
                 // System.out.println("do smth");
                 break;
         }
-        System.out.println("SKILLPOINTS ARE: " + aggressor.skillPoints);
+        // System.out.println(aggressor + " 's SKILLPOINTS ARE: " + aggressor.skillPoints);
         // System.out.println("this other one right here" + aggressor);
         // System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
         // System.out.println(aggressor.skillPoints);
@@ -198,5 +204,9 @@ public class Board {
 
         return -1;
     }
+    private void printPackage(Player aggressor, Player idle){
+        
+    }
+
 
 }

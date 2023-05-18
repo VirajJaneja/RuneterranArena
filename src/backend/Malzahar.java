@@ -26,7 +26,7 @@ public class Malzahar extends CharacterWrapperSq{
     
     public Malzahar(int diff){
         super(type, region, 80, diff);
-        System.out.println(type + "," + region);
+        // System.out.println(type + "," + region);
         setAbilities(a, b, c, d);
     }
     public String getName(){

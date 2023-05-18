@@ -7,9 +7,9 @@ public class Player {
 
     private ArrayList<CharacterWrapperSq> playerRoster;
     private int currentCharacter;
-    public static int nextTurn;
+    public int nextTurn;
     public static int pointsCounter;
-    public static int skillPoints;
+    public int skillPoints;
     
 
     public Player(int teamSize, ArrayList<CharacterWrapperSq> characs){
@@ -44,6 +44,12 @@ public class Player {
     }
     public void setCharacter(CharacterWrapperSq charac, int oldIndex){
         playerRoster.set(oldIndex, charac);
+    }
+    public int getskillPoints(){
+        return skillPoints;
+    }
+    public void setSkillPoints(int i){
+        skillPoints = i;
     }
     
 }

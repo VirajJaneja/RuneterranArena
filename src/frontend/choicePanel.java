@@ -50,7 +50,7 @@ public class choicePanel extends JPanel implements ActionListener{
 
     choicePanel(Turnstile turnstile2, Player Givenplayer) {
         warningLabel = new JLabel("");
-        skillPointsLabel = new JLabel("Skill Points: " + Givenplayer.skillPoints);
+        skillPointsLabel = new JLabel("Skill Points: " + Givenplayer.getskillPoints());
         warningLabel.setForeground(new Color(255, 255, 255));
         skillPointsLabel.setForeground(new Color(255, 255, 255));
         teamButtons = new ArrayList<>();
@@ -204,7 +204,12 @@ public class choicePanel extends JPanel implements ActionListener{
                     resetButtons();
                     Turnstile.moveTurn();
                     warningLabel.setText("");
-                    skillPointsLabel.setText("Skill Points: " + Player.skillPoints);
+                    // System.out.println("taken player is " + player);
+                    // System.out.println(player.skillPoints);
+                    skillPointsLabel.setText("Skill Points: " + player.getskillPoints());
+                    setConfirmButtonPresence(0);
+
+                    
                 }
                 break;
             case "3":
@@ -234,12 +239,12 @@ public class choicePanel extends JPanel implements ActionListener{
             }
         }
         if(player.getNextTurn() == 1){
-            if(player.skillPoints < 1){
+            if(player.getskillPoints() < 1){
                 warningLabel.setText("Warning: Not Enough Points");
                 return false;
             }
         } else if(player.getNextTurn() == 2){
-            if(player.skillPoints < 3){
+            if(player.getskillPoints() < 3){
                 warningLabel.setText("Warning: Not Enough Points");
                 return false;
             }

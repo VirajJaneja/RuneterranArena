@@ -42,9 +42,9 @@ public class RunRuneterranArena {
         
         Player player1 = new Player(characs.size(), characs1);
         Player player2 = new Player(characs.size(), characs);
-        ComputerPlayer compPlayer = new ComputerPlayer(0, characs);
+        ComputerPlayer compPlayer = new ComputerPlayer(2, characs);
 
-        System.out.println(characs.size() + " " + characs1.size());
+        // System.out.println(characs.size() + " " + characs1.size());
 
         Turnstile turnstile = new Turnstile(player1, compPlayer);
 

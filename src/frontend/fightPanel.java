@@ -158,7 +158,6 @@ public class fightPanel extends JPanel {
             timer.setRepeats(false); // Only fire once
             timer.start();
             // playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), "idle")));
-
         } 
         if(getSide(player).equals("right")){
             // ImageIcon x = new javax.swing.ImageIcon(getPathRight(TS.battlefield.deployedCharacterOne.getName(),action));
@@ -178,7 +177,7 @@ public class fightPanel extends JPanel {
             timer.setRepeats(false); // Only fire once
             timer.start();
             // playerIMG.setIcon(new javax.swing.ImageIcon(getPathLeft(TS.battlefield.deployedCharacterOne.getName(), "idle")));
-
+        
         } 
     }
 

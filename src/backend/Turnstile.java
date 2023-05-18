@@ -3,6 +3,7 @@ package backend;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 
 import frontend.gameFrame;
@@ -40,14 +41,32 @@ public class Turnstile {
                     // System.out.println("herez");
                 }
                 else {
-                    Board.makeMove(playerTwo.getNextTurn(), playerTwo, playerOne);
-                    gf.gp.tPane.repaint();
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            // code to be executed after 3 seconds
+                            Board.makeMove(playerTwo.getNextTurn(), playerTwo, playerOne);
+                            gf.gp.tPane.repaint();
+                            Timer timer = new Timer();
+                            timer.schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    // code to be executed after 3 seconds
+                                    gf.gp.cPane.setConfirmButtonPresence(1);
+
+                                }
+                            }, 2000);
+
+                        }
+                    }, 2000);
+                    
                     if(!(battlefield.gameOver().equals("Ongoing"))){
                         finishGame(battlefield.gameOver());
                     }
                     // System.out.println("broken");
                 }
-                gf.gp.cPane.setConfirmButtonPresence(1);
+                // gf.gp.cPane.setConfirmButtonPresence(1);
             }
         },
         P2Turn {
@@ -66,8 +85,9 @@ public class Turnstile {
                         finishGame(battlefield.gameOver());
                     }
                     // System.out.println("broken");
-                    moveTurn();
-
+                    // delayTS(2000);
+                    // System.out.println("get out");
+                    Timer timer = new Timer();
                 }
             }
         };
@@ -80,13 +100,13 @@ public class Turnstile {
         if(turn == Turn.P1Turn){
             turn = Turn.P2Turn;
             turn.run();
-            gf.gp.cPane.setConfirmButtonPresence(0);
+            // gf.gp.cPane.setConfirmButtonPresence(0);
         }
         if(turn == Turn.P2Turn){
             // System.out.println("this one right here");
             turn = Turn.P1Turn;
             turn.run();
-            gf.gp.cPane.setConfirmButtonPresence(1);
+            // gf.gp.cPane.setConfirmButtonPresence(1);
         }
         // System.out.println(turn);
         if(!gameOver){
