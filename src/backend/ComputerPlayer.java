@@ -8,15 +8,25 @@ public class ComputerPlayer extends Player{
         super(teamSize, characs);
         this.difficulty = difficulty;
     }
-    public void setNextTurn(){
+    public Integer getNextTurn(){
+        System.out.println(skillPoints + " I AM HERE");
         switch(difficulty){
             case 0:
-                nextTurn = 0;
+                if(skillPoints == 0)
+                    nextTurn = 0;
+                else
+                    nextTurn = 1;
                 break;
             default:
-                nextTurn = (int)(Math.random()*3);
+                if(skillPoints == 0)
+                    nextTurn = 0;
+                else
+                    nextTurn = 1;
                 break;
         }
+        System.out.println(skillPoints + "I AM HERE");
+
+        return nextTurn;
         
     }
     
