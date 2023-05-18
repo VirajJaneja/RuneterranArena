@@ -30,7 +30,7 @@ public class gameFrame implements ActionListener {
     public JFrame mainFrame;
     // private JPanel mainPanel;
     private JPanel backupPane;
-    private Point resolution;
+    private static Point resolution;
     JPanel contentPane;
     public static GamePanel gp;
     JMenuBar menuBar;
@@ -98,6 +98,10 @@ public class gameFrame implements ActionListener {
         mainFrame.setJMenuBar(menuBar);
         mainFrame.setVisible(true);
         mainFrame.setResizable(false);
+    }
+
+    public static Point getPoint(){
+        return resolution;
     }
 
 

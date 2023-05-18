@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 
+import frontend.endingScreen;
 import frontend.gameFrame;
 
 public class Turnstile {
@@ -38,7 +39,7 @@ public class Turnstile {
             public void run() {
                 // System.out.println("here1");
                 if(!(battlefield.gameOver().equals("Ongoing"))){
-                    gameOver = true;
+                    finishGame(battlefield.gameOver());
                     // System.out.println("herez");
                 }
                 else {
@@ -75,7 +76,7 @@ public class Turnstile {
             public void run() {
                 // System.out.println("here2");
                 if(!(battlefield.gameOver().equals("Ongoing"))){
-                    gameOver = true;
+                    finishGame(battlefield.gameOver());
                     // System.out.println("here");
                     
                 }
@@ -124,6 +125,8 @@ public class Turnstile {
 
     public static void finishGame(String s){
         gf.mainFrame.dispose();
+        gf.mainFrame.setVisible(false);
+        endingScreen ed = new endingScreen(gf.getPoint(), s);
     }
     public Player getPlayer(boolean b){
         if(b)

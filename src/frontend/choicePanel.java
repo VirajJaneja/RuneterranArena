@@ -207,9 +207,7 @@ public class choicePanel extends JPanel implements ActionListener{
                     // System.out.println("taken player is " + player);
                     // System.out.println(player.skillPoints);
                     skillPointsLabel.setText("Skill Points: " + player.getskillPoints());
-                    setConfirmButtonPresence(0);
-
-                    
+                    setConfirmButtonPresence(0);                    
                 }
                 break;
             case "3":

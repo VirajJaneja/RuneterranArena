@@ -115,7 +115,7 @@ public class Board {
         // printPackage(aggressor, idlePlayer);
         for(int x: output)
             System.out.println(x);
-        // fPane.updateField(getSentence(aggressor, idlePlayer, output));
+        // fPane.updateField(getSentence(aggressor, idlePlayer, output));       
         System.out.println((getSentence(aggressor, idlePlayer, output)));
         return false;
     }
