@@ -25,6 +25,10 @@ public class teamPanel extends JPanel{
     private ArrayList<JLabel> hpList = new ArrayList<JLabel>();
     private ArrayList<CharacterWrapperSq> playerList = new ArrayList<CharacterWrapperSq>();
     private ArrayList<CharacterWrapperSq> compList = new ArrayList<CharacterWrapperSq>();
+
+    private JTextArea textArea;
+    private JScrollPane scrollPane;
+
     public teamPanel(Turnstile ts) {
         // Load the background image
         int prefSize = 40;
@@ -34,7 +38,6 @@ public class teamPanel extends JPanel{
         backgroundImage = new ImageIcon("lib/league template 2.png").getImage();
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
         //first row panel
 
         JPanel row1Panel = new JPanel();
@@ -108,9 +111,9 @@ public class teamPanel extends JPanel{
             row2Panel.add(temp);
         }
 
-    add(row1Panel);
-    add(row2Panel);
-    repaint();
+        add(row1Panel);
+        add(row2Panel);
+        repaint();
     }
 
 

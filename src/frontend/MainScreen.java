@@ -173,7 +173,7 @@ public class MainScreen implements ActionListener {
     }
 
     public static void main(String args[]) {
-
+        
         new MainScreen(new Point(900, 900));
     }
 
@@ -259,41 +259,41 @@ public class MainScreen implements ActionListener {
         Image image;
         ImageIcon backgroundImage;
         JLabel backgroundLabel;
+        BorderLayout layout;
         public Mode() {
-            modePanel = new JPanel();
+            layout = new BorderLayout();
+            modePanel = new JPanel(layout);
+            
+            // backgroundImage = new ImageIcon("lib/RiftBG.jpg");
+            // backgroundLabel = new JLabel(backgroundImage);
+            // backgroundLabel.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
         
-            backgroundImage = new ImageIcon("lib/RiftBG.jpg");
-            backgroundLabel = new JLabel(backgroundImage);
-            backgroundLabel.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
-        
-            modePanel.setLayout(null);
-            modePanel.add(backgroundLabel);
+            // modePanel.setLayout(null);
+            // modePanel.add(backgroundLabel);
 
             easy = new ImageIcon("lib/Easy.png");
             medium = new ImageIcon("lib/Medium.png");
             hard = new ImageIcon("lib/Hard.png");
-        
-            int buttonWidth = 500;
-            int buttonHeight = 175;
+
         
             JButton diffOne = new JButton(easy);
-            diffOne.setBounds(50, 50, buttonWidth, buttonHeight);
+            diffOne.setBounds(50, 50, easy.getIconWidth(), easy.getIconHeight());
             diffOne.addActionListener(this);
             diffOne.setActionCommand("EASY");
-            modePanel.add(diffOne);
+            modePanel.add(diffOne, BorderLayout.CENTER);
         
             JButton diffTwo = new JButton(medium);
-            diffTwo.setBounds(50, 225, buttonWidth + 150, buttonHeight);
+            diffTwo.setBounds(50, 225, medium.getIconWidth(), medium.getIconWidth());
             diffTwo.addActionListener(this);
             diffTwo.setActionCommand("MEDIUM");
-            modePanel.add(diffTwo);
+            modePanel.add(diffTwo, BorderLayout.CENTER);
         
             JButton diffThree = new JButton(hard);
-            diffThree.setBounds(50, 400, buttonWidth, buttonHeight);
+            diffThree.setBounds(50, 400, hard.getIconWidth(), hard.getIconWidth());
             diffThree.setBorder(null);
             diffThree.addActionListener(this);
             diffThree.setActionCommand("HARD");
-            modePanel.add(diffThree);
+            modePanel.add(diffThree, BorderLayout.CENTER);
         
             JButton bottomRightButton = new JButton("Bottom Right");
             int buttonSize = 100;
@@ -301,10 +301,10 @@ public class MainScreen implements ActionListener {
             int buttonX = getWidth() - buttonSize - buttonMargin;
             int buttonY = getHeight() - buttonSize - buttonMargin;
             bottomRightButton.setBounds(buttonX, buttonY, buttonSize, buttonSize);
-            modePanel.add(bottomRightButton);
+            modePanel.add(bottomRightButton, BorderLayout.CENTER);
         
             // Set the preferred size of modePanel
-            modePanel.setPreferredSize(new Dimension(backgroundImage.getIconWidth(), backgroundImage.getIconHeight()));
+            //modePanel.setPreferredSize(new Dimension(backgroundImage.getIconWidth(), backgroundImage.getIconHeight()));
         
             add(modePanel);
             pack();

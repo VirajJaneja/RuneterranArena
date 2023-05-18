@@ -3,6 +3,7 @@ package frontend;
 import javax.swing.*;
 
 import backend.CharacterWrapperSq;
+import backend.ComputerPlayer;
 import backend.Player;
 import backend.Turnstile;
 import backend.Turnstile.Turn;
@@ -16,7 +17,9 @@ import java.awt.image.BufferedImage;
 public class fightPanel extends JPanel {
     private static JLabel playerIMG;
     private static JLabel computerIMG;
-
+    private JPanel animPane;
+    private JScrollPane chatPane;
+    private JTextArea textArea;
     private ImageIcon playerCharacter;
     private ImageIcon computerCharacter;
     private GridLayout layout;
@@ -24,9 +27,18 @@ public class fightPanel extends JPanel {
     public gameFrame frame;
     public int height;
     public int width;
+    private JTextArea chat;
     public fightPanel(Turnstile turnstile) {
+
+        setLayout(new BorderLayout());
+        chat = new JTextArea(10, getWidth());
+        chat.setEditable(false);
+
         layout = new GridLayout(1, 2, 0, 0);
-        setLayout(layout);
+
+        animPane = new JPanel(layout);
+        chatPane = new JScrollPane(chat);
+
         TS = turnstile;
         
         this.frame = TS.getGF();
@@ -50,11 +62,37 @@ public class fightPanel extends JPanel {
         // System.out.println(playerIMG.getHeight() +"+"+playerIMG.getWidth());
         // System.out.println(computerIMG.getHeight() +"+"+playerIMG.getWidth());
      // Replace with the path to your image
-        add(playerIMG);
-        add(computerIMG);
+        
+        animPane.add(playerIMG);
+        animPane.add(computerIMG);
+
+
+        animPane.setVisible(true);
+        add(animPane, BorderLayout.NORTH);
+
+        chatPane.setVisible(true);
+        
+        add(chatPane, BorderLayout.CENTER);
+
     }
     
+    public void updateField(String s){
 
+        chat.append("   "+s);
+        chatPane.repaint();
+    }
+
+    public String commentary(String charactername, String charactername2, String action){
+       if(action.equals("swap")){
+        return charactername + " has swapped in.";
+       } else if(action.equals("atk")){
+        return charactername + " attacks " + charactername2 + "!";
+       } else if(action.equals("kill")){
+        return charactername2 +" has fainted!";
+       }
+       return "";
+    }
+    
 
     public static void swapCharacter(Player player, CharacterWrapperSq charac){
         // if(player)
