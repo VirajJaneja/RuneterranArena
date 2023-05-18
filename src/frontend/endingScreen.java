@@ -67,7 +67,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import backend.Character.*;
 
-public class endingScreen extends JFrame implements ActionListener {
+public class endingScreen extends JFrame {
     private JFrame mainFrame;
     private JPanel mainPanel;
     private JPanel contentPane;
@@ -82,10 +82,11 @@ public class endingScreen extends JFrame implements ActionListener {
     private JLabel backgroundLabel;
 
     public endingScreen(Point p, String verdict) {
-        System.out.println("Is it alive");
-        // if(verdict.equals("Player 1 Wins"))
-        //     backgroundImage = new ImageIcon("lib/VictorySRC (2).png");
-        backgroundImage = new ImageIcon("lib/defeat.png");
+        System.out.println(verdict);
+        if(verdict.equals("Player 1 Wins"))
+            backgroundImage = new ImageIcon("lib/VictorySRC (2).png");
+        else if(verdict.equals("Player 2 Wins"))
+            backgroundImage = new ImageIcon("lib/defeat.png");
 
         ImageIcon back = new ImageIcon("lib/Backbutton (1).png");
 
@@ -121,64 +122,64 @@ public class endingScreen extends JFrame implements ActionListener {
         JLabel label = new JLabel("Game Statistics:");
         
         contentPane.add(label, BorderLayout.NORTH);
-        JButton backButton = createMaskedButton(back);
-        backButton.setSize(back.getIconWidth(), back.getIconWidth());
-        backButton.setBorder(null);
-        backButton.setOpaque(false);
-        backButton.addActionListener(this);
-        backButton.setActionCommand("back");
-        contentPane.add(backButton, BorderLayout.SOUTH);
+        // JButton backButton = createMaskedButton(back);
+        // backButton.setSize(back.getIconWidth(), back.getIconWidth());
+        // backButton.setBorder(null);
+        // backButton.setOpaque(false);
+        // backButton.addActionListener(this);
+        // backButton.setActionCommand("back");
+        // contentPane.add(backButton, BorderLayout.SOUTH);
         setVisible(true);
 
     }
 
 
-    private JButton createMaskedButton(ImageIcon icon) {
-        // Create a buffered image to hold the button image
-        BufferedImage buttonImage = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = buttonImage.createGraphics();
+    // private JButton createMaskedButton(ImageIcon icon) {
+    //     // Create a buffered image to hold the button image
+    //     BufferedImage buttonImage = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+    //     Graphics2D g2d = buttonImage.createGraphics();
 
-        // Draw the button image onto the buffered image
-        icon.paintIcon(null, g2d, 0, 0);
-        g2d.dispose();
+    //     // Draw the button image onto the buffered image
+    //     icon.paintIcon(null, g2d, 0, 0);
+    //     g2d.dispose();
 
-        // Create a new button with the masked image
-        JButton maskedButton = new JButton(new ImageIcon(createMaskedImage(buttonImage)));
-        maskedButton.setContentAreaFilled(false);
-        maskedButton.setBorder(null);
+    //     // Create a new button with the masked image
+    //     JButton maskedButton = new JButton(new ImageIcon(createMaskedImage(buttonImage)));
+    //     maskedButton.setContentAreaFilled(false);
+    //     maskedButton.setBorder(null);
 
-        return maskedButton;
-    }
-    private BufferedImage createMaskedImage(BufferedImage image) {
-        // Create a new buffered image with transparency
-        BufferedImage maskedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = maskedImage.createGraphics();
+    //     return maskedButton;
+    // }
+    // private BufferedImage createMaskedImage(BufferedImage image) {
+    //     // Create a new buffered image with transparency
+    //     BufferedImage maskedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    //     Graphics2D g2d = maskedImage.createGraphics();
 
-        // Create a shape based on the image bounds
-        Shape shape = new Rectangle2D.Float(0, 0, image.getWidth(), image.getHeight());
+    //     // Create a shape based on the image bounds
+    //     Shape shape = new Rectangle2D.Float(0, 0, image.getWidth(), image.getHeight());
 
-        // Create an area with the shape
-        Area area = new Area(shape);
+    //     // Create an area with the shape
+    //     Area area = new Area(shape);
 
-        // Set the shape as the clip for the graphics object
-        g2d.setClip(area);
+    //     // Set the shape as the clip for the graphics object
+    //     g2d.setClip(area);
 
-        // Draw the original image onto the masked image, using the clip to mask it
-        g2d.drawImage(image, 0, 0, null);
+    //     // Draw the original image onto the masked image, using the clip to mask it
+    //     g2d.drawImage(image, 0, 0, null);
 
-        g2d.dispose();
+    //     g2d.dispose();
 
-        return maskedImage;
-    }
+    //     return maskedImage;
+    // }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String act = e.getActionCommand();
-        if(act.equals("back")){
-            setVisible(false);
-            new MainScreen(resolution);
-        }
-    }
+    // @Override
+    // public void actionPerformed(ActionEvent e) {
+    //     String act = e.getActionCommand();
+    //     if(act.equals("back")){
+    //         setVisible(false);
+    //         new MainScreen(resolution);
+    //     }
+    // }
     // public static void main(String[] args) {
     //     new endingScreen(new Point(1000,800), "Player 1 Wins");
     // }
