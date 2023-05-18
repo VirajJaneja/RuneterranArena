@@ -26,6 +26,7 @@ public class Garen extends CharacterWrapperSq{
         super(type, region, 120, diff);
         setAbilities(a, b, c, d);
     }
+    
     public String getName(){
         return "Garen";
     }

@@ -39,36 +39,37 @@ public class Character {
         this.region = region;
         this.abilitySet = new ArrayList<Ability>(4);
 
-        difficultyManagement(diff);
-        setHealth(level, hp);
+        
+        setHealth(difficultyManagement(diff), hp);
         this.maxHp = health;
+
         // System.out.println("Base Health: " + hp+"\nMaxHP: "+ maxHp);
     }
     
-    public void difficultyManagement(int diff){
+    public String difficultyManagement(int diff){
         switch(diff){
             case 0: 
-            level = "Bronze";
+                return "Bronze";
 
             case 1: 
-            level = "Silver";
+                return "Silver";
 
             case 2: 
-            level = "Gold";
+                return "Gold";
 
             default: 
-                level = "Silver";
+                return "Silver";
         }
     }
     public void setHealth(String level, int baseHp){
         if(level.equals("Bronze")){
-            this.health = (int)(baseHp * Bronze);
+            this.health = (int)(baseHp * 0.8);
         }
         else if(level.equals("Silver")){
-            this.health = (int)(baseHp * Silver);
+            this.health = (int)(baseHp * 1);
         }
         else if(level.equals("Gold")){
-            this.health = (int)(baseHp * Gold);
+            this.health = (int)(baseHp * 2);
         }
     }
 

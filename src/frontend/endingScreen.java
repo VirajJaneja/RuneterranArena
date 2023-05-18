@@ -33,7 +33,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.RootPaneContainer;
+import javax.swing.SwingUtilities;
 
 import backend.Board;
 import backend.ComputerPlayer;
@@ -64,7 +67,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import backend.Character.*;
 
-public class endingScreen implements ActionListener {
+public class endingScreen extends JFrame implements ActionListener {
     private JFrame mainFrame;
     private JPanel mainPanel;
     private JPanel contentPane;
@@ -78,12 +81,108 @@ public class endingScreen implements ActionListener {
     private ImageIcon backgroundImage, start, buttonIcon;
     private JLabel backgroundLabel;
 
-    public endingScreen(Point p, String verdict) {
+    public endingScreen(Point p, String verdict, Board b) {
+        backgroundImage = new ImageIcon("lib/VictorySRC");
+        ImageIcon back = new ImageIcon("lib/Backbutton (1).png");
+
+        resolution = p;
+        int width = (int) p.getX();
+        int height = (int) p.getY();
+        
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setSize(width, height);
+        if(verdict.equals("Player 1 Wins")){
+            contentPane = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    Image backgroundImage = new ImageIcon("lib/VictorySRC (2).png").getImage();
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+                }
+            };   
+        } else if (verdict.equals("Player 2 Wins")) {
+            contentPane = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    Image backgroundImage = new ImageIcon("lib/RiftBG.jpg").getImage();
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+                }
+            };
+        }
+
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(width, height));
+        
+        JLabel label = new JLabel("Game Statistics:");
+        
+        contentPane.add(label, BorderLayout.NORTH);
+        JButton backButton = createMaskedButton(back);
+        backButton.setSize(back.getIconWidth(), back.getIconWidth());
+        backButton.setBorder(null);
+        backButton.setOpaque(false);
+        backButton.addActionListener(this);
+        backButton.setActionCommand("back");
+        contentPane.add(backButton, BorderLayout.SOUTH);
+
+
+    }
+
+
+    private JButton createMaskedButton(ImageIcon icon) {
+        // Create a buffered image to hold the button image
+        BufferedImage buttonImage = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = buttonImage.createGraphics();
+
+        // Draw the button image onto the buffered image
+        icon.paintIcon(null, g2d, 0, 0);
+        g2d.dispose();
+
+        // Create a new button with the masked image
+        JButton maskedButton = new JButton(new ImageIcon(createMaskedImage(buttonImage)));
+        maskedButton.setContentAreaFilled(false);
+        maskedButton.setBorder(null);
+
+        return maskedButton;
+    }
+    private BufferedImage createMaskedImage(BufferedImage image) {
+        // Create a new buffered image with transparency
+        BufferedImage maskedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = maskedImage.createGraphics();
+
+        // Create a shape based on the image bounds
+        Shape shape = new Rectangle2D.Float(0, 0, image.getWidth(), image.getHeight());
+
+        // Create an area with the shape
+        Area area = new Area(shape);
+
+        // Set the shape as the clip for the graphics object
+        g2d.setClip(area);
+
+        // Draw the original image onto the masked image, using the clip to mask it
+        g2d.drawImage(image, 0, 0, null);
+
+        g2d.dispose();
+
+        return maskedImage;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        String act = e.getActionCommand();
+        if(act.equals("back")){
+            setVisible(false);
+            new MainScreen(resolution);
+        }
     }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            Point resolution = new Point(800, 600);
+            String verdict = "Player 1 Wins";
+            screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            screen.setVisible(true);
+        });
+    }
+
+    
 }

@@ -16,11 +16,16 @@ public class RunRuneterranArena {
         ArrayList<CharacterWrapperSq> characs1 = new ArrayList<CharacterWrapperSq>();
 
         characs.add(new Ahri(1));
+        characs.add(new Ahri(2));
+        characs.add(new Ahri(0));
         characs.add(new Garen(1));
         System.out.println(characs.size());
         characs.add(new Jinx(1));
 
 
+        System.out.println(characs.get(0).getMaxHealth());
+        System.out.println(characs.get(1).getMaxHealth());
+        System.out.println(characs.get(2).getMaxHealth());
         characs1.add(new KhaZix(1));
         // characs.add(new Malzahar(2));
         // characs.add(new Taric(1));
