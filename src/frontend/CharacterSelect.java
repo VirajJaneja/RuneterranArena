@@ -246,9 +246,7 @@ class CharacterSelect extends JFrame implements ActionListener {
         secondPane.add(resolve);
         //for(int i = 0; i<)
 
-        JButton status = new JButton("Mute");
-        status.addActionListener(this);
-        status.setActionCommand("mute");
+        JLabel status = new JLabel("Mute");
         secondPane.add(status);
         add(firstPane);
         add(thirdPane);
@@ -258,7 +256,7 @@ class CharacterSelect extends JFrame implements ActionListener {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        playIdle(sound);
+        //playIdle(sound);
         //garen, ashe, ahri
         }
 
@@ -367,10 +365,10 @@ class CharacterSelect extends JFrame implements ActionListener {
             if (act.equals("back")) {
                 setVisible(false);
                 new MainScreen(new Point(600, 600));
-                stopSound();
+               // stopSound();
             } else if (act.equals("mute")) {
                 playSound("confirm");
-                stopSound();
+               // stopSound();
             }
             else if (act.equals("Resolve")) {
                 if (characterCount < 3) {
