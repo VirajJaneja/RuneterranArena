@@ -434,6 +434,10 @@ class CharacterSelect extends JFrame implements ActionListener {
             }
         }
         
+        private void stopSound() {
+
+        }
+
         public void setButton() {
             characterCount = 0;
             for (int i = 0; i < characterBoolean.length; i++) {

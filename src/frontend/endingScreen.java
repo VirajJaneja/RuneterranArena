@@ -81,7 +81,7 @@ public class endingScreen extends JFrame implements ActionListener {
     private ImageIcon backgroundImage, start, buttonIcon;
     private JLabel backgroundLabel;
 
-    public endingScreen(Point p, String verdict, Board b) {
+    public endingScreen(Point p, String verdict) {
         backgroundImage = new ImageIcon("lib/VictorySRC");
         ImageIcon back = new ImageIcon("lib/Backbutton (1).png");
 

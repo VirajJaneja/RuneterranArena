@@ -77,6 +77,7 @@ public class MainScreen implements ActionListener {
     
     private ImageIcon backgroundImage, start, buttonIcon;
     private JLabel backgroundLabel;
+    private Clip clip;
 
     public MainScreen(Point p) {
 
@@ -130,8 +131,39 @@ public class MainScreen implements ActionListener {
         mainFrame.setSize(xval, yval);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+        playIdle(true);
 
     }
+    private void playIdle(boolean b){
+        String sound = "";
+
+        if(b){
+            sound = "lib/SRidle.wav";
+        } else{
+            sound = "lib/Queue.wav";
+        }
+
+        try {
+            File soundFile = new File(sound);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+
+            // Play the sound
+            clip.start();
+            clip.loop(clip.LOOP_CONTINUOUSLY);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    private void stopSound() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+        }
+    }
+    
+
     private void playSound(String s){
         String sound = "lib/button SE.wav";
         if(s.equals("Confirm") || s.equals("None"))
@@ -170,11 +202,11 @@ public class MainScreen implements ActionListener {
 
         } else if (act.equals("Options")) {
             playSound("confirm");
-            mainFrame.setVisible(false);
+            //mainFrame.setVisible(false);
             new Settings();
         } else if (act.equals("Help")) {
             
-            mainFrame.setVisible(false);
+            //mainFrame.setVisible(false);
             System.out.println("Help frq here!");
         }
     }
@@ -189,28 +221,28 @@ public class MainScreen implements ActionListener {
     class Settings extends JFrame implements ActionListener {
         private JPanel settingsPanel;
         private JFrame settingsFrame;
-        private final Point res1 = new Point(1000, 520);
-        private final Point res2 = new Point(1980-200, 1080-200);
-        private final Point res3 = new Point(2560-200, 1440-200);
+        // private final Point res1 = new Point(1000, 520);
+        // private final Point res2 = new Point(1980-200, 1080-200);
+        // private final Point res3 = new Point(2560-200, 1440-200);
 
         public Settings() {
             settingsPanel = new JPanel();
             settingsFrame = new JFrame("Settings");
             //Create the panel that contains the "cards".
-            JButton resolution1 = new JButton("1280 x 720");
+            JButton resolution1 = new JButton("Lower Volume");
             resolution1.setBounds(100, 200, 100, 100);
-            JButton resolution2 = new JButton("1980 x 1080");
+            JButton resolution2 = new JButton("Increase Volume");
             resolution2.setBounds(100, 200, 100, 100);
-            JButton resolution3 = new JButton("2560 x 1440");
+            JButton resolution3 = new JButton("Mute");
             resolution3.setBounds(100, 200, 100, 100);
 
-            resolution1.addActionListener(this);
+            resolution1.addActionListener(this);    
             resolution2.addActionListener(this);
             resolution3.addActionListener(this);
 
-            resolution1.setActionCommand("res1");
-            resolution2.setActionCommand("res2");
-            resolution3.setActionCommand("res3");
+            resolution1.setActionCommand("low");
+            resolution2.setActionCommand("high");
+            resolution3.setActionCommand("mute");
 
             settingsPanel.add(resolution1);
             settingsPanel.add(resolution2);
@@ -230,25 +262,21 @@ public class MainScreen implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             String act = e.getActionCommand();
-            if (act.equals("res1")) {
+            if (act.equals("lower")) {
                 playSound("confirm");
-
-                setFrame(res1);
-                alterRes(resolution);
+                
                 settingsFrame.setVisible(false);
 
-            } else if (act.equals("res2")) {
+            } else if (act.equals("higher")) {
                 playSound("confirm");
 
-                setFrame(res2);
-                alterRes(resolution);
+                
                 settingsFrame.setVisible(false);
             }
-            else if (act.equals("res3")) {
+            else if (act.equals("mute")) {
                 playSound("confirm");
 
-                setFrame(res3);
-                alterRes(resolution);
+                stopSound();
                 settingsFrame.setVisible(false);
             }
             
@@ -377,6 +405,7 @@ class Mode extends JFrame implements ActionListener {
 
         public void actionPerformed(ActionEvent ae) {
             String act = ae.getActionCommand();
+            stopSound();
             if(act.equals("EASY")){
                 playSound("Select");
                 System.out.println("easy");
