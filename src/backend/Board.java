@@ -28,6 +28,7 @@ public class Board {
 
 
     public static boolean makeMove(int i, Player aggressor, Player idlePlayer){
+        int[] output = {0, 0, 0, 0};
         // System.out.println("CHARACS: AGGRESSOR: " + aggressor.getCurrentCharacter().getName() + " AND IDLE: " + idlePlayer.getCurrentCharacter().getName());
         // System.out.println(aggressor + " is dealing damage");
         // System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
@@ -48,9 +49,10 @@ public class Board {
                 aggressor.setSkillPoints(aggressor.getskillPoints()+1);
                 // System.out.println(aggressor + " 's SKILLPOINTS ARE: " + aggressor.skillPoints);
                 // System.out.println("adding one rn");
-                dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
+                dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i), output)));
                 fPane.doAction(aggressor, i);
                 if(!(target.getStatus())){
+                    output[3] = 1;
                     if(!(allDead(idlePlayer))){
                         // System.out.println(target.getHealth());
                         // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
@@ -68,9 +70,10 @@ public class Board {
                 aggressor.setSkillPoints(aggressor.getskillPoints()-1);
                 // System.out.println("taking 1 does " + aggressor.skillPoints);
                 // System.out.println("shouldnt be touching does " + idlePlayer.skillPoints);
-                dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
+                dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i), output)));
                 fPane.doAction(aggressor, i);
                 if(!(target.getStatus())){
+                    output[3] = 1;
                     if(!(allDead(idlePlayer))){
                         // System.out.println(target.getHealth());
                         // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
@@ -82,9 +85,10 @@ public class Board {
                 break;
             case 2:
                 aggressor.setSkillPoints(aggressor.getskillPoints()-3);
-                dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
+                dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i), output)));
                 fPane.doAction(aggressor, i);
                 if(!(target.getStatus())){
+                    output[3] = 1;
                     if(!(allDead(idlePlayer))){
                         // System.out.println(target.getHealth());
                         // System.out.println(idlePlayer.getCharacter(0).getHealth() + "this right here officer");
@@ -109,6 +113,10 @@ public class Board {
         // System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
         // System.out.println(aggressor.skillPoints);
         // printPackage(aggressor, idlePlayer);
+        for(int x: output)
+            System.out.println(x);
+        // fPane.updateField(getSentence(aggressor, idlePlayer, output));
+        System.out.println((getSentence(aggressor, idlePlayer, output)));
         return false;
     }
 
@@ -117,17 +125,21 @@ public class Board {
         target.updateHealth(target.getHealth()-damage);
     }
 
-    private static double calculateDamage(CharacterWrapperSq target, CharacterWrapperSq targetter, Ability a){
+    private static double calculateDamage(CharacterWrapperSq target, CharacterWrapperSq targetter, Ability a, int[] x){
         double baseDMG = a.minDmg;
         double result = baseDMG;
-        if(Math.random()<=a.critChance)
+        if(Math.random()<=a.critChance){
             result += baseDMG*.5;
+            x[2] = 1;
+        }
         if(doesCounter(targetter, target))
             result += baseDMG*.25;
-        if(Math.random()<a.missChance)
+        if(Math.random()<a.missChance){
             result =0;
+            x[1] = 1;
+        }
+        x[0] = (int)result;
         return result;
-
     }
 
     private static CharacterWrapperSq getCharacter(Player player){
@@ -221,6 +233,22 @@ public class Board {
             System.out.println(c + " is alive: " + c.getStatus() + " - hp is " + c.getHealth());
         }
         System.out.println("-------------------------");
+    }
+
+    private static String getSentence(Player aggressor, Player target, int[] x){
+        // dmg, miss, crit, killed
+        String result = "";
+        result = aggressor.getName() + " " + aggressor.getCurrentCharacter().getName() + " dealt " + x[0] + " damage to " + target.getName() + " " + target.getCurrentCharacter().getName();
+
+        if(x[1] == 1)
+            result = aggressor.getName() + " " + aggressor.getCurrentCharacter().getName() + " missed their attack on " + target.getName() + " " + target.getCurrentCharacter().getName();
+        if(x[2] == 1)
+            result = aggressor.getName() + " " + aggressor.getCurrentCharacter().getName() + " crit for " + x[0] + " damage to " + target.getName() + " " + target.getCurrentCharacter().getName();
+
+
+        if(x[3] == 1)
+            result.concat(", killing it");
+        return result;
     }
 
 

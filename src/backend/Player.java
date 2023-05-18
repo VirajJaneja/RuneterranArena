@@ -51,5 +51,8 @@ public class Player {
     public void setSkillPoints(int i){
         skillPoints = i;
     }
+    public String getName(){
+        return "your";
+    }
     
 }

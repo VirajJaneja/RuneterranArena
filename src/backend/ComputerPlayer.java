@@ -61,5 +61,8 @@ public class ComputerPlayer extends Player{
         
         return nextTurn;
         
-    }    
+    }  
+    public String getName(){
+        return "the enemy";
+    }  
 }
