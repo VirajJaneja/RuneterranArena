@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -18,9 +20,13 @@ import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.Point;
 import java.awt.PopupMenu;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +54,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -249,71 +256,124 @@ public class MainScreen implements ActionListener {
 
     }
 
-    class Mode extends JFrame implements ActionListener {
-        private JFrame modeSelect;
-        private JPanel modePanel;
-        ImageIcon easy;
-        ImageIcon medium;
-        ImageIcon hard;
-        Image newimg;
-        Image image;
-        ImageIcon backgroundImage;
-        JLabel backgroundLabel;
-        BorderLayout layout;
-        public Mode() {
-            layout = new BorderLayout();
-            modePanel = new JPanel(layout);
-            
-            // backgroundImage = new ImageIcon("lib/RiftBG.jpg");
-            // backgroundLabel = new JLabel(backgroundImage);
-            // backgroundLabel.setBounds(0, 0, backgroundImage.getIconWidth(), backgroundImage.getIconHeight());
-        
-            // modePanel.setLayout(null);
-            // modePanel.add(backgroundLabel);
+class Mode extends JFrame implements ActionListener {
+    private JFrame modeSelect;
+    private JPanel modePanel;
+    ImageIcon easy, medium, hard, back;
+    Image newimg;
+    Image image;
+    ImageIcon backgroundImage;
+    JLabel backgroundLabel;
+    BoxLayout layout;
 
-            easy = new ImageIcon("lib/Easy.png");
-            medium = new ImageIcon("lib/Medium.png");
-            hard = new ImageIcon("lib/Hard.png");
+    public Mode() {
+        modePanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+                // Draw background image
+                if (backgroundImage != null) {
+                    g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+                }
+            }
+        };
+
+        layout = new BoxLayout(modePanel, BoxLayout.Y_AXIS);
+        modePanel.setLayout(layout);
+
+        // Load background image
+        backgroundImage = new ImageIcon("lib/RiftBG.jpg");
+
+        easy = new ImageIcon("lib/Easy.png");
+        medium = new ImageIcon("lib/Medium.png");
+        hard = new ImageIcon("lib/Hard.png");
+        back = new ImageIcon("lib/Backbutton (1).png");
+
+        JButton diffOne = new JButton(easy);
+        diffOne.setSize(easy.getIconWidth(), easy.getIconHeight());
+        diffOne.setBorder(null);
+        diffOne.addActionListener(this);
+        diffOne.setActionCommand("EASY");
+        modePanel.add(diffOne);
+
+        JButton diffTwo = new JButton(medium);
+        diffTwo.setSize(medium.getIconWidth(), medium.getIconWidth());
+        diffTwo.setBorder(null);
+        diffTwo.addActionListener(this);
+        diffTwo.setActionCommand("MEDIUM");
+        modePanel.add(diffTwo);
+
+        JButton diffThree = new JButton(hard);
+        diffThree.setSize(hard.getIconWidth(), hard.getIconWidth());
+        diffThree.setBorder(null);
+        diffThree.addActionListener(this);
+        diffThree.setActionCommand("HARD");
+        modePanel.add(diffThree);
+
+        // Create a masked back button
+        JButton backButton = createMaskedButton(back);
+        backButton.setSize(back.getIconWidth(), back.getIconWidth());
+        backButton.setBorder(null);
+        backButton.setOpaque(false);
+        backButton.addActionListener(this);
+        backButton.setActionCommand("back");
+        modePanel.add(backButton);
+
+        add(modePanel);
+        pack();
+        setVisible(true);
+        
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Rectangle bounds = env.getMaximumWindowBounds();
+        setSize(bounds.width, getHeight());
+        
+        // Set the frame location to the top-left corner
+        setLocation(bounds.x, bounds.y);
+        
 
         
-            JButton diffOne = new JButton(easy);
-            diffOne.setBounds(50, 50, easy.getIconWidth(), easy.getIconHeight());
-            diffOne.addActionListener(this);
-            diffOne.setActionCommand("EASY");
-            modePanel.add(diffOne, BorderLayout.CENTER);
-        
-            JButton diffTwo = new JButton(medium);
-            diffTwo.setBounds(50, 225, medium.getIconWidth(), medium.getIconWidth());
-            diffTwo.addActionListener(this);
-            diffTwo.setActionCommand("MEDIUM");
-            modePanel.add(diffTwo, BorderLayout.CENTER);
-        
-            JButton diffThree = new JButton(hard);
-            diffThree.setBounds(50, 400, hard.getIconWidth(), hard.getIconWidth());
-            diffThree.setBorder(null);
-            diffThree.addActionListener(this);
-            diffThree.setActionCommand("HARD");
-            modePanel.add(diffThree, BorderLayout.CENTER);
-        
-            JButton bottomRightButton = new JButton("Bottom Right");
-            int buttonSize = 100;
-            int buttonMargin = 10;
-            int buttonX = getWidth() - buttonSize - buttonMargin;
-            int buttonY = getHeight() - buttonSize - buttonMargin;
-            bottomRightButton.setBounds(buttonX, buttonY, buttonSize, buttonSize);
-            modePanel.add(bottomRightButton, BorderLayout.CENTER);
-        
-            // Set the preferred size of modePanel
-            //modePanel.setPreferredSize(new Dimension(backgroundImage.getIconWidth(), backgroundImage.getIconHeight()));
-        
-            add(modePanel);
-            pack();
-            setVisible(true);
-            setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-        }
-        
-    
+        setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+    }
 
+    private JButton createMaskedButton(ImageIcon icon) {
+        // Create a buffered image to hold the button image
+        BufferedImage buttonImage = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = buttonImage.createGraphics();
+
+        // Draw the button image onto the buffered image
+        icon.paintIcon(null, g2d, 0, 0);
+        g2d.dispose();
+
+        // Create a new button with the masked image
+        JButton maskedButton = new JButton(new ImageIcon(createMaskedImage(buttonImage)));
+        maskedButton.setContentAreaFilled(false);
+        maskedButton.setBorder(null);
+
+        return maskedButton;
+    }
+
+    private BufferedImage createMaskedImage(BufferedImage image) {
+        // Create a new buffered image with transparency
+        BufferedImage maskedImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = maskedImage.createGraphics();
+
+        // Create a shape based on the image bounds
+        Shape shape = new Rectangle2D.Float(0, 0, image.getWidth(), image.getHeight());
+
+        // Create an area with the shape
+        Area area = new Area(shape);
+
+        // Set the shape as the clip for the graphics object
+        g2d.setClip(area);
+
+        // Draw the original image onto the masked image, using the clip to mask it
+        g2d.drawImage(image, 0, 0, null);
+
+        g2d.dispose();
+
+        return maskedImage;
+    }
 
         public void actionPerformed(ActionEvent ae) {
             String act = ae.getActionCommand();
@@ -336,6 +396,10 @@ public class MainScreen implements ActionListener {
             } else if(act.equals("Options")){
                 setVisible(false);
                 new Settings();
+                
+            } else if(act.equals("back")){
+                setVisible(false);
+                new MainScreen(new Point(900, 900));
                 
             }
         }
