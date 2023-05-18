@@ -14,6 +14,7 @@ public class Board {
     public static int P1CPos;
     public static int P2CPos;
     public static fightPanel fPane;
+    public Object printPackage;
 
     public Board(Player playerUno, Player playerDos, fightPanel fp){
         fPane = fp;
@@ -107,6 +108,7 @@ public class Board {
         // System.out.println("this other one right here" + aggressor);
         // System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
         // System.out.println(aggressor.skillPoints);
+        // printPackage(aggressor, idlePlayer);
         return false;
     }
 
@@ -204,8 +206,21 @@ public class Board {
 
         return -1;
     }
-    private void printPackage(Player aggressor, Player idle){
-        
+    public static void printPackage(Player aggressor, Player idle){
+        System.out.println("-------------------------");
+        System.out.println("aggressor: " + aggressor);
+        for(int i = 0;i<aggressor.getSize();i++){
+            Character c = aggressor.getCharacter(i);
+            System.out.println(c + " is alive: " + c.getStatus() + " - hp is " + c.getHealth());
+        }
+        System.out.println();
+
+        System.out.println("Idle: " + idle);
+        for(int i = 0;i<aggressor.getSize();i++){
+            Character c = idle.getCharacter(i);
+            System.out.println(c + " is alive: " + c.getStatus() + " - hp is " + c.getHealth());
+        }
+        System.out.println("-------------------------");
     }
 
 

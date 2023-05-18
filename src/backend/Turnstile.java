@@ -29,6 +29,7 @@ public class Turnstile {
         }
         // System.out.println(playerOne);
         // System.out.println(playerTwo);
+        battlefield.printPackage(playerOne, playerTwo);
     }
 
     public enum Turn {
@@ -117,6 +118,7 @@ public class Turnstile {
         }
         // System.out.println(turn);
         // System.out.println("whole loop");
+        battlefield.printPackage(playerOne, playerTwo);
     }
 
 
