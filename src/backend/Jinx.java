@@ -8,9 +8,9 @@ import javax.swing.ImageIcon;
 public class Jinx extends CharacterWrapperSq{
     private static String region = "Zaun";
     private static String type = "Marksman";
-    private Ability a = new Ability("Zap Cannon", 30, 0.4, 0.25, false, false, false);
-    private Ability b = new Ability("Flame Chompers", 45, 0.2, 0.1, false, false, false);
-    private Ability c = new Ability("Super Mega Death Rocket!", 45, 0.2, 0.1, false, false, true);
+    private Ability a = new Ability("Zap Cannon", 50, 0.35, 0.2, false, false, false);
+    private Ability b = new Ability("Flame Chompers", 45, 0.35, 0.2, false, false, false);
+    private Ability c = new Ability("Super Mega Death Rocket!", 55, 0.25, 0.1, false, false, true);
     private Ability d = new Ability("Auto Attack", 40, 0.2, 0.1, false, false, false);
     private ImageIcon characterIcon =  new ImageIcon("lib/icons/abilities/jinx icon.png");
     private ImageIcon basickATKIcon =  new ImageIcon("lib/icons/abilities/jinx basicATK.png");
@@ -23,7 +23,7 @@ public class Jinx extends CharacterWrapperSq{
     private String idleAnim =  "lib/animations/jinx/JinxIdle.gif";
     private String spawnAnim =  "lib/animations/jinx/JinxIdle.gif";
     public Jinx(int diff){
-        super(type, region, 80, diff);
+        super(type, region, 90, diff);
         // System.out.println(type + "," + region);
         setAbilities(a, b, c, d);
         basickAtkAnim =  "lib/animations/jinx/JinxATK.gif";

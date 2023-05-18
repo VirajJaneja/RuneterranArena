@@ -7,9 +7,9 @@ import javax.swing.ImageIcon;
 public class Garen extends CharacterWrapperSq{
     private static String region = "Demacian";
     private static String type = "Fighter";
-    private Ability a = new Ability("Decisive Strike", 40, 0.15, 0.2, false, false, false);
-    private Ability b = new Ability("Courage", 35, 3, 0.2, false, false, true);
-    private Ability c = new Ability("Justice", 65, 3, 0.2, false, false, false);
+    private Ability a = new Ability("Decisive Strike", 50, 0.2, 0.2, false, false, false);
+    private Ability b = new Ability("Courage", 45, .2, 0.2, false, false, true);
+    private Ability c = new Ability("Justice", 55, .1, 0.1, false, false, false);
     private Ability d = new Ability("Auto Attack", 25, 0.15, 0.2, false, false, false);
     private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/garen icon.png");
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/garen basicATK.png");
@@ -23,7 +23,7 @@ public class Garen extends CharacterWrapperSq{
     private ImageIcon idleAnim =  new ImageIcon("lib/animations/Garen/GarenIdle.gif");
 
     public Garen(int diff){
-        super(type, region, 120, diff);
+        super(type, region, 110, diff);
         setAbilities(a, b, c, d);
     }
     

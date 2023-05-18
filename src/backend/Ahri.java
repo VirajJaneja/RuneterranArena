@@ -8,9 +8,9 @@ import javax.swing.ImageIcon;
 public class Ahri extends CharacterWrapperSq{
     private static String region = "Ionian";
     private static String type = "Mage";
-    private Ability a = new Ability("Spirit Orb", 40, 0.2, 0.2, false, false, false);
-    private Ability b = new Ability("Fox Fire", 35, 0.35, 0.2, false, false, false);
-    private Ability c = new Ability("Charm", 30, 0.2, 0.2, false, false, true);
+    private Ability a = new Ability("Spirit Orb", 35, 0.2, 0.2, false, false, false);
+    private Ability b = new Ability("Fox Fire", 45, 0.2, 0.2, false, false, false);
+    private Ability c = new Ability("Charm", 60, 0.1, 0.05, false, false, true);
     private Ability d = new Ability("Auto Attack", 20, 0.2, 0.2, false, false, false);
     private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/ahri icon.png");
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/ahri basicATK.png");

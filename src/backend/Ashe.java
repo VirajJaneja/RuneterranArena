@@ -7,9 +7,9 @@ import javax.swing.ImageIcon;
 public class Ashe extends CharacterWrapperSq{
     private static String region = "Demacian";
     private static String type = "Marksman";
-    private Ability a = new Ability("Frost Arrow", 30, 0.4, 0.25, false, false, false);
-    private Ability b = new Ability("Ice Volley", 45, 0.2, 0.1, false, false, false);
-    private Ability c = new Ability("Piercing Cold", 45, 0.2, 0.1, false, false, true);
+    private Ability a = new Ability("Frost Arrow", 35, 0.35, 0.22, false, false, false);
+    private Ability b = new Ability("Ice Volley", 50, 0.35, 0.2, false, false, false);
+    private Ability c = new Ability("Piercing Cold", 45, 0.25, 0.1, false, false, true);
     private Ability d = new Ability("Auto Attack", 40, 0.2, 0.1, false, false, false);
     private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/ashe icon.png");
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/ashe basicATK.png");
@@ -25,7 +25,7 @@ public class Ashe extends CharacterWrapperSq{
 
     
     public Ashe(int diff){
-        super(type, region, 80, diff);
+        super(type, region, 100, diff);
         // System.out.println(type + "," + region);
         setAbilities(a, b, c, d);
     }

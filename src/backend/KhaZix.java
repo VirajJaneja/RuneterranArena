@@ -8,9 +8,9 @@ import javax.swing.ImageIcon;
 public class KhaZix extends CharacterWrapperSq{
     private static String region = "Void";
     private static String type = "Mage";
-    private Ability a = new Ability("Unseen Threat", 40, 0.2, 0.25, false, false, false);
-    private Ability b = new Ability("Void Spike", 45, 0.2, 0.1, false, false, false);
-    private Ability c = new Ability("Taste their Fear", 45, 0.5, 0.1, false, false, true);
+    private Ability a = new Ability("Unseen Threat", 35, 0.2, 0.2, false, false, false);
+    private Ability b = new Ability("Void Spike", 45, 0.2, 0.2, false, false, false);
+    private Ability c = new Ability("Taste their Fear", 60, 0.1, 0.1, false, false, true);
     private Ability d = new Ability("Auto Attack", 40, 0.2, 0.1, false, false, false);
     private ImageIcon characterIcon = new ImageIcon("lib/icons/abilities/khazix icon.png");
     private ImageIcon basickATKIcon = new ImageIcon("lib/icons/abilities/khazix basicATK.png");
@@ -24,7 +24,7 @@ public class KhaZix extends CharacterWrapperSq{
     private ImageIcon spawnAnim = new ImageIcon("lib/animations/Kha/KhaIdle.gif");
     
     public KhaZix(int diff){
-        super(type, region, 80, diff);
+        super(type, region, 100, diff);
         // System.out.println(type + "," + region);
         setAbilities(a, b, c, d);
     }
