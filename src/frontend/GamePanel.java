@@ -113,7 +113,10 @@ public class GamePanel extends JPanel {
     private choicePanel initCP(){
         choicePanel cPane = new choicePanel(TurnStile, TurnStile.playerOne);
         cPane.addSwapButtons(cPane);
-        cPane.setLayout(new BoxLayout(cPane, BoxLayout.PAGE_AXIS));
+        cPane.setLayout(new BoxLayout(cPane, BoxLayout.Y_AXIS));
+        int spacing = 35; // Adjust the spacing as desired
+        // setBorder(BorderFactory.createEmptyBorder(spacing, 0, 0, 0));
+        cPane.add(Box.createVerticalStrut(spacing));
         cPane.add(cPane.basicATK);
         cPane.add(cPane.abilityOne);
         cPane.add(cPane.ult);
