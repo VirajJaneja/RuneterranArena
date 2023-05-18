@@ -204,9 +204,9 @@ public class Board {
         if(statusTOne && statusTTwo)
             return "Draw";
         if(statusTTwo)
-            return "Player 2 Wins";
-        if(statusTOne)
             return "Player 1 Wins";
+        if(statusTOne)
+            return "Player 2 Wins";
         return "Ongoing";
     }
 

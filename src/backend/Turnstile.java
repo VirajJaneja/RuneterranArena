@@ -17,8 +17,10 @@ public class Turnstile {
     static Turn turn;
     static boolean gameOver;
     public static gameFrame gf;
+    private static int endingCounter;
     public Turnstile(Player pOne, Player pTwo){
         turn = Turn.P1Turn;
+        endingCounter = 0;
         turnCounter =0;
         playerOne = pOne;
         playerTwo = pTwo;
@@ -130,7 +132,11 @@ public class Turnstile {
         gf.killGF();
         // System.out.println("We made it here");
         // System.out.println(s);
-        new endingScreen(new Point(1000, 800), s);
+        if(endingCounter<1){
+            new endingScreen(new Point(1000, 800), s);
+            endingCounter++;
+        }
+        
     }
     public Player getPlayer(boolean b){
         if(b)
