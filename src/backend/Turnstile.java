@@ -127,9 +127,9 @@ public class Turnstile {
 
     public static void finishGame(String s){
         gf.mainFrame.dispose();
-        gf.invis();
-        System.out.println("We made it here");
-        System.out.println(s);
+        gf.killGF();
+        // System.out.println("We made it here");
+        // System.out.println(s);
         new endingScreen(new Point(1000, 800), s);
     }
     public Player getPlayer(boolean b){

@@ -8,6 +8,7 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class gameFrame implements ActionListener {
     public static GamePanel gp;
     JMenuBar menuBar;
     Turnstile turnstile;
+    gameFrame newGf;
 
 
     public gameFrame(Point p, Turnstile turnstile2) {
@@ -60,7 +62,17 @@ public class gameFrame implements ActionListener {
         contentPane.add(gp);
         menuBar.add(settingsButton);
         mainFrame.setSize((int) resolution.getX(), (int) resolution.getY());
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Handle the window closing event
+                // Perform any necessary cleanup or actions
+                // Here, you can choose to dispose the frame or hide it
+                mainFrame.dispose();
+                // Alternatively, you can use frame.setVisible(false); to hide the frame instead of disposing it
+            }
+        });
 
 
         mainFrame.setJMenuBar(menuBar);
@@ -129,6 +141,11 @@ public class gameFrame implements ActionListener {
             new Settings();
         }
     }
+
+    public void killGF(){
+        this.mainFrame.setVisible(false);
+    }
+
 
     public void setPane(JPanel pane){
         contentPane.removeAll();

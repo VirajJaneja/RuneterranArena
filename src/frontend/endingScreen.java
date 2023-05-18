@@ -83,7 +83,10 @@ public class endingScreen extends JFrame implements ActionListener {
 
     public endingScreen(Point p, String verdict) {
         System.out.println("Is it alive");
-        backgroundImage = new ImageIcon("lib/VictorySRC");
+        // if(verdict.equals("Player 1 Wins"))
+        //     backgroundImage = new ImageIcon("lib/VictorySRC (2).png");
+        backgroundImage = new ImageIcon("lib/defeat.png");
+
         ImageIcon back = new ImageIcon("lib/Backbutton (1).png");
 
         resolution = p;
@@ -106,7 +109,7 @@ public class endingScreen extends JFrame implements ActionListener {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
-                    Image backgroundImage = new ImageIcon("lib/RiftBG.jpg").getImage();
+                    Image backgroundImage = new ImageIcon("lib/defeat.png").getImage();
                     g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
                 }
             };
@@ -176,9 +179,9 @@ public class endingScreen extends JFrame implements ActionListener {
             new MainScreen(resolution);
         }
     }
-    public static void main(String[] args) {
-        new endingScreen(new Point(1000,800), "Player 1 Wins");
-    }
+    // public static void main(String[] args) {
+    //     new endingScreen(new Point(1000,800), "Player 1 Wins");
+    // }
 
     
 }
