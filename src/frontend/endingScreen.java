@@ -179,8 +179,8 @@ public class endingScreen extends JFrame implements ActionListener {
         SwingUtilities.invokeLater(() -> {
             Point resolution = new Point(800, 600);
             String verdict = "Player 1 Wins";
-            screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            screen.setVisible(true);
+            // screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            // screen.setVisible(true);
         });
     }
 

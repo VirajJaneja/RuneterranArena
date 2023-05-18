@@ -132,6 +132,7 @@ public class GamePanel extends JPanel {
     
     private fightPanel initFP(){
         fightPanel fPane = new fightPanel(TurnStile);
+        fPane.setBackground(new Color(191, 191, 191));
         return fPane;
     }
     

@@ -116,6 +116,7 @@ public class gameFrame implements ActionListener {
 
     public void alterRes(Point p) {
         new gameFrame(p, turnstile, 1);
+        turnstile.battlefield.updateFPane(this.gp.fPane);
     }
 
 
