@@ -71,13 +71,12 @@ public class fightPanel extends JPanel {
         add(animPane, BorderLayout.NORTH);
 
         chatPane.setVisible(true);
-        
         add(chatPane, BorderLayout.CENTER);
 
+        updateField("Thanos, with his giant, 3 foot, macedonian chicken.");
     }
     
     public void updateField(String s){
-
         chat.append("   "+s);
         chatPane.repaint();
     }
