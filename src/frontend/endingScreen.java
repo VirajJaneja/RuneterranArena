@@ -82,6 +82,7 @@ public class endingScreen extends JFrame implements ActionListener {
     private JLabel backgroundLabel;
 
     public endingScreen(Point p, String verdict) {
+        System.out.println("Is it alive");
         backgroundImage = new ImageIcon("lib/VictorySRC");
         ImageIcon back = new ImageIcon("lib/Backbutton (1).png");
 
@@ -124,7 +125,7 @@ public class endingScreen extends JFrame implements ActionListener {
         backButton.addActionListener(this);
         backButton.setActionCommand("back");
         contentPane.add(backButton, BorderLayout.SOUTH);
-
+        setVisible(true);
 
     }
 
@@ -176,12 +177,7 @@ public class endingScreen extends JFrame implements ActionListener {
         }
     }
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            Point resolution = new Point(800, 600);
-            String verdict = "Player 1 Wins";
-            // screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            // screen.setVisible(true);
-        });
+        new endingScreen(new Point(1000,800), "Player 1 Wins");
     }
 
     

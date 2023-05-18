@@ -104,7 +104,9 @@ public class gameFrame implements ActionListener {
         return resolution;
     }
 
-
+    public void invis(){
+        mainFrame.setVisible(false);
+    }
     public void firstTimeRun() {
         mainFrame.setVisible(false);
         new gameFrame(new Point(1750-200, 920-100), turnstile, 1);
