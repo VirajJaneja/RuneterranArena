@@ -55,7 +55,7 @@ public class teamPanel extends JPanel{
 
 
         for(int i = 0; i<playerList.size(); i++){
-            fractionList.add("("+getHealth(i) +" / "+ playerList.get(i).getMaxHealth()+")");
+            fractionList.add("("+getHealth(i, true) +" / "+ playerList.get(i).getMaxHealth()+")");
         }
         //     frac.setPreferredSize(new Dimension(prefSize, prefSize));
         //     row2Panel.add(frac, Box.createHorizontalGlue());
@@ -65,7 +65,7 @@ public class teamPanel extends JPanel{
         // row2Panel.add(frac, Box.createHorizontalGlue());
 
         for(int i = 0; i<compList.size(); i++){
-            fractionList.add("("+getHealth(i) +" / "+ compList.get(i).getMaxHealth()+")");
+            fractionList.add("("+getHealth(i, false) +" / "+ compList.get(i).getMaxHealth()+")");
         }
         
         
@@ -126,6 +126,21 @@ public class teamPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        fractionList = new ArrayList<String>();
+        for(int i = 0; i<playerList.size(); i++){
+            fractionList.add("("+getHealth(i, true) +" / "+ playerList.get(i).getMaxHealth()+")");
+        }
+        //     frac.setPreferredSize(new Dimension(prefSize, prefSize));
+        //     row2Panel.add(frac, Box.createHorizontalGlue());
+        // }
+        // frac = new JLabel(new ImageIcon("lib/trans.png"));
+        // frac.setPreferredSize(new Dimension(prefSize, prefSize));
+        // row2Panel.add(frac, Box.createHorizontalGlue());
+
+        for(int i = 0; i<compList.size(); i++){
+            fractionList.add("("+getHealth(i, false) +" / "+ compList.get(i).getMaxHealth()+")");
+        }
+
         // Draw the background image
         // g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
@@ -146,6 +161,21 @@ public class teamPanel extends JPanel{
 
     private String getHealth(int i){
         int health = playerList.get(i).getHealth();
+        String result = health + "";
+        if(health <= 0)
+            result = "Dead";
+        return result +"";
+    }
+
+    private String getHealth(int i, boolean b){
+        if(b){
+            int health = playerList.get(i).getHealth();
+            String result = health + "";
+            if(health <= 0)
+                result = "Dead";
+            return result +"";
+        } 
+        int health = compList.get(i).getHealth();
         String result = health + "";
         if(health <= 0)
             result = "Dead";
