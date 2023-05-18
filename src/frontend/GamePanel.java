@@ -38,7 +38,7 @@ public class GamePanel extends JPanel {
     public GamePanel(Point p, Turnstile turnstile){
         height = p.y;
         width = p.x;
-        System.out.println(width);
+        // System.out.println(width);
         TurnStile = turnstile;
         cPane = initCP();
         tPane = initTP();
@@ -53,7 +53,7 @@ public class GamePanel extends JPanel {
     public GamePanel(Point p){
         height = p.y;
         width = p.x;
-        System.out.println(width);
+        // System.out.println(width);
 
         cPane = initCP();
         tPane = initTP();

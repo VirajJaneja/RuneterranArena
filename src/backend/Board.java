@@ -27,6 +27,8 @@ public class Board {
 
 
     public static boolean makeMove(int i, Player aggressor, Player idlePlayer){
+        // System.out.println("CHARACS: AGGRESSOR: " + aggressor.getCurrentCharacter().getName() + " AND IDLE: " + idlePlayer.getCurrentCharacter().getName());
+        // System.out.println(aggressor + " is dealing damage");
         // System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
         // System.out.println("PLEASE WORK FOR THE LOVE OF GOD");
         CharacterWrapperSq target;
@@ -43,6 +45,7 @@ public class Board {
         switch(i){
             case 0:
                 aggressor.skillPoints += 1;
+                System.out.println("SKILLPOINTS ARE: " + aggressor.skillPoints);
                 System.out.println("adding one rn");
                 dealDamage(target, (int)(calculateDamage(target, targetter, target.getAbility(i))));
                 fPane.doAction(aggressor, i);
@@ -94,6 +97,7 @@ public class Board {
                 // System.out.println("do smth");
                 break;
         }
+        System.out.println("SKILLPOINTS ARE: " + aggressor.skillPoints);
         // System.out.println("this other one right here" + aggressor);
         // System.out.println("hp: " + idlePlayer.getCharacter(0).getHealth());
         // System.out.println(aggressor.skillPoints);

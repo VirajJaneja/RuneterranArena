@@ -13,15 +13,20 @@ public class RunRuneterranArena {
         ArrayList<CharacterWrapperSq> testCharacter = new ArrayList<CharacterWrapperSq>();
 
         ArrayList<CharacterWrapperSq> characs = new ArrayList<CharacterWrapperSq>();
-        characs.add(new Ahri(2));
-        characs.add(new Garen(2));
+        ArrayList<CharacterWrapperSq> characs1 = new ArrayList<CharacterWrapperSq>();
+
+        characs.add(new Ahri(1));
+        characs.add(new Garen(1));
         System.out.println(characs.size());
-        characs.add(new Jinx(2));
-        characs.add(new KhaZix(2));
+        characs.add(new Jinx(1));
+
+
+        characs1.add(new KhaZix(1));
         // characs.add(new Malzahar(2));
-        characs.add(new Taric(2));
-        // characs.add(new Ashe(2));
-        // characs.add(new Ahri(2));
+        // characs.add(new Taric(1));
+
+        characs1.add(new Ashe(1));
+        characs1.add(new Ahri(1));
 
         // for(int i =0; i<characs.size(); i++){
         //     System.out.println(characs.get(i).getIcon("icon"));
@@ -30,12 +35,18 @@ public class RunRuneterranArena {
         //     System.out.println(characs.get(i).getIcon("ultIcon"));
         // }
 
-        characs.get(1).setHealth("Bronze", 0);
-        characs.get(0).setHealth("Bronze", 3);
+        // characs.get(1).setHealth("Bronze", 0);
+        // characs.get(0).setHealth("Bronze", 3);
+
+
         
-        Player player1 = new Player(characs.size(), characs);
+        Player player1 = new Player(characs.size(), characs1);
         Player player2 = new Player(characs.size(), characs);
-        Turnstile turnstile = new Turnstile(player1, player2);
+        ComputerPlayer compPlayer = new ComputerPlayer(0, characs);
+
+        System.out.println(characs.size() + " " + characs1.size());
+
+        Turnstile turnstile = new Turnstile(player1, compPlayer);
 
         
 

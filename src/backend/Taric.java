@@ -24,7 +24,7 @@ public class Taric extends CharacterWrapperSq{
     
     public Taric(int diff){
         super(type, region, 80, diff);
-        System.out.println(type + "," + region);
+        // System.out.println(type + "," + region);
         setAbilities(a, b, c, d);
     }
     public String getName(){

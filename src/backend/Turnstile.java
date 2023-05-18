@@ -24,10 +24,10 @@ public class Turnstile {
         battlefield = new Board(playerOne, playerTwo, gf.gp.fPane);
         gf = new gameFrame(new Point(1080, 520), this);
         for(int i=0;i<pOne.getSize();i++){
-            System.out.println(pOne.getCharacter(i).getName());
+            // System.out.println(pOne.getCharacter(i).getName());
         }
-        System.out.println(playerOne);
-        System.out.println(playerTwo);
+        // System.out.println(playerOne);
+        // System.out.println(playerTwo);
     }
 
     public enum Turn {
@@ -39,14 +39,15 @@ public class Turnstile {
                     gameOver = true;
                     // System.out.println("herez");
                 }
-                else if(!(turnCounter<1)){
+                else {
                     Board.makeMove(playerTwo.getNextTurn(), playerTwo, playerOne);
                     gf.gp.tPane.repaint();
                     if(!(battlefield.gameOver().equals("Ongoing"))){
                         finishGame(battlefield.gameOver());
                     }
-                    System.out.println("broken");
+                    // System.out.println("broken");
                 }
+                gf.gp.cPane.setConfirmButtonPresence(1);
             }
         },
         P2Turn {
@@ -75,26 +76,27 @@ public class Turnstile {
     }
 
     public static void moveTurn(){
-        Turn nextStep = Turn.P1Turn;
+        // Turn nextStep = Turn.P1Turn;
         if(turn == Turn.P1Turn){
-            nextStep = Turn.P2Turn;
-            nextStep.run();
+            turn = Turn.P2Turn;
+            turn.run();
             gf.gp.cPane.setConfirmButtonPresence(0);
         }
         if(turn == Turn.P2Turn){
-            System.out.println("this one right here");
-            nextStep = Turn.P1Turn;
-            nextStep.run();
+            // System.out.println("this one right here");
+            turn = Turn.P1Turn;
+            turn.run();
             gf.gp.cPane.setConfirmButtonPresence(1);
         }
-        System.out.println(turn);
+        // System.out.println(turn);
         if(!gameOver){
-            nextStep.run();
+            // turn.run();
             // System.out.println("here");
-            turn = nextStep;
+            turn = turn;
             // turn.run();
         }
         // System.out.println(turn);
+        // System.out.println("whole loop");
     }
 
 

@@ -24,7 +24,7 @@ public class Jinx extends CharacterWrapperSq{
     private String spawnAnim =  "lib/animations/jinx/JinxIdle.gif";
     public Jinx(int diff){
         super(type, region, 80, diff);
-        System.out.println(type + "," + region);
+        // System.out.println(type + "," + region);
         setAbilities(a, b, c, d);
         basickAtkAnim =  "lib/animations/jinx/JinxATK.gif";
         ABAnim =  "lib/animations/jinx/JinxAbility.gif";

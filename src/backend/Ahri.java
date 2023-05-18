@@ -25,7 +25,7 @@ public class Ahri extends CharacterWrapperSq{
     
     public Ahri(int diff){
         super(type, region, 100, diff);
-        System.out.println(type + "," + region);
+        // System.out.println(type + "," + region);
         setAbilities(a, b, c, d);
     }
     public String getName(){

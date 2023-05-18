@@ -42,7 +42,7 @@ public class Character {
         difficultyManagement(diff);
         setHealth(level, hp);
         this.maxHp = health;
-        System.out.println("Base Health: " + hp+"\nMaxHP: "+ maxHp);
+        // System.out.println("Base Health: " + hp+"\nMaxHP: "+ maxHp);
     }
     
     public void difficultyManagement(int diff){
