@@ -17,12 +17,15 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 import backend.Player;
 import backend.Turnstile;
@@ -51,8 +54,8 @@ public class choicePanel extends JPanel implements ActionListener{
     choicePanel(Turnstile turnstile2, Player Givenplayer) {
         warningLabel = new JLabel("");
         skillPointsLabel = new JLabel("Skill Points: " + Givenplayer.getskillPoints());
-        warningLabel.setForeground(new Color(255, 255, 255));
-        skillPointsLabel.setForeground(new Color(255, 255, 255));
+        warningLabel.setForeground(new Color(200, 161, 108));
+        skillPointsLabel.setForeground(new Color(200, 161, 108));
         teamButtons = new ArrayList<>();
         TurnStile = turnstile2;
         player = Givenplayer;
@@ -76,12 +79,18 @@ public class choicePanel extends JPanel implements ActionListener{
     }
 
     private void resetButtons(){
-        basicATK.setBackground(new Color(255, 255, 255));
-	    abilityOne.setBackground(new Color(255, 255, 255));
-	    ult.setBackground(new Color(255, 255, 255));
-	    swapCharac.setBackground(new Color(255, 255, 255));
+        basicATK.setBackground(new Color(9, 22, 27));
+	    abilityOne.setBackground(new Color(9, 22, 27));
+	    ult.setBackground(new Color(9, 22, 27));
+	    swapCharac.setBackground(new Color(9, 22, 27));
+        basicATK.setForeground(new Color(200, 161, 108));
+	    abilityOne.setForeground(new Color(200, 161, 108));
+	    ult.setForeground(new Color(200, 161, 108));
+	    swapCharac.setForeground(new Color(200, 161, 108));
         for(JButton b: teamButtons){
-            b.setBackground(new Color(255, 255, 255));
+            b.setBackground(new Color(9, 22, 27));
+            b.setForeground(new Color(200, 161, 108));
+
         }
     }
 
@@ -100,9 +109,11 @@ public class choicePanel extends JPanel implements ActionListener{
 
     private void setupButton(JButton b, String s){
         b.setFont(new Font("Serif", Font.BOLD, 30));
-	    b.setBackground(new Color(255, 255, 255));
-        b.setForeground(new Color(138, 158, 160));
-        b.setBorder(BorderFactory.createTitledBorder(s));
+	    b.setBackground(new Color(9, 22, 27));
+        b.setForeground(new Color(200, 161, 108));
+        Color customBorderColor = new Color(255, 0, 0); // Example custom border color
+        Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10); // Example border
+        TitledBorder customTitledBorder = new TitledBorder(border, "Title", TitledBorder.CENTER, TitledBorder.TOP, null, customBorderColor);
 	    b.setOpaque(true);
 	    b.setActionCommand(s);
 	    b.addActionListener(this);
@@ -111,6 +122,8 @@ public class choicePanel extends JPanel implements ActionListener{
     }
 
     public void addSwapButtons(choicePanel cp){
+        int spacing = 55;
+        cp.add(Box.createVerticalStrut(spacing));
         for(int i = 0; i<player.getSize();i++){
             teamButtons.get(i).setActionCommand((i*10)+3+"");
             cp.add(teamButtons.get(i));
@@ -123,7 +136,7 @@ public class choicePanel extends JPanel implements ActionListener{
         if(i == 1){
             // confirm.setBackground(new Color(79, 88, 94));
             confirm.setActionCommand("Confirm");
-            confirm.setBackground(new Color(255, 255, 255));
+            confirm.setBackground(new Color(9, 22, 27));
             confirm.setVisible(true);
         } if(i == 0){
             confirm.setActionCommand("None");
@@ -181,17 +194,23 @@ public class choicePanel extends JPanel implements ActionListener{
             case "Basic Attack":
                 player.setNextTurn(0);
                 resetButtons();
-                basicATK.setBackground(new Color(29,67,71));
+                basicATK.setForeground(new Color(9, 22, 27));
+                basicATK.setBackground(new Color(200, 161, 108));
                 break;
             case "Ability 1":
                 player.setNextTurn(1);
                 resetButtons();
-                abilityOne.setBackground(new Color(29,67,71));
+                abilityOne.setBackground(new Color(200, 161, 108));
+                abilityOne.setForeground(new Color(9, 22, 27));
+
+
                 break;
             case "Ultimate":
                 player.setNextTurn(2);
                 resetButtons();
-                ult.setBackground(new Color(29,67,71));
+                ult.setBackground(new Color(200, 161, 108));
+                ult.setForeground(new Color(9, 22, 27));
+
                 break;
             case "cancel":
                 swapRotate(eventName);
@@ -217,7 +236,8 @@ public class choicePanel extends JPanel implements ActionListener{
             case "43":
                 player.setNextTurn(Integer.parseInt(eventName));
                 resetButtons();
-                teamButtons.get((Integer.parseInt(eventName)-3)/10).setBackground(new Color(29,67,71));
+                teamButtons.get((Integer.parseInt(eventName)-3)/10).setBackground(new Color(200, 161, 108));
+                teamButtons.get((Integer.parseInt(eventName)-3)/10).setForeground(new Color(9, 22, 27));
                 break; 
         }
         
